@@ -50,9 +50,22 @@ Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 
 
 // 5
-Route::get('/login', function () {
-    return view('Frontend.login');
-})->name("login");
+Route::get('/studentLogin', function () {
+    return view('Frontend.studentLogin');
+});
+Route::get('/newLogin', function () {
+    return view('Frontend.newLogin');
+});
+Route::get('/newRegister', function () {
+    return view('Frontend.newRegister');
+});
+Route::get('/newForget', function () {
+    return view('Frontend.newForgetPass');
+});
+
+// Route::get('/studentR', function () {
+//     return view('Auth.studentR');
+// });
 
 // 6   master "it doesn't have to be opened"
 
@@ -112,7 +125,8 @@ Route::get('/studentRegister', function () {
 
 Route::get('/parentRegister', function () {
     return view('Frontend.parentRegister');
-})->name("parentRegister");
+})->name("k");
+
 
 Route::get('certificate', function () {
     return view('Frontend.certificate');
@@ -143,3 +157,4 @@ Route::get('/hoome', 'HomeCotroller@index')->name("home")->middleware("verified"
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/studnetIndex', [App\Http\Controllers\StudentController::class, 'index']);
