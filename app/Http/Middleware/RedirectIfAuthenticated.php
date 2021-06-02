@@ -25,6 +25,12 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);
             }
+            if (Auth::guard($guard)->check() && $guard == "teacher" ) {
+                return redirect('teacher');
+            }
+            if (Auth::guard($guard)->check() && $guard == "parent") {
+                return redirect('parent');
+            }
         }
 
         return $next($request);

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\Teacher;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/student','App\Http\Controllers\projectcontroller@index2');
 
 // 1
-Route::get('/child', function () {
-    return view('Frontend.childview');
-})->name("child");
+Route::get('/parent', function () {
+    return view('Frontend.parent');
+})->name("parent");
 
 // 2
 Route::get('/create', function () {
@@ -37,15 +38,15 @@ Route::get('/createClassroom', function () {
 
 // 4
 
-// Route::get('/', function () {
-//     return view('Frontend.home');
-// })->name("home");
-// Route::get('/home', function () {
-//     return view('Frontend.home');
-// })->name("home");
+Route::get('/', function () {
+    return view('Frontend.home');
+})->name("home");
+Route::get('/home', function () {
+    return view('Frontend.home');
+})->name("home");
 // Route::get('/home', 'HomeController@index')->name("home")->middleware("verified");
 Auth::routes(['verify'=>true]);
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware("verified");
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware("verified");
 
 
 
@@ -62,10 +63,10 @@ Route::get('/newRegister', function () {
 Route::get('/newForget', function () {
     return view('Frontend.newForgetPass');
 });
+Route::get('/survay', function () {
+    return view('Frontend.jasonSurvay');
+});
 
-// Route::get('/studentR', function () {
-//     return view('Auth.studentR');
-// });
 
 // 6   master "it doesn't have to be opened"
 
@@ -116,7 +117,7 @@ Route::get('/teacher', function () {
 
 // 16
 Route::get('/teacherRegister', function () {
-    return view('Frontend.teacherRegister');
+    return view('Frontend.newteacherRegister');
 })->name("teacherRegister");
 
 Route::get('/studentRegister', function () {
@@ -128,6 +129,7 @@ Route::get('/parentRegister', function () {
 })->name("k");
 
 
+
 Route::get('certificate', function () {
     return view('Frontend.certificate');
 })->name("certificate");
@@ -136,25 +138,59 @@ Route::get('certificate', function () {
 //     return view('Frontend.certificate');
 // })->name('b');
 
-Auth::routes(['verify'=>true]);
+    Auth::routes(['verify'=>true]);
+    Auth::routes();
+
+    // Teacher login and register
+    Route::get('/register/student', 'App\Http\Controllers\Auth\RegisterController@showStudentRegisterForm');
+    Route::post('/register/student', 'App\Http\Controllers\Auth\RegisterController@createStudent');
+    Route::get('/login/student', 'App\Http\Controllers\Auth\LoginController@showStudentLoginForm');
+    Route::post('/login/student', 'App\Http\Controllers\Auth\LoginController@studentLogin');
+
+    // parent login and register
+    Route::get('/register/parent', 'App\Http\Controllers\Auth\RegisterController@showParentRegisterForm');
+    Route::post('/register/parent', 'App\Http\Controllers\Auth\RegisterController@createParent');
+    Route::get('/login/parent', 'App\Http\Controllers\Auth\LoginController@showParentLoginForm');
+    Route::post('/login/parent', 'App\Http\Controllers\Auth\LoginController@parentLogin');
+
+
+    // teacher login and register
+    Route::get('/register/teacher', 'App\Http\Controllers\Auth\RegisterController@showTeacherRegisterForm');
+    Route::post('/register/teacher', 'App\Http\Controllers\Auth\RegisterController@createTeacher');
+    Route::get('/login/teacher', 'App\Http\Controllers\Auth\LoginController@showTeacherLoginForm');
+    Route::post('/login/teacher', 'App\Http\Controllers\Auth\LoginController@teacherLogin');
+
+    // Route::group(['middleware' => 'auth:parent'], function () {
+    //     Auth::routes();
+    //     Route::view('parent', 'parent');
+    //     });
+
+    // Route::view('/home', 'home')->middleware('auth');
+    // Route::view('/teacher', 'Frontend.newteacherRegister');
+    // Route::view('/writer', 'writer');
+
+
+
+
+
+
 
 // Route::get('/hoome', [UserController::class, 'index'])->name('user.index');
-Route::get('/hoome', 'HomeCotroller@index')->name("home")->middleware("verified");
+// Route::get('/hoome', 'HomeCotroller@index')->name("home")->middleware("verified");
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/studnetIndex', [App\Http\Controllers\StudentController::class, 'index']);
+Route::get('/studnetIndex', [App\Http\Controllers\ParentController::class, 'index']);
+
+
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::get('survay2', [App\Http\Controllers\QuestionnaireController::class, 'show']);
+//     Route::match(
+//         ['put',' patch'],
+//         'jasonSurvay',
+//         'QuestionnaireController@update'
+//     );
+// });

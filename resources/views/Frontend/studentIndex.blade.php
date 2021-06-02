@@ -22,11 +22,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-4 col3">
-          {{$students}}
-          @foreach ($students as $student)
-              
-          
-        <h1>{{$student->name}}</h1>
+          {{$parents}}
+          @foreach ($parents as $student)
+        <h1>{{$student->fname}}</h1>
+        <h1>{{$student->lname}}</h1>
         <p>{{$student->email}}</p>
 
         <button type="button" class="btn btn-primary">Get Started</button>

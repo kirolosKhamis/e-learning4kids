@@ -20,6 +20,18 @@
         <!-- header -->
 
 @section('content')
+{{-- {{$parents}} --}}
+{{-- @foreach ($parents as $student) --}}
+{{-- <h1>{{session('data')['fname']}}</h1> --}}
+{{-- {{ Auth::teacher()->fname }}
+{{ Auth::teacher()->lname }}
+{{ Auth::teacher()->user_id }} --}}
+{{-- {{ Auth::teacher()->fname }} --}}
+
+
+{{-- <h1>{{$student->lname}}</h1> --}}
+{{-- <p>{{$student->email}}</p> --}}
+{{-- <p>{{$student->id}}</p> --}}
     <!--Body-->
     <div class="row">
       <div class="col-lg-8 col3">
@@ -28,6 +40,8 @@
 
       <div class="col-lg-4 col4">
         <h1>Teacher</h1>
+        <p>Hello ,{{session()->get('email')}}</p>
+        {{Auth::guard('teacher')->user()->user_id}}
         <p>Learning System for kids is an education via the Internet, network, or standalone computer.
           It is an online platform where students can learn,
            teachers can create contents and Parents can monitor their children</p>

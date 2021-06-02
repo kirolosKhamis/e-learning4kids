@@ -36,13 +36,18 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            
-                            <form method="POST" class="user" action="{{ route('register') }}">
+                            @isset($url)
+                            <div> {{ $url }}</div>
+                            <form method="POST" action='{{ url("register/$url") }}' aria-label="{{ __('Register') }}">
+                            @else
+                            <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                            @endisset
+                            {{-- <form method="POST" class="user" action="{{ route('register/$url') }}"> --}}
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Name" required autocomplete="name" autofocus>
-                                            @error('name')
+                                        <input id="fname" type="text" class="form-control form-control-user @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" placeholder="First Name" required autocomplete="fname" autofocus>
+                                            @error('fname')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -56,14 +61,18 @@
                                                 </span>
                                             @enderror
                                     </div>
-                                    {{-- <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
-                                    </div> --}}
                                 </div>
                                 <div class="form-group">
                                         <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email Address" required autocomplete="email">
                                         @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                </div>
+                                <div class="form-group">
+                                        <input id="parent_id" type="text" class="form-control form-control-user @error('parent_id') is-invalid @enderror" name="parent_id" value="{{ old('parent_id') }}" placeholder="Enter Your Parent ID" required autocomplete="parent_id">
+                                        @error('parent_id')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -82,6 +91,24 @@
                                         <input id="password-confirm" type="password" class="form-control form-control-user" placeholder="Repeat Password" name="password_confirmation" required autocomplete="new-password">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input id="address" type="text" class="form-control form-control-user @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" placeholder="Address" required autocomplete="address" autofocus>
+                                            @error('address')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input id="term" type="text" class="form-control form-control-user @error('term') is-invalid @enderror" name="term" value="{{ old('term') }}" placeholder="Your Education Stage" required autocomplete="term" autofocus>
+                                            @error('term')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                    </div>
+                                </div>                           
                                 {{-- <a href="login.html" class="btn btn-primary ">
                                     
                                 </a> --}}

@@ -8,7 +8,7 @@ class StudentController extends Controller
 {
     //
     public function index(){
-        $students= Student::where('name', 'boula')->get();
+        $students= Student::where('fname', 'boula')->get();
         return view('Frontend.studentIndex',compact('students'));
     }
 

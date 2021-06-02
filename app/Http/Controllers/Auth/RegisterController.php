@@ -4,11 +4,17 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Teacher;
+use App\Models\ParentModel;
+
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
 
 class RegisterController extends Controller
 {
@@ -40,7 +46,118 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:student');
+        $this->middleware('guest:teacher');
+        $this->middleware('guest:parent');
+
     }
+
+    public function showStudentRegisterForm()
+    {
+
+        return view('Frontend.newStudentRegister', ['url' => 'student']);
+
+    }
+
+    protected function createStudent(Request $request)
+    {
+        $request->validate( [
+            'fname' => ['required', 'string', 'max:255'],
+            'lname'=>['required', 'string', 'min:3'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:teacher'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'address'=>['required', 'string', 'min:3'],
+            'term'=>['required', 'string', 'min:3'],
+            'parent_id'=>['required', 'string', 'min:1'],
+            // 'specialization'=>['required', 'string', 'min:1'],
+
+        ]);
+        $student = Student::create([
+            'fname' => $request['fname'],
+            'lname' => $request['lname'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'address' => $request['address'],
+            'term' => $request['term'],
+            'parent_id' => $request['parent_id'],
+            // 'specialization' => $request['specialization'],
+        ]);
+        return redirect()->intended('student');
+    }
+
+    public function showTeacherRegisterForm()
+    {
+
+        return view('Frontend.newteacherRegister', ['url' => 'teacher']);
+
+    }
+
+    protected function createTeacher(Request $request)
+    {
+        $request->validate( [
+            'fname' => ['required', 'string', 'max:255'],
+            'lname'=>['required', 'string', 'min:3'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:teacher'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'address'=>['required', 'string', 'min:3'],
+            'age'=>['required', 'string', 'min:1'],
+            'phone'=>['required', 'string', 'min:1'],
+            'specialization'=>['required', 'string', 'min:1'],
+
+        ]);
+        $teacher = Teacher::create([
+            'fname' => $request['fname'],
+            'lname' => $request['lname'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'address' => $request['address'],
+            'age' => $request['age'],
+            'phone' => $request['phone'],
+            'specialization' => $request['specialization'],
+        ]);
+        return redirect()->intended('teacher' );
+    }
+
+
+    public function showParentRegisterForm()
+    {
+
+        return view('Frontend.newparentRegister', ['url' => 'parent']);
+
+    }
+
+    protected function createParent(Request $request)
+    {
+
+        $request->validate( [
+            'fname' => ['required', 'string', 'max:255'],
+            'lname'=>['required', 'string', 'min:3'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:parent'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'address'=>['required', 'string', 'min:3'],
+            'phone'=>['required', 'string', 'min:1'],
+            'relation'=>['required', 'string', 'min:1'],
+            'number_of_children'=>['required', 'string', 'min:1'],
+            'age'=>['required', 'string', 'min:1'],
+
+        ]);
+        $parent = ParentModel::create([
+            'fname' => $request['fname'],
+            'lname' => $request['lname'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'address' => $request['address'],
+            'phone' => $request['phone'],
+            'relation' => $request['relation'],
+            'number_of_children' => $request['number_of_children'],
+            'age' => $request['age'],
+        ]);
+        return redirect()->intended('parent');
+    }
+
+
+
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -51,10 +168,14 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:students'],
+            'fname' => ['required', 'string', 'max:255'],
+            'lname'=>['required', 'string', 'min:3'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:student'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            // 'lname'=>['required', 'string', 'min:3'],
+            'address'=>['required', 'string', 'min:3'],
+            'term'=>['required', 'string', 'min:1'],
+            // 'personality_type'=>['required', 'string', 'min:3'],
+
         ]);
     }
 
@@ -68,10 +189,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return Student::create([
-            'name' => $data['name'],
+            'fname' => $data['fname'],
+            'lname'=>$data['lname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            // 'lname'=>$data['lname'],
+            'address' => $data['address'],
+            'term' => $data['term'],
+            // 'personality_type' => $data['personality_type'],
+
         ]);
     }
 }

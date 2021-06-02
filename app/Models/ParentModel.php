@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Student extends Authenticatable
+class ParentModel extends Authenticatable
 {
     use HasFactory, Notifiable;
-protected $table='student';
-protected $guard = 'student';
+    protected $table='parent';
+    protected $guard = 'parent';
     /**
      * The attributes that are mass assignable.
      *
@@ -21,8 +21,8 @@ protected $guard = 'student';
         'fname',
         'lname',
         'email',
-        'address','term',
-        'password','parent_id',
+        'address',
+        'password','phone','relation','age','number_of_children'
     ];
 
     /**

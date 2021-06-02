@@ -23,15 +23,14 @@
 
       <div class="collapse navbar-collapse" id="navtest">
                 <ul class="nav navbar-nav navbar-right">
-                  <li ><a href="{{asset('b')}}">Home </a></li>
+                    <li ><a href="{{asset('home')}}">Home </a></li>
 
-                  <li ><a href="{{asset('student')}}">Student </a></li>
+                    <li ><a href="{{asset('student')}}">Student </a></li>
 
-                 <li><a href="{{asset('teacher')}}">Teacher</a></li>
-                    <li class="active"><a href="{{asset('login')}}">Login <span class="sr-only">(current)</span></a></a></li>
-
-
+                    <li><a href="{{asset('teacher')}}">Teacher</a></li>
+                    <li class="active"><a href="{{asset('newLogin')}}">Login <span class="sr-only">(current)</span></a></li>
                 </ul>
+
 
       </div>
     </div>
