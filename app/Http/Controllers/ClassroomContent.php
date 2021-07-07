@@ -257,15 +257,21 @@ if( $file=$request->file('file'))
 // student submit assignment to database 
     public function submitAssignment(Request $request)
     {
-        // dd($request->all());
+        // $filee=$request->file('content');
+        // $namee=$filee->getClientOriginalName();
+        // dd($namee);
+
         // $request->validate([
-        //     'content' => 'required'
+        //     "content"=$namee => 'required|exists:student_assignment';
+
         // ]);
-$classroom_id=$request->input('classroom_id');
+  
+        $classroom_id=$request->input('classroom_id');
+        $assignment_id=$request->input('assignment_id');
 
 
         
-if( $file=$request->file('file'))
+if( $file=$request->file('content'))
     {
 
 
@@ -286,7 +292,7 @@ if( $file=$request->file('file'))
             else
             StudentAssignment::create($request->all());
 
-        return redirect()->route('show.teacherAssignment', compact('classroom_id'));
+        return redirect()->route('show.Assignment', compact('classroom_id','assignment_id'));
 
     }
 
@@ -326,7 +332,9 @@ if( $file=$request->file('file'))
         $classroom_id=$request->input('classroom_id');
         $assignment_id=$request->input('assignment_id');
         $teacherassignments=TeacherAssignment::latest()->paginate(100);
-        return view('Frontend.submitassignment', compact('teacherassignments','assignment_id','classroom_id'))
+        $studentassignments=StudentAssignment::latest()->paginate(100);
+        $flag=5;
+        return view('Frontend.submitassignment', compact('teacherassignments','assignment_id','classroom_id','studentassignments','flag'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 
