@@ -24,7 +24,7 @@
 
 <body class="bg-gradient-primary">
 
-    <div class="container">
+    <div class="container" style="margin-top: -75px">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
@@ -35,17 +35,15 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Teacher Create an Account!</h1>
                             </div>
                             {{-- <div class="card-header"> {{ isset($url) ? ucwords($url) : ""}} {{ __('Register') }}</div> --}}
                             
-
-
                             @isset($url)
                             {{-- <div> {{ $url }}</div> --}}
-                            <form method="POST" action='{{ url("register/$url") }}' aria-label="{{ __('Register') }}">
+                            <form method="POST" action='{{ url("register/$url") }}' aria-label="{{ __('Register') }}" enctype="multipart/form-data">
                             @else
-                            <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                            <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}" enctype="multipart/form-data">
                             @endisset
                             {{-- <form method="POST" class="user" action="{{ route('register') }}"> --}}
                                 @csrf
@@ -133,6 +131,15 @@
                                                 </span>
                                             @enderror
                                     </div>
+
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="file" class="form-control-file" name="file" id="exampleInputFile">
+                                            {{-- @error('relation')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror --}}
+                                    </div>
                                 </div>
                                                           
                                 {{-- <a href="login.html" class="btn btn-primary ">
@@ -167,15 +174,18 @@
 
     </div>
 
+
+
+
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('customeAuth/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('customeAuth/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{asset('customeAuth/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="{{asset('customeAuth/js/sb-admin-2.min.js')}}"></script>
 
 </body>
 

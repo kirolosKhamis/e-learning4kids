@@ -10,8 +10,11 @@ use Illuminate\Notifications\Notifiable;
 class Student extends Authenticatable
 {
     use HasFactory, Notifiable;
-protected $table='student';
-protected $guard = 'student';
+    
+    protected $table='student';
+    protected $guard = 'student';
+    
+    protected $primaryKey = 'user_id';
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +25,7 @@ protected $guard = 'student';
         'lname',
         'email',
         'address','term',
-        'password','parent_id',
+        'password','parent_id','phone','expire','photo'
     ];
 
     /**

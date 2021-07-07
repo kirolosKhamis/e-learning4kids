@@ -12,6 +12,8 @@ class Teacher extends Authenticatable
     use HasFactory, Notifiable;
     protected $table='teacher';
     protected $guard = 'teacher';
+
+    protected $primaryKey = 'user_id';
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +24,7 @@ class Teacher extends Authenticatable
         'lname',
         'email',
         'address',
-        'password','phone','age','specialization'
+        'password','phone','age','specialization','name_of_school','photo'
     ];
 
     /**

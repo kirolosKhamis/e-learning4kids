@@ -12,6 +12,8 @@ class ParentModel extends Authenticatable
     use HasFactory, Notifiable;
     protected $table='parent';
     protected $guard = 'parent';
+    
+    protected $primaryKey = 'user_id';
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +24,7 @@ class ParentModel extends Authenticatable
         'lname',
         'email',
         'address',
-        'password','phone','relation','age','number_of_children'
+        'password','phone','relation','age','number_of_children','photo'
     ];
 
     /**

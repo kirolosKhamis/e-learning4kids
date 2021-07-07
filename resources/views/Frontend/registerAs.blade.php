@@ -34,21 +34,21 @@
             <div class="row">
                 <!-- student -->
                 <div class="col-lg-4 col5 ">
-                    <a href="{{asset('studentRegister')}}">
+                    <a href="{{route('register/student')}}">
                         <img src="../public/images/student.jpg"  alt="">
-                        <h4>Studet</h4>
+                        <h4>Student</h4>
                     </a>
                 </div>
                 <!-- teacher -->
                 <div class="col-lg-4 col6 ">
-                    <a href="{{asset('teacherRegister')}}">
+                    <a href="{{route('register/teacher')}}">
                         <img src="../public/images/teacher.jpg" alt="">
                         <h4>teacher</h4>
                     </a>
                 </div>
                 <!-- parent -->
                 <div class="col-lg-4 col7 ">
-                    <a href="{{asset('parentRegister')}}">
+                    <a href="{{route('register/parent')}}">
                         <img src="../public/images/parent.jpg" alt="">
                         <h4>Parent</h4>
                     </a>
@@ -64,11 +64,11 @@
 
          <!--End Loading Screen-->
 
- <script src="../public/js/jquery-3.3.1.min.js"></script>
-        <script src="../public/js/bootstrap.min.js"></script>
-        <script src="../public/js/plugins.js"></script>
-        <script src="../public/js/wow.min.js"></script>
-        <script>new WOW().init();</script>
+         <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+         <script src="{{asset('js/bootstrap.min.js')}}"></script>
+         <script src="{{asset('js/plugins.js')}}"></script>
+         <script src="{{asset('js/wow.min.js')}}"></script>
+         <script>new WOW().init();</script>
 
 
 </div>

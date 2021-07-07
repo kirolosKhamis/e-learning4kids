@@ -80,7 +80,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => User::class,
+            'model' => App\Models\Student::class,
         ],
 
         // 'users' => [
@@ -125,19 +125,19 @@ return [
         ],
         'student' => [
             'provider' => 'student',
-            'table' => 'password_resets',
+            'table' => 'student_password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
         'teacher' => [
             'provider' => 'teacher',
-            'table' => 'password_resets',
+            'table' => 'teacher_password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
         'parent' => [
             'provider' => 'parent',
-            'table' => 'password_resets',
+            'table' => 'parent_password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],

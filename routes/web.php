@@ -1,8 +1,17 @@
 <?php
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Teacher;
+use App\Models\Classroom;
+use App\Models\StudentRegisteration;
+use App\Models\Course;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CreateClassroomController;
+use App\Http\Controllers\ClassroomContent;
+use App\Models\Student;
+use App\Models\ParentModel;
+
+// use App\Http\Controllers\QuestionnaireController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,182 +24,237 @@ use App\Models\Teacher;
 |
 */
 
+/*-------------------------------Midelware Student,Teacher,Parent------------------------------------------*/
+Route::group(['middleware' => 'auth:student,teacher,parent'],function () {
+    Route::get('/profile', [App\Http\Controllers\ClassroomContent::class, 'showProfileDetails'])->name('show.profileDetails');
+    Route::get('/Setting', [App\Http\Controllers\ClassroomContent::class, 'showaccountsetting'])->name('show.accountsetting');
+    Route::put('/profileUpdate', [App\Http\Controllers\ClassroomContent::class, 'updateInfo'])->name('profileUpdate');
+
+    Route::get('/', function () {
+        return view('Frontend.home');
+    })->name("home");
+});
+/*-------------------------------End of Midelware Student,Teacher,Parent------------------------------------------*/
+
+
+/*-------------------------------Midelware Student,Teacher---------------------------------------------*/
+Route::group(['middleware' => 'auth:student,teacher'],function () {
+    Route::get('/post', [App\Http\Controllers\ClassroomContent::class, 'showClassroom'])->name('show.classroom');
+    Route::resource('contents', ClassroomContent::class);
+    Route::post('/post', [App\Http\Controllers\ClassroomContent::class, 'post'])->name("contents");
+    Route::post('/comment', [App\Http\Controllers\ClassroomContent::class, 'comment'])->name("post.comment");
+    Route::get('/showteacherAssignment', [App\Http\Controllers\ClassroomContent::class, 'showTeacherAssignment'])->name('show.teacherAssignment');
+    Route::get('/showAssignment', [App\Http\Controllers\ClassroomContent::class, 'showAssignment'])->name('show.Assignment');
+
+    Route::get('/downloadStudentAssignment', [App\Http\Controllers\ClassroomContent::class, 'downloadStudentAssignment'])->name('download.studentAssignment');
+    Route::get('/downloadPost', [App\Http\Controllers\ClassroomContent::class, 'downloadPost'])->name('download.post');
+    Route::get('/downloadcomment', [App\Http\Controllers\ClassroomContent::class, ' commentDownload'])->name('download.comment');
+    
+
+    // Route::get('/', function () {
+    //     return view('Frontend.home');
+    // })->name("home");
+    
+
+});
+
+/*-------------------------------End of Midelware Student,Teacher---------------------------------------------*/
+
+
+Route::group(['middleware' => 'auth:student'], function () {
+
+    Route::get('/student', function () {
+        $studentregs = StudentRegisteration::latest()->paginate(100);
+        $classrooms = Classroom::latest()->paginate(100);
+    return view('Frontend.student',compact('studentregs','classrooms'));
+    })->name('student');
+
+    Route::get('/studentcoursedetails', function () {
+        $parents= ParentModel::all();
+        $students= Student::all();
+        $studentregistrations=StudentRegisteration::all();
+        $classrooms=Classroom::all();
+        $courses= Course::all();
+        $teachers= Teacher::all();
+        return view('Frontend.studentcoursedetails',compact("parents", "students", "studentregistrations", "classrooms","courses","teachers"));
+    })->name("studentcoursedetails");
+    Route::get('/results', [App\Http\Controllers\ClassroomContent::class, 'showResult'])->name('show.result');
+        
+    Route::get('/submitassignment', function () {
+        return view('Frontend.submitassignment');
+    })->name("submitassignment");
+
+    Route::get('/viewassignments', function () {
+        return view('Frontend.viewassignments');
+    })->name("viewassignments");
+
+    Route::post('/submitAssignment', [App\Http\Controllers\ClassroomContent::class, 'submitAssignment'])->name("submit.assignment");
+
+});
+
+
+Route::group(['middleware' => 'auth:teacher'], function () {
+    Route::get('/teacher', function () {
+        $studentregs = StudentRegisteration::latest()->paginate(100);
+        $classrooms = Classroom::latest()->paginate(100);
+    //  dd($classrooms);
+            return view('Frontend.teacher', compact('classrooms'));
+    })->name("teacher");
+    Route::get('/studentresults', [App\Http\Controllers\ClassroomContent::class, 'addResult'])->name('add.result');
+    Route::get('/editresults', [App\Http\Controllers\ClassroomContent::class, 'editResult'])->name('edit.result');
+    Route::post('/updateresults', [App\Http\Controllers\ClassroomContent::class, 'updateResult'])->name('update.result');
+
+
+    
+
+    Route::post('/addAssignment', [App\Http\Controllers\ClassroomContent::class, 'addAssignment'])->name("add.assignment");
+    Route::get('/showstudentAssignment', [App\Http\Controllers\ClassroomContent::class, 'showStudentAssignment'])->name('show.studentAssignment');
+
+    Route::get('/viewAddassignment', [App\Http\Controllers\ClassroomContent::class, 'viewAddassignment'])->name('view.addAssignment');
 
 
 
-// Route::get('/','App\Http\Controllers\projectcontroller@index');
-// Route::get('/student','App\Http\Controllers\projectcontroller@index2');
+});
 
-// 1
-Route::get('/parent', function () {
-    return view('Frontend.parent');
-})->name("parent");
+Route::group(['middleware' => 'auth:parent'], function () {
+    Route::get('/parent', function () {
+        $parents= ParentModel::all();
+        $students= Student::all();
+        $studentregistrations=StudentRegisteration::all();
+        $classrooms=Classroom::all();
+        $courses= Course::all();
+        $teachers= Teacher::all();
+        return view('Frontend.parent',compact("parents", "students", "studentregistrations", "classrooms","courses","teachers"));
+    })->name("parent");
+    Route::get('/showSCourseDetails', [App\Http\Controllers\ClassroomContent::class, 'showCourseDetails'])->name('show.coursedetails');
+    // Route::put('/profileUpdate', [App\Http\Controllers\ClassroomContent::class, 'updateInfo'])->name('profileUpdate');
+});
 
-// 2
+
+
+
+
+
+
+
 Route::get('/create', function () {
     return view('Frontend.Creataccount');
 })->name("child");
 
-// 3
+
 Route::get('/createClassroom', function () {
-    return view('Frontend.createClassroom');
-})->name("create_class");
+    $courses = Course::latest()->paginate(100);
+    return view('Frontend.createClassroom', compact('courses'));
+})->name("createClassroom");
 
-// 4
-
+/** */
 Route::get('/', function () {
     return view('Frontend.home');
 })->name("home");
-Route::get('/home', function () {
-    return view('Frontend.home');
-})->name("home");
-// Route::get('/home', 'HomeController@index')->name("home")->middleware("verified");
-Auth::routes(['verify'=>true]);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware("verified");
 
 
-
-// 5
-Route::get('/studentLogin', function () {
-    return view('Frontend.studentLogin');
-});
 Route::get('/newLogin', function () {
     return view('Frontend.newLogin');
-});
-Route::get('/newRegister', function () {
-    return view('Frontend.newRegister');
 });
 Route::get('/newForget', function () {
     return view('Frontend.newForgetPass');
 });
-Route::get('/survay', function () {
-    return view('Frontend.jasonSurvay');
-});
 
 
-// 6   master "it doesn't have to be opened"
-
-// 7
 Route::get('/materials', function () {
     return view('Frontend.materials');
 })->name("materials");
 
-// 8
-Route::get('/result', function () {
-    return view('Frontend.questionairResult');
-})->name("");
 
-// 9
+
 Route::get('/questionnaire', function () {
     return view('Frontend.questionnaire');
 })->name("questionnaire");
 
-// 10
-Route::get('/register', function () {
-    return view('Frontend.registerAs');
-})->name("");
 
-// 11
+Route::get('/registerAs', function () {
+    return view('Frontend.registerAs');
+})->name("registerAs");
+
+Route::get('/loginAs', function () {
+    return view('Frontend.loginAs');
+})->name("loginAs");
+
+
 Route::get('/studentClassroom', function () {
     return view('Frontend.student-classroom');
 })->name("");
 
-// 12
+
 Route::get('/studentJoin', function () {
     return view('Frontend.student-join-classroom');
-})->name("");
+})->name("studentJoin");
 
-// 13
-Route::get('/student', function () {
-    return view('Frontend.student');
-})->name('student');
 
-// 14
+
+
 Route::get('/teacherClassroom', function () {
     return view('Frontend.teacher-classroom');
 })->name("");
-
-// 15
-Route::get('/teacher', function () {
-    return view('Frontend.teacher');
-})->name("teacher");
-
-// 16
-Route::get('/teacherRegister', function () {
-    return view('Frontend.newteacherRegister');
-})->name("teacherRegister");
-
-Route::get('/studentRegister', function () {
-    return view('Frontend.studentRegister');
-})->name("studentRegister");
-
-Route::get('/parentRegister', function () {
-    return view('Frontend.parentRegister');
-})->name("k");
-
-
 
 Route::get('certificate', function () {
     return view('Frontend.certificate');
 })->name("certificate");
 
-// Route::get('certificate/{id?}', function () {
-//     return view('Frontend.certificate');
-// })->name('b');
-
     Auth::routes(['verify'=>true]);
     Auth::routes();
 
-    // Teacher login and register
-    Route::get('/register/student', 'App\Http\Controllers\Auth\RegisterController@showStudentRegisterForm');
-    Route::post('/register/student', 'App\Http\Controllers\Auth\RegisterController@createStudent');
-    Route::get('/login/student', 'App\Http\Controllers\Auth\LoginController@showStudentLoginForm');
-    Route::post('/login/student', 'App\Http\Controllers\Auth\LoginController@studentLogin');
+// Teacher login and register
+Route::get('/register/student', 'App\Http\Controllers\Auth\RegisterController@showStudentRegisterForm')->name("register/student");
+Route::post('/register/student', 'App\Http\Controllers\Auth\RegisterController@createStudent');
+Route::get('/login/student', 'App\Http\Controllers\Auth\LoginController@showStudentLoginForm')->name("login/student");
+Route::post('/login/student', 'App\Http\Controllers\Auth\LoginController@studentLogin');
 
-    // parent login and register
-    Route::get('/register/parent', 'App\Http\Controllers\Auth\RegisterController@showParentRegisterForm');
-    Route::post('/register/parent', 'App\Http\Controllers\Auth\RegisterController@createParent');
-    Route::get('/login/parent', 'App\Http\Controllers\Auth\LoginController@showParentLoginForm');
-    Route::post('/login/parent', 'App\Http\Controllers\Auth\LoginController@parentLogin');
-
-
-    // teacher login and register
-    Route::get('/register/teacher', 'App\Http\Controllers\Auth\RegisterController@showTeacherRegisterForm');
-    Route::post('/register/teacher', 'App\Http\Controllers\Auth\RegisterController@createTeacher');
-    Route::get('/login/teacher', 'App\Http\Controllers\Auth\LoginController@showTeacherLoginForm');
-    Route::post('/login/teacher', 'App\Http\Controllers\Auth\LoginController@teacherLogin');
-
-    // Route::group(['middleware' => 'auth:parent'], function () {
-    //     Auth::routes();
-    //     Route::view('parent', 'parent');
-    //     });
-
-    // Route::view('/home', 'home')->middleware('auth');
-    // Route::view('/teacher', 'Frontend.newteacherRegister');
-    // Route::view('/writer', 'writer');
+// parent login and register
+Route::get('/register/parent', 'App\Http\Controllers\Auth\RegisterController@showParentRegisterForm')->name("register/parent");
+Route::post('/register/parent', 'App\Http\Controllers\Auth\RegisterController@createParent');
+Route::get('/login/parent', 'App\Http\Controllers\Auth\LoginController@showParentLoginForm')->name("login/parent");
+Route::post('/login/parent', 'App\Http\Controllers\Auth\LoginController@parentLogin');
 
 
+// teacher login and register
+Route::get('register/teacher', 'App\Http\Controllers\Auth\RegisterController@showTeacherRegisterForm')->name("register/teacher");
+Route::post('register/teacher', 'App\Http\Controllers\Auth\RegisterController@createTeacher');
 
+Route::get('login/teacher', 'App\Http\Controllers\Auth\LoginController@showTeacherLoginForm')->name("login/teacher");
+Route::post('login/teacher', 'App\Http\Controllers\Auth\LoginController@teacherLogin');
 
-
-
-
-// Route::get('/hoome', [UserController::class, 'index'])->name('user.index');
-// Route::get('/hoome', 'HomeCotroller@index')->name("home")->middleware("verified");
-
-
-
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::resource('products', ProductController::class); /tbd
+// Route::resource('proucts', CreateClassroomController::class);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/studnetIndex', [App\Http\Controllers\ParentController::class, 'index']);
+// Route::post('/proucts', [CreateClassroomController::class, 'store'])->name('proucts');
+
+Route::resource('proucts', CreateClassroomController::class);
+Route::get('/proucts', [App\Http\Controllers\CreateClassroomController::class, 'boula'])->name("proucts");
 
 
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::get('survay2', [App\Http\Controllers\QuestionnaireController::class, 'show']);
-//     Route::match(
-//         ['put',' patch'],
-//         'jasonSurvay',
-//         'QuestionnaireController@update'
-//     );
-// });
+
+Route::get('questionnaire',[App\Http\Controllers\QuestionnaireController::class, 'show']);
+Route::get('result',[App\Http\Controllers\QuestionnaireController::class, 'showResult'])->name('result');
+Route::match(['put',' patch'], 'questionnaire', [App\Http\Controllers\QuestionnaireController::class, 'update']);
+
+
+
+// Route::get('start',[App\Http\Controllers\sendEmailController::class, 'start']);
+// Route::get('ship',[App\Http\Controllers\sendEmailController::class, 'ship']);
+// Route::get('completed',[App\Http\Controllers\sendEmailController::class, 'completed']);
+
+
+
+
+
+Route::get('/studentIndex', [App\Http\Controllers\StudentController::class, 'index']);
+Route::get('/sendEmail', [App\Http\Controllers\DeadlineController::class, 'index'])->name('sendEmail');
+
+Route::get('cards', function () {
+    return view('Frontend.cardsTrails');
+});
+Route::get('spare', function () {
+    return view('Frontend.spare');
+});

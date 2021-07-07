@@ -6,20 +6,36 @@
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
- <title>E-Learning for Kids</title>
- <link rel="icon" href="{{asset('images/icon2.jpg')}}" />
- <link rel='stylesheet'href ="{{asset('css/bootstrap.css')}}"/>
+ <title>E-Learning4Kids</title>
+ {{-- <link rel="icon" href="{{asset('images/icon2.jpg')}}" /> --}}
+        <link rel='stylesheet'href ="{{asset('css/bootstrap.css')}}"/>
         <link rel='stylesheet'href ="{{asset('css/font-awesome.min.css')}}"/>
         <link rel='stylesheet'href ="{{asset('css/style.css')}}"/>
         <link rel='stylesheet'href="{{asset('css/media.css')}}"/>
         <link rel='stylesheet'href="{{asset('css/animate.css')}}"/>
         <link rel='stylesheet'href="{{asset('css/home.css')}}"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+  <script>
+    //paste this code under head tag or in a seperate js file.
+    // Wait for window load
+    $(window).load(function() {
+      // Animate loader off screen
+      $(".se-pre-con").fadeOut("slow");;
+    });
+  </script>    
+    <!-- Start of e-learninig Zendesk Widget script -->
+<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=1185a688-6de8-4a53-8246-4cf9832b1d45"> </script>
+<!-- End of e-learninig Zendesk Widget script -->
 </head>
 <body>
-
+<!-- Paste this code after body tag -->
+<div class="se-pre-con"></div>
+<!-- Ends -->
 @section('content')
   <!--Body-->
   <div class="container-fluid">
+
     <div class="row">
       <div class="col-lg-4 col3">
         <h1>What is the gamified Learning system</h1>
@@ -27,35 +43,38 @@
           It is an online platform where students can learn,
            teachers can create contents and Parents can monitor their children</p>
 
-        <button type="button" class="btn btn-primary">Get Started</button>
-        <button type="button" class="btn btn-outline-primary">View Demo</button>
-
+        <a href="{{asset('registerAs')}}"><button type="button" class="btn btn-primary">Get Started</button></a>
+        <a href="{{asset('#videoDemo')}}"><button type="button" class="btn btn-outline-primary">View Demo</button></a>
       </div>
       <div class="col-lg-8 col4">
-
-
-
           <div class="slideshow-container">
 
             <div class="mySlides fade">
-              <img src="../public/images/img1.jpg" style="width:100%">
-              <div class="text">Caption Text</div>
+              <img src="{{asset('images/img1.jpg')}}" style="width:100%">
+              {{-- <div class="text">Caption Text</div> --}}
+            </div>
+
+            <div class="mySlides fade" style="margin-top: 5px">
+              <img src="{{asset('images/img2.jpg')}}" style="width:100%">
+              {{-- <div class="text">Caption Two</div> --}}
             </div>
 
             <div class="mySlides fade">
-              <img src="../public/images/img2.jpg" style="width:100%">
-              <div class="text">Caption Two</div>
+              <img src="{{asset('images/img3.jpg')}}" style="width:100%">
+              {{-- <div class="text">Caption Three</div> --}}
+            </div>
+        
+            <div class="mySlides fade" style="margin-bottom: 50px">
+              <img src="{{asset('images/img6.jpg')}}" style="width:100%">
+              {{-- <div class="text">Caption Three</div> --}}
             </div>
 
-            <div class="mySlides fade">
-              <img src="../public/images/img3.jpg" style="width:100%">
-              <div class="text">Caption Three</div>
-            </div>
 
 
           </div>
 
-          <div style="text-align:center">
+          <div style="text-align:center;margin-top:-40px">
+            <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
@@ -64,7 +83,6 @@
           <script>
           var slideIndex = 0;
           showSlides();
-
           function showSlides() {
             var i;
             var slides = document.getElementsByClassName("mySlides");
@@ -82,21 +100,20 @@
             setTimeout(showSlides, 2000); // Change image every 2 seconds
           }
           </script>
-
       </div>
   </div>
 
 
-  <div class="row">
-    <div class="col-lg-12 col6">
+  <div class="row" id="videoDemo">
+    <div class="col-lg-12 col6" >
 
-          <video src="../public/images/1.mp4" controls >1</video>
+          <video src="{{asset('videos/1.mp4')}}" controls >1</video>
     </div>
 
     <div class="row" id="offer">
 
 
-        <div class="col-lg-6  col7">
+        <div class="col-lg-6 col7">
 
           <div class="about-text">
             <h1>E-Learning System<br>For Kids</h1>
@@ -116,7 +133,7 @@
       </div>
 
       <div class="col-lg-6   col7">
-        <img src="../public/images/offer2.jpg" alt="about">
+        <img src="{{asset('images/offer2.jpeg')}}" alt="about">
       </div>
 
 
@@ -124,17 +141,17 @@
     <div class="row" id="features">
 
         <div class="col-lg-4 feature-col">
-          <img src="../public/images/pic-1.png" alt="">
+          <img src="{{asset('images/pic-1.png')}}" alt="">
           <h4>Learn Anywhere</h4>
           <p>Switch between your computer, tablet or mobile device</p>
         </div>
         <div class="col-lg-4 feature-col">
-          <img src="../public/images/pic-2.png" alt="">
+          <img src="{{asset('images/pic-2.png')}}" alt="">
           <h4>Expert Teachers</h4>
           <p>Learn from industry experts who are passionate about teaching</p>
         </div>
         <div class="col-lg-4 feature-col">
-          <img src="../public/images/pic-3.png" alt="">
+          <img src="{{asset('images/pic-3.png')}}" alt="">
             <h4>Unlimited Access</h4>
             <p>Choose what you'd like to learn from our extensive supscriptio library</p>
         </div>
@@ -148,11 +165,11 @@
 
          <!--End Loading Screen-->
 
- <script src="../public/js/jquery-3.3.1.min.js"></script>
-        <script src="../public/js/bootstrap.min.js"></script>
-        <script src="../public/js/plugins.js"></script>
-        <script src="../public/js/wow.min.js"></script>
-        <script>new WOW().init();</script>
+ <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+ <script src="{{asset('js/bootstrap.min.js')}}"></script>
+ <script src="{{asset('js/plugins.js')}}"></script>
+ <script src="{{asset('js/wow.min.js')}}"></script>
+ <script>new WOW().init();</script>
 
 
 </body>

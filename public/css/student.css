@@ -32,11 +32,11 @@
 .col18{height: 200px; background-color: rgb(82, 87, 82);}
 
 
-.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+/* .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
     color: #fff;
     background-color: #2073d9;
     margin-right: 20px;
-}
+} */
 
 @media only screen and (max-width: 300px) {
     .text {font-size: 11px}

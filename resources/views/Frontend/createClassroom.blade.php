@@ -29,35 +29,42 @@
     <div class="col5">
       <!-- login -->
 
-      <form>
+      <form
+       action="{{ route('proucts.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        
+
+
         <div class="form-group">
-          <label for="exampleFormControlInput1">Email address</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          <label for="exampleFormControlInput1">title</label>
+          <input type="text" class="form-control" id="title" name="title" placeholder="title">
         </div>
+
         <div class="form-group">
-          <label for="exampleFormControlSelect1">Example select</label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <label for="exampleFormControlInput1">course</label>
+          <br>
+          <select name="course_id" id="courses">
+
+            @foreach ($courses as $course)
+          <option value="{{$course->course_id}}" name="course_id">{{$course->title}} </option>
+                
+            @endforeach
+    
           </select>
         </div>
-        <div class="form-group">
-          <label for="exampleFormControlSelect2">Example multiple select</label>
-          <select multiple class="form-control" id="exampleFormControlSelect2">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1 ">Example textarea</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
+         
+        <div class="form-group" >
+          <input type="hidden" class="form-control" id="1" name="teacher_id" value=" {{Auth::guard('teacher')->user()->user_id}}" placeholder="teacher_id">
+        </div> 
+
+        <div class="form-group" >
+          <input type="file" class="form-control-file" name="file" id="exampleInputFile">
+        </div> 
+        
+        
+        
+
+           <button type="submit">add</button>
       </form>
   </div>
 </div>
@@ -76,11 +83,11 @@
 
          <!--End Loading Screen-->
 
- <script src="../public/js/jquery-3.3.1.min.js"></script>
-        <script src="../public/js/bootstrap.min.js"></script>
-        <script src="../public/js/plugins.js"></script>
-        <script src="../public/js/wow.min.js"></script>
-        <script>new WOW().init();</script>
+  <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('js/plugins.js')}}"></script>
+  <script src="{{asset('js/wow.min.js')}}"></script>
+  <script>new WOW().init();</script>
 
 
 

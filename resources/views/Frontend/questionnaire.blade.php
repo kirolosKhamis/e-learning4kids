@@ -922,10 +922,10 @@
 
 </script>
 
- <script src="../public/js/jquery-3.3.1.min.js"></script>
-<script src="../public/js/bootstrap.min.js"></script>
-<script src="../public/js/plugins.js"></script>
-<script src="../public/js/wow.min.js"></script>
+<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script src="{{asset('js/plugins.js')}}"></script>
+<script src="{{asset('js/wow.min.js')}}"></script>
 <script>new WOW().init();</script>
 
 

@@ -104,11 +104,11 @@
       
          <!--End Loading Screen-->
 
- <script src="../js/jquery-3.3.1.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/plugins.js"></script>
-        <script src="../js/wow.min.js"></script>
-        <script>new WOW().init();</script>
+  <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('js/plugins.js')}}"></script>
+  <script src="{{asset('js/wow.min.js')}}"></script>
+  <script>new WOW().init();</script>
 
 </body>
 </html>

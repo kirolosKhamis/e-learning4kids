@@ -64,14 +64,22 @@ class RegisterController extends Controller
         $request->validate( [
             'fname' => ['required', 'string', 'max:255'],
             'lname'=>['required', 'string', 'min:3'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:teacher'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:student'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'address'=>['required', 'string', 'min:3'],
             'term'=>['required', 'string', 'min:3'],
             'parent_id'=>['required', 'string', 'min:1'],
+            'phone'=>['required', 'string', 'max:11'],
+            'file'=>['required'],
             // 'specialization'=>['required', 'string', 'min:1'],
 
         ]);
+
+        $file=$request->file('file');
+        $name=$file->getClientOriginalName();
+
+        $file->move('materials',$name);
+
         $student = Student::create([
             'fname' => $request['fname'],
             'lname' => $request['lname'],
@@ -80,9 +88,12 @@ class RegisterController extends Controller
             'address' => $request['address'],
             'term' => $request['term'],
             'parent_id' => $request['parent_id'],
+            'name_of_school' => $request['name_of_school'],
+            'photo' => $name,
+            'phone' => $request['phone'],
             // 'specialization' => $request['specialization'],
         ]);
-        return redirect()->intended('student');
+        return redirect()->intended('questionnaire');
     }
 
     public function showTeacherRegisterForm()
@@ -103,8 +114,17 @@ class RegisterController extends Controller
             'age'=>['required', 'string', 'min:1'],
             'phone'=>['required', 'string', 'min:1'],
             'specialization'=>['required', 'string', 'min:1'],
+            'name_of_school'=>['required', 'string', 'min:1'],
+            'phone'=>['required', 'string', 'max:11'],
+            'file'=>['required']
 
         ]);
+
+        $file=$request->file('file');
+        $name=$file->getClientOriginalName();
+
+        $file->move('materials',$name);
+
         $teacher = Teacher::create([
             'fname' => $request['fname'],
             'lname' => $request['lname'],
@@ -114,6 +134,8 @@ class RegisterController extends Controller
             'age' => $request['age'],
             'phone' => $request['phone'],
             'specialization' => $request['specialization'],
+            'name_of_school' => $request['name_of_school'],
+            'photo' => $name,
         ]);
         return redirect()->intended('teacher' );
     }
@@ -135,12 +157,19 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:parent'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'address'=>['required', 'string', 'min:3'],
-            'phone'=>['required', 'string', 'min:1'],
             'relation'=>['required', 'string', 'min:1'],
             'number_of_children'=>['required', 'string', 'min:1'],
             'age'=>['required', 'string', 'min:1'],
+            'phone'=>['required', 'string', 'max:11'],
+            'file'=>['required']
 
         ]);
+
+        $file=$request->file('file');
+        $name=$file->getClientOriginalName();
+
+        $file->move('materials',$name);
+
         $parent = ParentModel::create([
             'fname' => $request['fname'],
             'lname' => $request['lname'],
@@ -151,6 +180,7 @@ class RegisterController extends Controller
             'relation' => $request['relation'],
             'number_of_children' => $request['number_of_children'],
             'age' => $request['age'],
+            'photo' => $name,
         ]);
         return redirect()->intended('parent');
     }

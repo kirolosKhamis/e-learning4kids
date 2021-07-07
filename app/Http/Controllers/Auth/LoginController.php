@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\ParentModel;
+use App\Models\Classroom;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Client\Request as ClientRequest;
@@ -81,7 +82,7 @@ class LoginController extends Controller
     public function studentLogin(Request $request)
     {
         $this->validate($request, [
-            'email'   => 'required|email',
+            'email'   => 'required|email|string|max:255|exists:student',
             'password' => 'required|min:6'
         ]);
         if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -89,25 +90,25 @@ class LoginController extends Controller
                     $data=$request->input();
                     $request->session()->put('email', $data['email'] );
                     return redirect()->intended('student');
-
-                }
+                } 
         return redirect()->back()->withInput($request->only('email', 'remember'));
     }
 
     public function teacherLogin(Request $request)
     {
         $this->validate($request, [
-            'email'   => 'required|email',
+            'email'   => 'required|email|string|max:255|exists:teacher',
             'password' => 'required|min:6'
         ]);
         if (Auth::guard('teacher')->attempt(['email' => $request->email, 'password' => $request->password])) {
                     // if successful, then redirect to their intended location
-
-                    // $parents= ParentModel::where('email',  'k.k.nashed@gmail.com')->get();
-                    // return redirect()->intended('teacher')->with(compact('parents'));
-                    // return view('Frontend.teacher',compact('parents'));
                     $data=$request->input();
                     $request->session()->put('email', $data['email'] );
+
+                    // $classrooms = Classroom::latest()->paginate(100);
+                    // return view('Frontend.teacher', compact('classrooms'))
+                    //     ->with('i', (request()->input('page', 1) - 1) * 100);
+                    // return redirect()->route('proucts.index');
                     return redirect()->intended('teacher');
 
                 }
@@ -119,8 +120,8 @@ class LoginController extends Controller
 
     public function parentLogin (Request $request) {
         $this->validate($request, [
-                    'email'   => 'required|email',
-                    'password' => 'required|min:6'
+            'email'   => 'required|email|string|max:255|exists:parent',                   
+            'password' => 'required|min:6'
         ]);
         if (Auth::guard('parent')->attempt(['email' => $request->email, 'password' => $request->password])) {
                     // if successful, then redirect to their intended location

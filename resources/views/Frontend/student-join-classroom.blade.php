@@ -31,22 +31,28 @@
 
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col4">
+            
             <div class="row">
-              <div class="col-lg-12 col-sm-12 col5">
-                  <input class="form-control inputtext" type="text" id="classcode" name="classcode" placeholder="Enter Class Code..">
-              </div>
+                
+            <form action="{{ route('contents.store') }}" method="POST">
+                @csrf
+                <div class="col-lg-12 col-sm-12 col5">
+                    <input class="form-control inputtext" type="text" id="classcode" name="classcode" placeholder="Enter Class Code..">
+                </div>
 
-              <div class="col-lg-12 col-sm-12 col10">
+                <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
 
-                <button class="buttons2" type="button">Join</button>
+                <div class="col-lg-12 col-sm-12 col10">
+                <button   type="submit" class="buttons2" >Join</button>
                 <button class="buttons2" type="button">Cancel</button>
-              </div>
+                </div>
+            </form>
 
             </div>
 
             <!-- <div class="row">
 
-          </div> -->
+            </div> -->
 
         </div>
     </div>
@@ -58,12 +64,11 @@
   <!-- Footer -->
          <!--End Loading Screen-->
 
- <script src="../public/js/jquery-3.3.1.min.js"></script>
-        <script src="../public/js/bootstrap.min.js"></script>
-        <script src="../public/js/plugins.js"></script>
-        <script src="../public/js/wow.min.js"></script>
+        <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+        <script src="{{asset('js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('js/plugins.js')}}"></script>
+        <script src="{{asset('js/wow.min.js')}}"></script>
         <script>new WOW().init();</script>
-
 
 </body>
 </html>

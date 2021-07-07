@@ -5,6 +5,7 @@ body {
   overflow-x: hidden;
   }
 
+
 /*Start Nav bar*/
 /*size containerel nav bar*/
 
@@ -37,12 +38,12 @@ body {
   }
 
        .dropdown-menu {
- border-top: 5px solid #2073d9;;
+ border-top: 5px solid #2073d9;
  width: 200px;
 }
   /*color el text gwa el drop down*/
     .dropdown-menu > li > a {
-        color: #2073d9;;
+        color: #2073d9;
         }
        /*color el hover gwa el drop down*/
    .dropdown-menu > li > a:hover,
@@ -55,17 +56,17 @@ body {
           /*color el divider*/
 .dropdown-menu .divider {
   height: 2px;
-  background-color: #2073d9;;
+  background-color: #2073d9;
 
 }
   .navbar-inverse .navbar-brand:hover,
   .navbar-inverse .navbar-brand:focus {
-  color:#2073d9; ;
+  color:#2073d9;
   }
 
 /*color el logo*/
     .navbar-inverse .navbar-brand {
-  color: #2073d9;;
+  color: #2073d9;
   font-size: 30px;
   font-family: monospace;
   line-height: 40px;
@@ -84,7 +85,7 @@ body {
 
 /*hover el link f el nav bar*/
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-  color: #2073d9;;
+  color: #2073d9;
   background-color: transparent;
 }
 
@@ -115,7 +116,7 @@ margin-top:18px;
 /*lead da el class bta3 el paragraph*/
 .about .lead
 {
-  color:#2073d9;;
+  color:#2073d9;
   font-size:25px;
   margin-top:15px;
 
@@ -211,7 +212,7 @@ background-color: black;
 }
 
 .price_table .price_box  a:visited {
-background-color: #ccc;
+background-color: #044594;
 }
 
 /*End section price table*/

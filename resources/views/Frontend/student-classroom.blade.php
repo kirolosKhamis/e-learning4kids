@@ -5,121 +5,390 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
- <title>E-Learning for Kids</title>
+    <title>E-Learning for Kids</title>
+    <link rel="icon" href="{{asset('images/icon2.jpg')}}" />
+    <link rel='stylesheet'href ="{{asset('css/bootstrap.css')}}"/>
+    <link rel='stylesheet'href ="{{asset('css/font-awesome.min.css')}}"/>
+    <link rel='stylesheet'href ="{{asset('css/style.css')}}"/>
+    <link rel='stylesheet'href="{{asset('css/media.css')}}"/>
+    <link rel='stylesheet'href="{{asset('css/animate.css')}}"/>
+    <link rel='stylesheet'href="{{asset('css/Student-classroom.css')}}"/>
 
-        <link rel="icon" href="{{asset('images/icon2.jpg')}}" />
-        <link rel='stylesheet'href ="{{asset('css/bootstrap.css')}}"/>
-        <link rel='stylesheet'href ="{{asset('css/font-awesome.min.css')}}"/>
-        <link rel='stylesheet'href ="{{asset('css/style.css')}}"/>
-        <link rel='stylesheet'href="{{asset('css/media.css')}}"/>
-        <link rel='stylesheet'href="{{asset('css/animate.css')}}"/>
-        <link rel='stylesheet'href="{{asset('css/Student-classroom.css')}}"/>
+    <link rel='stylesheet'href="{{asset('css/file.css')}}"/>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+    body {
+        background: #eee;
+        font-size: 150%;
+    }
+    
+    .date {
+        font-size: 11px
+    }
+    
+    .comment-text {
+        font-size: 12px
+    }
+    
+    .fs-12 {
+        font-size: 12px
+    }
+    
+    .shadow-none {
+        box-shadow: none
+    }
+    
+    .name {
+        color: #007bff
+    }
+    
+    .cursor:hover {
+        color: blue
+    }
+    
+    .cursor {
+        cursor: pointer
+    }
+    
+    .textarea {
+        resize: none
+    }
+    
+    .fa-facebook {
+        color: #3b5999
+    }
+    
+    .fa-twitter {
+        color: #55acee
+    }
+    
+    .fa-linkedin {
+        color: #0077B5
+    }
+    
+    .fa-instagram {
+        color: #e4405f
+    }
+    
+    .fa-dribbble {
+        color: #ea4c89
+    }
+    
+    .fa-pinterest {
+        color: #bd081c
+    }
+    
+    .fa {
+        cursor: pointer
+    }
+    </style>
 </head>
-<body>
-    <!-- header -->
+
+<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
+<script type='text/javascript'></script>
+<!-- header -->
 @section('content')
-    <!--Body-->
-    <div class="row">
-        <div class="col-lg-12 col3">
-            <img class="img1 img img-responsive" src="../public/images/photos/studentclassroom.jpg">
+<!--Body-->
 
+@if (Auth::guard('student')->user())
+    {{-- student --}}
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col3">
+            <img class="img1 img img-responsive" src="{{asset('images/photos/studentclassroom.jpg')}}">
         </div>
-
     </div>
-
-
     <div class="row">
-        <div class="col-lg-3  col4">
-            <div class="square">
-                <label class="textstream" for="Stream">Stream</label>
-            </br>
-                <label class="textclasswork" for="classwork">Materials</label>
-            </br>
-                <label class="textclasswork" for="newassissement">Members</label>
-            </br>
-                <label class="textclasswork" for="members">View all</label>
+        <div class="col-lg-12 col-md-12 col-sm-6 courseTitle">
+            @foreach ($classrooms as $classroom)           
+                @if ($classroom->classroom_id==$classroom_id)
+                    <p>{{$classroom->title}}</p>
+                @endif
+            @endforeach
+        </div>
+    </div>  
+        
+    </div>
+    
+    <div class="container mt-5">
+        <div class="d-flex justify-content-center row">
 
-
+            
+            <div class="col-md-8">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">Submit assignment<hr style="margin-top: 1rem;"></a></li>
+                        <li class="list-group-item">Materials<hr></li>
+                        <li class="list-group-item">Members<hr></li>
+                        <li class="list-group-item">View All<hr></li>
+                        <li class="list-group-item">View other classrooms</li>
+                    </ul>
+                </div>
+                <div class="d-flex flex-column comment-section" id="myGroup">
+                    <div class="bg-white p-2">
+                        <form action="{{asset('post')}}" method="POST" enctype="multipart/form-data">
+                            @csrf 
+                        <div class="mt-2">
+                            <div  class="bg-light p-2" data-parent="#myGroup">
+                                <textarea name="post" class="form-control ml-1 shadow-none textarea" placeholder=" Student announce...."></textarea> 
+                                <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
+                                <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
+                                
+                                <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" >
+                                
+                                <div class="mt-2 text-right">
+                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post comment</button>
+                                    <button class="btn btn-danger btn-sm shadow-none" type="reset"  style="height: 29px;width: 110px;font-size: small;">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>            
+                </div>
             </div>
-
-            <div class="col11">
-                <label class="textviewotherclassrooms" for="viewotherclassrooms"> View other classrooms</label>
-                  </div>
-        </div>
-
-        <div class="col-lg-7   ">
-            <div class="col5">
-            <input class="inputtext" type="text" id="Teacherannounce" name="Teacherannounce" placeholder=" Teacher announce....">
-        <div >
-            <button class="btn btn-light" type="button">Browse..</button>
-
-            <button class="btn btn-primary" type="button">Post</button>
-        </div>
-           </div>
-
-
         </div>
     </div>
+@foreach ($studentposts as $studentpost)
+@if ($studentpost->classroom_id==$classroom_id)
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-8">
+            <div class="d-flex flex-column comment-section" id="myGroup">
+                <div class="bg-white p-2">
+                    <div class="d-flex flex-row user-info"><img class="rounded-circle" src="materials/{{$studentpost->student_id !== null ? $studentpost->student->photo :$studentpost->teacher->photo }}"  width="40">
+                        {{-- <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"> --}}
+                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$studentpost->student_id !== null ? $studentpost->student->fname :$studentpost->teacher->fname }} {{ $studentpost->student_id !== null ? $studentpost->student->lname : $studentpost->teacher->lname}}</span><span class="date text-black-50">Shared publicly - {{$studentpost->created_at}}</span></div>
+                    </div>
+                    <div class="mt-2">
+                        <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$studentpost->post}}</p>
+                        {{-- <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> --}}
+                    </div>
 
+                    <div class="mt-2">
+                        <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['post_id' =>$studentpost->id])}}">{{$studentpost->content}}</a></p>
+                    </div>
+                </div>
+                <div class="bg-white p-2">
+                    <div class="d-flex flex-row fs-12">
+                        <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
+                        <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$studentpost->id}}"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+                        <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-2" href="#collapse-2"><i class="fa fa-share"></i><span class="ml-1">Reply</span></div>
+                    </div>
+                </div>
+                
 
+                {{-- @if ($studentpost->content!=null)
+                    <img height="50px" width="50px" src="materials/{{$studentpost->content}}" alt="">
+                @endif --}}
+            @foreach($comments as $comment)
+                @if ($comment->post_id==$studentpost->id)
+ 
+                    <div id="collapse-{{$studentpost->id}}" class="bg-light p-2 collapse" data-parent="#myGroup">                                                                                       
+                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="materials/{{$comment->student_id !== null ? $comment->student->photo :$comment->teacher->photo}}"width="35" height="32">
+                        {{-- name and date --}}
+                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name" style="font-size: 12px;">{{$comment->student_id !== null ? $comment->student->fname :$comment->teacher->fname }} {{ $comment->student_id !== null ? $comment->student->lname : $comment->teacher->lname}}<span class="date text-black-50" style="font-size: 8px;margin: 0 4px 0 2px;margin: 0 4px 0 2px;">Shared publicly -{{$comment->created_at}}</span></span></div>
+                        </div>
+                        {{-- comments --}}
+                        <div class="mt-2">
+                            <p class="comment-text" style="font-size: 13px;margin:-8px 0 0px 43px">{{$comment->comments}}</p>
+                        </div>
 
+                        <div class="mt-2">
+                            <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['comment_id' =>$comment->comment_id])}}">{{$comment->content}}</a></p>
+                        </div>
+                        <hr> 
+                    </div>
 
+                    {{-- @if ($comment->content!=null)
+                        <img height="50px" width="50px" src="materials/{{$comment->content}}" alt="">
+                    @endif --}}
+                @endif
+            @endforeach 
 
-
-
-
-
-
-
-
-
-
-    <div class="row">
-        <div class="col-lg-7 col-md-6 col-sm-4 col7">
-            <img class="userimg" src="../public/images/photos/user.png">
-            <label class="textuser" for="user" >User</label>
-        <br>
-             <label class="texttypesomthing" for="typesomething" >Type Something here...</label>
+                <form action="{{route('post.comment')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    
+                    <div id="collapse-{{$studentpost->id}}" class="bg-light p-2 collapse" data-parent="#myGroup">
+                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="materials/{{$studentpost->student_id !== null ? $studentpost->student->photo :$studentpost->teacher->photo }}"  width="35" height="32">
+                            <textarea name="comments" class="form-control ml-1 shadow-none textarea"></textarea> 
+                            <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile">
+                        </div>
+                            
+                        <input type="hidden" name="post_id" value="{{$studentpost->id}}">
+                        <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
+                        <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
+                        <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post comment</button></div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-lg-7 col-md-6 col-sm-4 col8">
-            <img class="userimg" src="../public/images/photos/user.png">
-            <label class="textuser" for="user" >User</label>
-        <br>
-             <label class="texttypesomthing" for="typesomething" >Type Something here...</label>
 
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-7 col-md-6 col-sm-4 col9">
-            <img class="userimg" src="../public/images/photos/user.png">
-            <label class="textuser" for="user" >User</label>
-        <br>
-             <label class="texttypesomthing" for="typesomething" >Type Something here...</label>
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-2 col-md-6 col-sm-4 col10">
-            <img class="imgchatbot" src="../public/images/photos/chatbot.png">
-        <br>
-            <label class="textchatbot" for="user" >Chat Bot</label>
-
-        </div>
-    </div>
-    @endsection
-   <!-- Footer -->
-         <!--End Loading Screen-->
-
+@endif
+@endforeach
+@endsection
+<!-- Footer -->
+<!--End Loading Screen-->
  <script src="../public/js/jquery-3.3.1.min.js"></script>
-        <script src="../public/js/bootstrap.min.js"></script>
-        <script src="../public/js/plugins.js"></script>
-        <script src="../public/js/wow.min.js"></script>
-        <script>new WOW().init();</script>
+<script src="../public/js/bootstrap.min.js"></script>
+<script src="../public/js/plugins.js"></script>
+<script src="../public/js/wow.min.js"></script>
+<script>new WOW().init();</script>
 
-</body>
+@else {{-- if you are a teacher --}}
+        
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col3">
+            <img class="img1 img img-responsive" src="{{asset('images/photos/studentclassroom.jpg')}}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-6 courseTitle">
+            @foreach ($classrooms as $classroom)           
+                @if ($classroom->classroom_id==$classroom_id)
+                    <p>{{$classroom->title}}</p>
+                @endif
+            @endforeach
+        </div>
+    </div>
+
+    {{-- make post for teacher --}}
+    <div class="container mt-5">
+        <div class="d-flex justify-content-center row">
+
+            
+            <div class="col-md-8">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="{{route('view.addAssignment', ['classroom_id' =>$classroom_id])}}">Add assignment</a></li>
+                        <li class="list-group-item"><a href="{{route('show.studentAssignment', ['classroom_id' =>$classroom_id])}}">Grade assignment</a></li>
+                        <li class="list-group-item">Members</li>
+                        {{-- <li class="list-group-item">View All<hr></li> --}}
+                        <li class="list-group-item"><a href="{{route('add.result', ['classroom_id' =>$classroom_id])}}">Add results</li></a>
+                        <li class="list-group-item">View other classrooms</li>
+                    </ul>
+                </div>
+                <div class="d-flex flex-column comment-section" id="myGroup">
+                    <div class="bg-white p-2">
+                        <form action="{{asset('post')}}" method="POST" enctype="multipart/form-data">
+                            @csrf 
+                        <div class="mt-2">
+                            <div  class="bg-light p-2" data-parent="#myGroup">
+                                <textarea name="post" class="form-control ml-1 shadow-none textarea"id="Teacherannounce" placeholder=" Teacher announce...."></textarea> 
+                                <input type="hidden" name="teacher_id" value="{{Auth::guard('teacher')->user()->user_id}}">
+                                <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
+                                
+                                <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" >
+                                
+                                <div class="mt-2 text-right">
+                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post comment</button>
+                                    <button class="btn btn-danger btn-sm shadow-none" type="reset"  style="height: 29px;width: 110px;font-size: small;">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        </form>
+                    </div>            
+                </div>
+            </div>
+        </div>
+    </div>
+
+@foreach ($studentposts as $studentpost)
+@if ($studentpost->classroom_id==$classroom_id)
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-8">
+            <div class="d-flex flex-column comment-section" id="myGroup">
+                <div class="bg-white p-2">
+                    <div class="d-flex flex-row user-info"><img class="rounded-circle" src="materials/{{$studentpost->student_id !== null ? $studentpost->student->photo :$studentpost->teacher->photo }}"  width="40">
+                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$studentpost->student_id !== null ? $studentpost->student->fname :$studentpost->teacher->fname }} {{ $studentpost->student_id !== null ? $studentpost->student->lname : $studentpost->teacher->lname}}</span><span class="date text-black-50">Shared publicly - Jan 2020</span></div>
+                    </div>
+                    <div class="mt-2">
+                        <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$studentpost->post}}</p>
+                    </div>
+
+                    <div class="mt-2">
+                        <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['post_id' =>$studentpost->id])}}">{{$studentpost->content}}</a></p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-2">
+                    <div class="d-flex flex-row fs-12">
+                        <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
+                        <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$studentpost->id}}"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+                        <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-2" href="#collapse-2"><i class="fa fa-share"></i><span class="ml-1">Reply</span></div>
+                    </div>
+                </div>
+                
+
+                {{-- @if ($studentpost->content!=null)
+                    <img height="50px" width="50px" src="materials/{{$studentpost->content}}" alt="">
+                @endif --}}
+            @foreach($comments as $comment)
+                @if ($comment->post_id==$studentpost->id)
+ 
+                    <div id="collapse-{{$studentpost->id}}" class="bg-light p-2 collapse" data-parent="#myGroup">                                                                                       
+                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="materials/{{$comment->student_id !== null ? $comment->student->photo :$comment->teacher->photo}}"width="35" height="32">
+                        {{-- name and date --}}
+                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name" style="font-size: 12px;">{{$comment->student_id !== null ? $comment->student->fname :$comment->teacher->fname }} {{ $comment->student_id !== null ? $comment->student->lname : $comment->teacher->lname}}<span class="date text-black-50" style="font-size: 8px;margin: 0 4px 0 2px;margin: 0 4px 0 2px;">Shared publicly - Jan 2021</span></span></div>
+                        </div>
+                        {{-- comments --}}
+                        <div class="mt-2">
+                            <p class="comment-text" style="font-size: 13px;margin:-8px 0 0px 43px">{{$comment->comments}}</p>
+                        </div>
+
+                        <div class="mt-2">
+                            <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['comment_id' =>$comment->comment_id])}}">{{$comment->content}}</a></p>
+                        </div>
+                        <hr> 
+                    </div>
+
+                    {{-- @if ($comment->content!=null)
+                        <img height="50px" width="50px" src="materials/{{$comment->content}}" alt="">
+                    @endif --}}
+                @endif
+            @endforeach 
+
+                <form action="{{route('post.comment')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    
+                    <div id="collapse-{{$studentpost->id}}" class="bg-light p-2 collapse" data-parent="#myGroup">
+                        
+                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="materials/{{$studentpost->student_id !== null ? $studentpost->student->photo :$studentpost->teacher->photo }}"  width="35" height="32">
+                            <textarea name="comments" class="form-control ml-1 shadow-none textarea" placeholder="Add comment"></textarea> 
+                            <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile">
+                        </div>
+                            
+                        <input type="hidden" name="post_id" value="{{$studentpost->id}}">
+                        <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
+                        <input type="hidden" name="teacher_id" value="{{Auth::guard('teacher')->user()->user_id}}">
+                        <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post comment</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@endif
+@endforeach
+@endsection
+       
+<!-- Footer -->
+<!--End Loading Screen-->
+     <script src="../public/js/jquery-3.3.1.min.js"></script>
+    <script src="../public/js/bootstrap.min.js"></script>
+    <script src="../public/js/plugins.js"></script>
+    <script src="../public/js/wow.min.js"></script>
+    <script>new WOW().init();</script>
+@endif
+        
 </html>

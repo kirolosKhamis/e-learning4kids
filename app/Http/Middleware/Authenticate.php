@@ -14,8 +14,22 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+        // if (! $request->expectsJson()) {
+        //      return route('login');
+        // }
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticateddd.'], 401);
         }
+        if ($request->is('student') || $request->is('student/*')) {
+            return route('login/student');
+        }
+        if ($request->is('teacher') || $request->is('teacher/*')) {
+            // return redirect()'/login/teacher'));
+            return route('login/teacher');
+        }
+        if ($request->is('parent') || $request->is('parent/*')) {
+            return route('login/parent');
+        }
+        return redirect()->guest(route('Unauthenticated go and login'));
     }
 }

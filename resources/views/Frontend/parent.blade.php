@@ -1,3 +1,4 @@
+
 @extends('Frontend.master')
 <!DOCTYPE html>
 <html>
@@ -22,132 +23,120 @@
        
             <!--Body-->
             <div class="row">
-            <div class=" col-lg-4  col-md-4 col-sm-4 col-xm-4  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-                <i class="fa fa-user fa-5x"></i>
-                <h1>Student 1</h1>
-                <p class="lead">Welcome to School</p>
-
-            </div>
-
-                <div class="col-lg-4  col-md-4 col-sm-4 col-xm-4  col14  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-                <i class="fa fa-user fa-5x"></i>
-                <h1>Student 2</h1>
-                <p class="lead">Welcome to School</p>
-
+                <b hidden>{{$flag=0}}</b>
+                @foreach ($students as $student)
+                @if ($student->parent_id == Auth::guard('parent')->user()->user_id )
+            
+                <div class=" col-lg-4  col-md-4 col-sm-4 col-xm-4  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
+                    <i class="fa fa-user fa-5x"></i>
+                    <h1> {{$student->fname}}</h1>
+                    {{-- <h1><button onclick="myFunction()" type="button" class="btn btn-primary">View {{$student->fname}} Courses</button></h1> --}}
+                    {{-- <button onclick="myFunction()">View {{$student->fname}} Courses</button> --}}
+                    {{-- <p class="lead">Welcome to School</p> --}}
+                    <b hidden>{{$flag++}}</b>
                 </div>
+                @endif
+   
+                @endforeach
 
-            <div class="col-lg-4  col-md-4 col-sm-4 col-xm-4  col18  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-                <i class="fa fa-user fa-5x"></i>
-                <h1>Student 3</h1>
-                <p class="lead">Welcome to School</p>
+                @if ($flag==0 )
+                
+                <div class="col-lg-4  col-md-4 col-sm-4 col-xm-4  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300">
+                    <i class="fa fa-user fa-5x"></i>
+                    <h1> You Don't Have Any <br>Chlid Register Yet</h1>
+                    {{-- <p class="lead">Welcome to School</p> --}}
+    
+                </div>
+                @endif
+          
 
-            </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-lg-12 col7">
-                <h1>Enrolled Courses</h1>
                 </div>
             </div>
 
             <section class="price_table text-center">
             <div class="container-fluid">
-
+                <h1 >Enrollment courses  </h1>
                 <div class="row">
+                  
 
-                    <div class="col-md-4 col-sm-6 col-xm-12">
-                    <div class="price_box wow fadeInUp" data-wow-duration="2s" data-wow-offset="200">
-                        <div class="img">
-                        <img  class="center-block" src="../public/images/cart/1.jpg" alt="img">
-                        </div>
-                        <ul class="info list-unstyled">
-                        <li >EGP 3,999</li>
-                        <li class="right-text">EGP 4,488</li>
-                        <a href="../HTML/cart.html" >Details</a>
-
-                        </ul>
-                    </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 col-xm-12">
-                    <div class="price_box wow fadeInUp" data-wow-duration="3s" data-wow-offset="200">
-                        <div class="img">
-                        <img src="../public/images/cart/2.jpg" alt="img">
-                        </div>
-                        <ul class="info list-unstyled">
-                        <li >EGP 5,899</li>
-                        <li class="right-text">EGP 6,499</li>
-                        <a href="../HTML/cart.html" >Details</a>
-
-                        </ul>
-                    </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 col-xm-12">
-                    <div class="price_box wow fadeInUp" data-wow-duration="4s" data-wow-offset="200">
-                        <div class="img">
-                        <img src="../public/images/cart/3.jpg" alt="img">
-                        </div>
-                        <ul class="info list-unstyled">
-                        <li >EGP 2,499</li>
-                        <li class="right-text">EGP 3,499</li>
-                        <a href="../HTML/cart.html" >Details</a>
-
-                        </ul>
-                    </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 col-xm-12">
-                    <div class="price_box wow fadeInUp" data-wow-duration="2s" data-wow-offset="200">
-                        <div class="img">
-                        <img src="../public/images/cart/4.jpg" alt="img">
-                        </div>
-                        <ul class="info list-unstyled">
-                        <li >EGP 3,499</li>
-                        <li class="right-text">EGP 5,499</li>
-                        <a href="../HTML/cart.html" >Details</a>
-
-                        </ul>
-                    </div>
-                    </div>
-
-                <div class="col-md-4 col-sm-6 col-xm-12">
-                    <div class="price_box wow fadeInUp" data-wow-duration="3s" data-wow-offset="200">
-                        <div class="img">
-                        <img src="../public/images/cart/5.jpg" alt="img">
-                        </div>
-                        <ul class="info list-unstyled">
-                        <li >EGP 6,499</li>
-                        <li class="right-text">EGP 7,499</li>
-                        <a href="../HTML/cart.html" >Details</a>
-
-                        </ul>
-                    </div>
-                    </div>
+                {{-- <div id="myDIV" style="display: none">    --}}
+                    @foreach ($students as $student)
+                    <p hidden>{{$teacherName=''}}{{$courseTitle=''}}</p>
+                        @if ($student->parent_id == Auth::guard('parent')->user()->user_id)
+                            <p hidden>{{$student_id= $student->user_id }}</p>
+                    
+                            @foreach ($studentregistrations as $studentregistration)
+                                @if ($studentregistration->student_id==$student_id)    
+                                      
+                                        @foreach ($classrooms as $classroom)
+                                            @if ($classroom->classroom_id==$studentregistration->classroom_id)
+                                            <p hidden> {{$classroom_id=$classroom->classroom_id}}</p>
+                                             
+                                                @foreach ($teachers as $teacher)
+                                                    @if ($teacher->user_id ==$classroom->teacher_id)
+                                                        <p hidden>{{$teacherName=$teacher->fname}}</p>
+                                                        {{-- {{$classroom->teacher_id}} --}}
+                                                    @endif
+                                                @endforeach
+                                               
+                                                @foreach ($courses as $course)
+                                                    @if ($course->course_id==$classroom->course_id)
+                                                        <p hidden > {{$courseTitle=$course->title}}</p>
+                                                        {{-- <p hidden > {{$course_id=$course->course_id}}</p> --}}
+                                                       
+                                                        <div class="col-md-4 col-sm-6 col-xm-12">
+                                                            <div class="price_box wow fadeInUp" data-wow-duration="2s" data-wow-offset="200">
+                                                                <div class="img">
+                                                                <img  class="center-block" src="../public/images/cart/1.jpg" alt="img">
+                                                                </div>
+                                                                <ul class="info list-unstyled">
+                                                                    <li >Course Title: {{$courseTitle}}</li>
+                                                                    <li class="right-text" ></li>
+                                                                    <li >Dr. {{$teacherName}}</li>
+                                                                    <a href="{{route('show.coursedetails', ['student_id'=> $student_id,'courseTitle'=>$courseTitle,'teacherName'=>$teacherName, 'classroom_id'=>$classroom_id])}}">Details</a>
+                                                                    {{-- <a  href="{{url('studentcoursedetails?$course->course_id')}}" >Details</a> --}}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
 
 
+                                                    @endif
+                                                @endforeach
 
-                    <div class="col-md-4 col-sm-6 col-xm-12">
-                    <div class="price_box wow fadeInUp" data-wow-duration="4s" data-wow-offset="200">
-                        <div class="img">
-                        <img src="../public/images/cart/6.jpg" alt="img">
-                        </div>
-                        <ul class="info list-unstyled">
-                        <li >EGP 1,499</li>
-                        <li class="right-text">EGP 2,499</li>
-                        <a href="../HTML/cart.html" >Details</a>
+                                               
 
-                        </ul>
-                    </div>
-                    </div>
+                                            @endif
+                                            
+                                        @endforeach    
+                                @endif
+
+                                
+                            @endforeach
+                            
+                        @endif
+
+                    @endforeach
+                {{-- </div>              --}}
                 </div>
 
             </div>
 
-            </section>
+        </section>
 
         @endsection
+        
+
+
+        <script>
+        function myFunction() {
+        var x = document.getElementById("myDIV");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+        </script>
 
         <script src="../public/js/jquery-3.3.1.min.js"></script>
                 <script src="../public/js/bootstrap.min.js"></script>

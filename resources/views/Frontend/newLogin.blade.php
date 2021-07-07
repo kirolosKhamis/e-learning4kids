@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>{{$url}} login</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('customAuth/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -43,23 +43,22 @@
                                     </div>
                                     
                                     @isset($url)
-                                    <div> kk {{$url}}</div>
+                                    <div> {{$url}}</div>
                                     <form method="POST" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
                                     @else
                                     <div> kkklk </div>
                                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                                     @endisset
-                                    {{-- <form method="POST" class="user" action="{{ route('login') }}"> --}}
                                         @csrf
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror"
                                                 aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address..."
-                                                id="email"  name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                                id="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
+                                                        <strong>{{ $message  }}</strong>
                                                     </span>
                                                 @enderror
                                         </div>
@@ -96,7 +95,7 @@
                                         <a class="small" href="{{asset('newForget')}}">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="{{asset('newRegister')}}">Create an Account!</a>
+                                        <a class="small" href="{{url("register/$url")}}">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
@@ -111,14 +110,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('customeAuth/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('customeAuth/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{asset('customeAuth/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="{{asset('customeAuth/js/sb-admin-2.min.js')}}"></script>
 
 </body>
 
