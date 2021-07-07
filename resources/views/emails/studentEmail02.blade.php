@@ -7,9 +7,7 @@
   <title>Document</title>
 </head>
 <body>
-    <div class="title m-b-md">
-      <strong>{{$details['title']}}</strong>
-    </div>
+    
 
     {{-- <div class="row">
       <div class="col-lg-6 col-md-3 col-sm-3"> --}}
