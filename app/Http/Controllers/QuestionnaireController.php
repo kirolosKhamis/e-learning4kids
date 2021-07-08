@@ -7,7 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-namespace App\Http\Controllers;
+use App\Http\Controllers;
 use App\Models\Student;
 use Redirect,Response;
 
@@ -40,11 +40,11 @@ class QuestionnaireController extends Controller
     }
 
     
-    public function update(Request $request){
+    // public function update(Request $request){
         
-        $student->update($request->only([
-            'personality_type'
-        ]));
-        return view('Frontend.jsonSurvey', compact('student'));
-    }
+    //     $student->update($request->only([
+    //         'personality_type'
+    //     ]));
+    //     return view('Frontend.jsonSurvey', compact('student'));
+    // }
 }
