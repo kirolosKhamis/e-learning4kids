@@ -90,6 +90,7 @@ Route::group(['middleware' => 'auth:student'], function () {
     })->name("viewassignments");
 
     Route::post('/submitAssignment', [App\Http\Controllers\ClassroomContent::class, 'submitAssignment'])->name("submit.assignment");
+    Route::get('/StudentCertificate', [App\Http\Controllers\ClassroomContent::class, 'showcertificate'])->name("show.certificate");
 
 });
 

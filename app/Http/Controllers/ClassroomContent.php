@@ -600,25 +600,24 @@ if( $file=$request->file('content'))
 
     
     public function showProfileDetails(Request $request) {
-        // $fname=$request->input('fname');
-        // $lname=$request->input('lname');
-        // $email=$request->input('email');
-        // $phone=$request->input('phone');
-        // $address=$request->input('address');
-        return view('Frontend.profile');
-            //  ->with('i', (request()->input('page', 1) - 1) * 100);
+        
+        if (Auth::guard('student')->user()){
+            $studentregs = StudentRegisteration::latest()->paginate(100);
+            $classrooms =Classroom::all();
+            return view('Frontend.profile',compact('studentregs','classrooms'));
+            
+
+        }
+     
+        return view('Frontend.profile');   
     }
 
 
     public function showaccountsetting(Request $request) {
-        // $fname=$request->input('fname');
-        // $lname=$request->input('lname');
-        // $email=$request->input('email');
-        // $phone=$request->input('phone');
-        // $address=$request->input('address');
+        
 
         return view('Frontend.profileEdit');
-            //  ->with('i', (request()->input('page', 1) - 1) * 100);
+          
     }
 
 //     public function download($uuid)
@@ -677,7 +676,19 @@ if( $file=$request->file('content'))
     // ->with('i', (request()->input('page', 1) - 1) * 100);
 }
 
-
+    public function showcertificate (Request $request) {
+        $student_id=$request->input('student_id');
+        $classroom_id=$request->input('classroom_id');
+    
+        $data=['student_id'=>$student_id,'classroom_id'=>$classroom_id];
+        // dd($request->input('data'));
+        $studentregs = StudentRegisteration::latest()->paginate(100);
+        $classrooms =Classroom::all();
+        $students= Student::all();
+        $courses= Course::all();
+    
+        return view('Frontend.certificateform',compact('data','studentregs','classrooms','students','courses'));
+        }
 
 
 

@@ -213,7 +213,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding:7px 58px 6px 32px; width: 0;">
                                     <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
-                                    <a href="{{route('delete.content', ['comment_id' => $comment->id])}}">Delete</a>
+                                    <a href="{{route('delete.content', ['comment_id' => $comment->comment_id])}}">Delete</a>
                                 </div>
                             </span>
                             
