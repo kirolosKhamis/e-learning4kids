@@ -162,7 +162,7 @@
                         {{-- <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"> --}}
                         <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$studentpost->student_id !== null ? $studentpost->student->fname :$studentpost->teacher->fname }} {{ $studentpost->student_id !== null ? $studentpost->student->lname : $studentpost->teacher->lname}}</span><span class="date text-black-50">Shared publicly - {{$studentpost->created_at}}</span></div>
                         
-                        
+                        @if ($studentpost->student_id==Auth::user()->user_id || $studentpost->teacher_id==Auth::user()->user_id) 
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="margin-left: auto;margin: 0 38px 25px 12px 20px;margin-right: 12px;margin-top: 11px;">
                             <i class="fa fa-ellipsis-v" style="font-size:24px"></i>
                             <span class="sr-only">(current)</span>
@@ -170,8 +170,12 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding:7px 58px 6px 32px; width: 0;">
                             <a href="{{route('show.profileDetails')}}"><i class="fa fa-user-o"></i> Profile</a>
                             <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+                   
+                            
                             <a href="{{route('delete.content', ['post_id' => $studentpost->id])}}">Delete Post</a>
+                            
                         </div>
+                        @endif
                     
                     </div>
                     
@@ -207,6 +211,7 @@
                         <div class="d-flex flex-column justify-content-start ml-2">
                             <span class="d-block font-weight-bold name" style="font-size: 12px;">{{$comment->student_id !== null ? $comment->student->fname :$comment->teacher->fname }} {{ $comment->student_id !== null ? $comment->student->lname : $comment->teacher->lname}}
                                 <span class="date text-black-50" style="font-size: 8px;margin: 0 4px 0 2px;margin: 0 4px 0 2px;">Shared publicly -{{$comment->created_at}}</span>
+                                @if ($comment->student_id==Auth::user()->user_id || $comment->teacher_id==Auth::user()->user_id)
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="padding: 0 0 0 394px;">
                                     <i class="fa fa-ellipsis-v" style="font-size:20px"></i>
                                     <span class="sr-only">(current)</span>
@@ -215,6 +220,7 @@
                                     <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
                                     <a href="{{route('delete.content', ['comment_id' => $comment->comment_id])}}">Delete</a>
                                 </div>
+                                @endif
                             </span>
                             
                             
@@ -228,6 +234,7 @@
                         <div class="mt-2">
                             <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['comment_id' =>$comment->comment_id])}}">{{$comment->content}}</a></p>
                         </div>
+                        <hr>
                     </div>
 
                     {{-- @if ($comment->content!=null)
