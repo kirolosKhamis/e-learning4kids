@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 namespace App\Http\Controllers;
 use App\Models\Student;
 use Redirect,Response;
-use Illuminate\Http\Request;
+
 
 class QuestionnaireController extends Controller
 {

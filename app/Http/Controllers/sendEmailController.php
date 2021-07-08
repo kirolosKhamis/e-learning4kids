@@ -18,11 +18,11 @@ class sendEmailController extends Controller
 
 
 
-    public function store(Request $request){
-        $order = Student::findOrFail($request->order_id);
+    // public function store(Request $request){
+    //     $order = Student::findOrFail($request->order_id);
 
-        // Ship the order...
-        Mail::to($request->user())->send(new OrderShipped($order));
-    }
+    //     // Ship the order...
+    //     Mail::to($request->user())->send(new OrderShipped($order));
+    // }
 
 }
