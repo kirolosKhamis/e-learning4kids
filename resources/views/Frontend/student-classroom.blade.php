@@ -161,7 +161,22 @@
                     <div class="d-flex flex-row user-info"><img class="rounded-circle" src="materials/{{$studentpost->student_id !== null ? $studentpost->student->photo :$studentpost->teacher->photo }}"  width="40">
                         {{-- <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"> --}}
                         <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$studentpost->student_id !== null ? $studentpost->student->fname :$studentpost->teacher->fname }} {{ $studentpost->student_id !== null ? $studentpost->student->lname : $studentpost->teacher->lname}}</span><span class="date text-black-50">Shared publicly - {{$studentpost->created_at}}</span></div>
+                        
+                        
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="margin-left: auto;margin: 0 38px 25px 12px 20px;margin-right: 12px;margin-top: 11px;">
+                            <i class="fa fa-ellipsis-v" style="font-size:24px"></i>
+                            <span class="sr-only">(current)</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding:7px 58px 6px 32px; width: 0;">
+                            <a href="{{route('show.profileDetails')}}"><i class="fa fa-user-o"></i> Profile</a>
+                            <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+                            <a href="{{route('delete.content', ['post_id' => $studentpost->id])}}">Delete Post</a>
+                        </div>
+                    
                     </div>
+                    
+                            
+                     
                     <div class="mt-2">
                         <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$studentpost->post}}</p>
                         {{-- <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> --}}
@@ -175,7 +190,6 @@
                     <div class="d-flex flex-row fs-12">
                         <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
                         <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$studentpost->id}}"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
-                        <a href="{{route('delete.content', ['post_id' => $studentpost->id])}}">Delete</a>
                         <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-2" href="#collapse-2"><i class="fa fa-share"></i><span class="ml-1">Reply</span></div>
                     </div>
                 </div>
@@ -190,7 +204,21 @@
                     <div id="collapse-{{$studentpost->id}}" class="bg-light p-2 collapse" data-parent="#myGroup">                                                                                       
                         <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="materials/{{$comment->student_id !== null ? $comment->student->photo :$comment->teacher->photo}}"width="35" height="32">
                         {{-- name and date --}}
-                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name" style="font-size: 12px;">{{$comment->student_id !== null ? $comment->student->fname :$comment->teacher->fname }} {{ $comment->student_id !== null ? $comment->student->lname : $comment->teacher->lname}}<span class="date text-black-50" style="font-size: 8px;margin: 0 4px 0 2px;margin: 0 4px 0 2px;">Shared publicly -{{$comment->created_at}}</span></span></div>
+                        <div class="d-flex flex-column justify-content-start ml-2">
+                            <span class="d-block font-weight-bold name" style="font-size: 12px;">{{$comment->student_id !== null ? $comment->student->fname :$comment->teacher->fname }} {{ $comment->student_id !== null ? $comment->student->lname : $comment->teacher->lname}}
+                                <span class="date text-black-50" style="font-size: 8px;margin: 0 4px 0 2px;margin: 0 4px 0 2px;">Shared publicly -{{$comment->created_at}}</span>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="padding: 0 0 0 394px;">
+                                    <i class="fa fa-ellipsis-v" style="font-size:20px"></i>
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding:7px 58px 6px 32px; width: 0;">
+                                    <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+                                    <a href="{{route('delete.content', ['comment_id' => $comment->id])}}">Delete</a>
+                                </div>
+                            </span>
+                            
+                            
+                        </div>
                         </div>
                         {{-- comments --}}
                         <div class="mt-2">
@@ -200,9 +228,6 @@
                         <div class="mt-2">
                             <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['comment_id' =>$comment->comment_id])}}">{{$comment->content}}</a></p>
                         </div>
-
-                        <a href="{{route('delete.content', ['comment_id' => $comment->id])}}">Delete</a>
-                        <hr> 
                     </div>
 
                     {{-- @if ($comment->content!=null)

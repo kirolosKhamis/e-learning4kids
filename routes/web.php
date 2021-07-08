@@ -261,3 +261,9 @@ Route::get('cards', function () {
 Route::get('spare', function () {
     return view('Frontend.spare');
 });
+
+Route::get('notAutherized', function () {
+    return view('Frontend.notAutherized');
+})->name('notAutherized');
+
+

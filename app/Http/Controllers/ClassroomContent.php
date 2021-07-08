@@ -246,9 +246,6 @@ if( $file=$request->file('file'))
             else
             TeacherAssignment::create($request->all());
 
-        // return asset('wwe');
-
-        //dd($request->all());
 
         return redirect()->route('show.teacherAssignment', ['classroom_id' => $request->input('classroom_id')]);
 
@@ -587,42 +584,31 @@ if( $file=$request->file('content'))
     }
 
 
-    
-
-
-
-
-    
-    
-    
-    // }
-    // public function showCourseDetails(Request $request) {
-    //     $student_id=$request->input('student_id');
-    //     $courseTitle=$request->input('courseTitle');
-    //     $teacherName=$request->input('teacherName');
-    //     $classroom_id=$request->input('classroom_id');
-    //     $studentregs = StudentRegisteration::latest()->paginate(100);
-    //     $classrooms = Classroom::latest()->paginate(100);
-    //     $courses= Course::all();
-    //     $teachers= Teacher::all();
-    //     $students=Student::latest()->paginate(100);
-    //     return view('Frontend.studentcoursedetails', compact('courses','teachers','studentregs','students','classrooms','student_id','courseTitle','teacherName','classroom_id'))
-    //          ->with('i', (request()->input('page', 1) - 1) * 100);
-    // }
+    public function showCourseDetails(Request $request) {
+        $student_id=$request->input('student_id');
+        $courseTitle=$request->input('courseTitle');
+        $teacherName=$request->input('teacherName');
+        $classroom_id=$request->input('classroom_id');
+        $studentregs = StudentRegisteration::latest()->paginate(100);
+        $classrooms = Classroom::latest()->paginate(100);
+        $courses= Course::all();
+        $teachers= Teacher::all();
+        $students=Student::latest()->paginate(100);
+        return view('Frontend.studentcoursedetails', compact('courses','teachers','studentregs','students','classrooms','student_id','courseTitle','teacherName','classroom_id'))
+             ->with('i', (request()->input('page', 1) - 1) * 100);
+    }
 
     
-    // public function showProfileDetails(Request $request) {
-    //     // $fname=$request->input('fname');
-    //     // $lname=$request->input('lname');
-    //     // $email=$request->input('email');
-    //     // $phone=$request->input('phone');
-    //     // $address=$request->input('address');
-    //     return view('Frontend.profile');
-    //         //  ->with('i', (request()->input('page', 1) - 1) * 100);
-    // }
+    public function showProfileDetails(Request $request) {
+        // $fname=$request->input('fname');
+        // $lname=$request->input('lname');
+        // $email=$request->input('email');
+        // $phone=$request->input('phone');
+        // $address=$request->input('address');
+        return view('Frontend.profile');
+            //  ->with('i', (request()->input('page', 1) - 1) * 100);
+    }
 
-
-    //**/
 
     public function showaccountsetting(Request $request) {
         // $fname=$request->input('fname');

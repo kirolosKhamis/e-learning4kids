@@ -14,114 +14,130 @@
             <link rel='stylesheet'href="{{asset('css/media.css')}}"/>
             <link rel='stylesheet'href="{{asset('css/animate.css')}}"/>
             <link rel='stylesheet'href ="{{asset('css/childview.css')}}"/>
+            <link rel='stylesheet'href ="{{asset('css/parentStyle.css')}}"/>
+
     </head>
     <body>
 
 
-        @section('content')
+@section('content')
 
-       
-            <!--Body-->
-            <div class="row">
-                <b hidden>{{$flag=0}}</b>
-                @foreach ($students as $student)
-                @if ($student->parent_id == Auth::guard('parent')->user()->user_id )
-            
-                <div class=" col-lg-4  col-md-4 col-sm-4 col-xm-4  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-                    <i class="fa fa-user fa-5x"></i>
-                    <h1> {{$student->fname}}</h1>
-                    {{-- <h1><button onclick="myFunction()" type="button" class="btn btn-primary">View {{$student->fname}} Courses</button></h1> --}}
-                    {{-- <button onclick="myFunction()">View {{$student->fname}} Courses</button> --}}
-                    {{-- <p class="lead">Welcome to School</p> --}}
-                    <b hidden>{{$flag++}}</b>
-                </div>
-                @endif
-   
-                @endforeach
+    <div class="row">
+        <div class="col-lg-8 col3">
+        <img class="img img-responsive" src="{{asset('images/3.jpeg')}}" alt="">
+        </div>
 
-                @if ($flag==0 )
-                
-                <div class="col-lg-4  col-md-4 col-sm-4 col-xm-4  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300">
-                    <i class="fa fa-user fa-5x"></i>
-                    <h1> You Don't Have Any <br>Chlid Register Yet</h1>
-                    {{-- <p class="lead">Welcome to School</p> --}}
+        <div class="col-lg-4 col4">
+        <h1>Parent</h1>
+        <p>Learning System for kids is an education via the Internet, network, or standalone computer. 
+            It is an online platform where students can learn,
+            teachers can create contents and Parents can monitor their children</p>
+        <a href="{{ route('studentJoin') }}"> <button type="button" class="btn btn-primary" >Join Classroom</button></a>
+        <a href="{{ route('show.result') }}"> <button type="button" class="btn btn-outline-primary">Show results</button></a>
+        </div>
+    </div>
+
+    <!--Body-->
+    <div class="row">
+        <b hidden>{{$flag=0}}</b>
+        @foreach ($students as $student)
+        @if ($student->parent_id == Auth::guard('parent')->user()->user_id )
     
-                </div>
-                @endif
-          
+        <div class=" col-lg-4  col-md-4 col-sm-4 col-xm-4  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
+            <i class="fa fa-user fa-5x"></i>
+            <h1> {{$student->fname}}</h1>
+            {{-- <h1><button onclick="myFunction()" type="button" class="btn btn-primary">View {{$student->fname}} Courses</button></h1> --}}
+            {{-- <button onclick="myFunction()">View {{$student->fname}} Courses</button> --}}
+            {{-- <p class="lead">Welcome to School</p> --}}
+            <b hidden>{{$flag++}}</b>
+        </div>
+        @endif
 
-                </div>
-            </div>
+        @endforeach
 
-            <section class="price_table text-center">
-            <div class="container-fluid">
-                <h1 >Enrollment courses  </h1>
-                <div class="row">
-                  
+        @if ($flag==0 )
+        
+        <div class="col-lg-4  col-md-4 col-sm-4 col-xm-4  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300">
+            <i class="fa fa-user fa-5x"></i>
+            <h1> You Don't Have Any <br>Chlid Register Yet</h1>
+            {{-- <p class="lead">Welcome to School</p> --}}
 
-                {{-- <div id="myDIV" style="display: none">    --}}
-                    @foreach ($students as $student)
-                    <p hidden>{{$teacherName=''}}{{$courseTitle=''}}</p>
-                        @if ($student->parent_id == Auth::guard('parent')->user()->user_id)
-                            <p hidden>{{$student_id= $student->user_id }}</p>
-                    
-                            @foreach ($studentregistrations as $studentregistration)
-                                @if ($studentregistration->student_id==$student_id)    
-                                      
-                                        @foreach ($classrooms as $classroom)
-                                            @if ($classroom->classroom_id==$studentregistration->classroom_id)
-                                            <p hidden> {{$classroom_id=$classroom->classroom_id}}</p>
-                                             
-                                                @foreach ($teachers as $teacher)
-                                                    @if ($teacher->user_id ==$classroom->teacher_id)
-                                                        <p hidden>{{$teacherName=$teacher->fname}}</p>
-                                                        {{-- {{$classroom->teacher_id}} --}}
-                                                    @endif
-                                                @endforeach
-                                               
-                                                @foreach ($courses as $course)
-                                                    @if ($course->course_id==$classroom->course_id)
-                                                        <p hidden > {{$courseTitle=$course->title}}</p>
-                                                        {{-- <p hidden > {{$course_id=$course->course_id}}</p> --}}
-                                                       
-                                                        <div class="col-md-4 col-sm-6 col-xm-12">
-                                                            <div class="price_box wow fadeInUp" data-wow-duration="2s" data-wow-offset="200">
-                                                                <div class="img">
-                                                                <img  class="center-block" src="../public/images/cart/1.jpg" alt="img">
-                                                                </div>
-                                                                <ul class="info list-unstyled">
-                                                                    <li >Course Title: {{$courseTitle}}</li>
-                                                                    <li class="right-text" ></li>
-                                                                    <li >Dr. {{$teacherName}}</li>
-                                                                    <a href="{{route('show.coursedetails', ['student_id'=> $student_id,'courseTitle'=>$courseTitle,'teacherName'=>$teacherName, 'classroom_id'=>$classroom_id])}}">Details</a>
-                                                                    {{-- <a  href="{{url('studentcoursedetails?$course->course_id')}}" >Details</a> --}}
-                                                                </ul>
-                                                            </div>
+        </div>
+        @endif
+    
+
+        </div>
+    </div>
+
+    <section class="price_table text-center">
+    <div class="container-fluid">
+        <h1 >Enrollment courses</h1>
+        <div class="row">
+            
+
+        {{-- <div id="myDIV" style="display: none">    --}}
+            @foreach ($students as $student)
+            <p hidden>{{$teacherName=''}}{{$courseTitle=''}}</p>
+                @if ($student->parent_id == Auth::guard('parent')->user()->user_id)
+                    <p hidden>{{$student_id= $student->user_id }}</p>
+            
+                    @foreach ($studentregistrations as $studentregistration)
+                        @if ($studentregistration->student_id==$student_id)    
+                                
+                                @foreach ($classrooms as $classroom)
+                                    @if ($classroom->classroom_id==$studentregistration->classroom_id)
+                                    <p hidden> {{$classroom_id=$classroom->classroom_id}}</p>
+                                        
+                                        @foreach ($teachers as $teacher)
+                                            @if ($teacher->user_id ==$classroom->teacher_id)
+                                                <p hidden>{{$teacherName=$teacher->fname}}</p>
+                                                {{-- {{$classroom->teacher_id}} --}}
+                                            @endif
+                                        @endforeach
+                                        
+                                        @foreach ($courses as $course)
+                                            @if ($course->course_id==$classroom->course_id)
+                                                <p hidden > {{$courseTitle=$course->title}}</p>
+                                                {{-- <p hidden > {{$course_id=$course->course_id}}</p> --}}
+                                                
+                                                <div class="col-md-4 col-sm-6 col-xm-12">
+                                                    <div class="price_box wow fadeInUp" data-wow-duration="2s" data-wow-offset="200">
+                                                        <div class="img">
+                                                        <img  class="center-block" src="../public/images/cart/1.jpg" alt="img">
                                                         </div>
+                                                        <ul class="info list-unstyled">
+                                                            <li >Course Title: {{$courseTitle}}</li>
+                                                            <li class="right-text" ></li>
+                                                            <li >Dr. {{$teacherName}}</li>
+                                                            <a href="{{route('show.coursedetails', ['student_id'=> $student_id,'courseTitle'=>$courseTitle,'teacherName'=>$teacherName, 'classroom_id'=>$classroom_id])}}">Details</a>
+                                                            {{-- <a  href="{{url('studentcoursedetails?$course->course_id')}}" >Details</a> --}}
+                                                        </ul>
+                                                    </div>
+                                                </div>
 
-
-                                                    @endif
-                                                @endforeach
-
-                                               
 
                                             @endif
-                                            
-                                        @endforeach    
-                                @endif
+                                        @endforeach
 
-                                
-                            @endforeach
-                            
+                                        
+
+                                    @endif
+                                    
+                                @endforeach    
                         @endif
 
+                        
                     @endforeach
-                {{-- </div>              --}}
-                </div>
+                    
+                @endif
 
-            </div>
+            @endforeach
+        {{-- </div>              --}}
+        </div>
 
-        </section>
+    </div>
+
+</section>
 
         @endsection
         
