@@ -23,12 +23,16 @@
 @if ($teacherassignment->id==$assignment_id)
 
 @foreach ($studentassignments as $studentassignment)
-@if ($studentassignment->assignment_id==$assignment_id)
+@if ($studentassignment->assignment_id==$assignment_id )
 {{$flag=0}}
-    
+
 @endif
 
 @endforeach
+
+{{-- {{$assignment_id=$studentassignment->id}} --}}
+    
+
 
 @if ($flag ==0)
     
@@ -58,8 +62,9 @@
                        
                 <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
 
-                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px; margin-left:7%" >Your Work</span>
-                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 12px; margin-left: 30%">تم التسليم</span>
+                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px; margin-left:7%" >Your grade is {{$studentassignment->grade}} out of {{$studentassignment->assignment->points}}</span>
+                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px; margin-left:7%" >Turned in at    {{$studentassignment->created_at}}</span>
+                    {{-- <span class="badge badge-primary" style="color: black; background-color: white; font-size: 12px; margin-left: 30%">Turned in at {{$studentassignment->created_at}}</span> --}}
                     {{-- <label for="floatingInputInvalid">Invalid input</label> --}}
                     {{-- <h1 style="margin-left: 10%">Your Work </h1> 
                     <h1 style="font-size: 15px; margin-left: 68%; margin-top: -8% "  >Turned in</h1> --}}
@@ -82,6 +87,8 @@
                     
                      <!-- Submit button -->
                      <button  type="button" class="btn btn-primary" style="margin-left: 20%; margin-top: 20px; font-size: 12px; border-radius: 7px">Edit</button> 
+
+                     <a href="{{route('delete.content', ['studentassignment_id' =>$studentassignment->id, 'classroom_id' =>$classroom_id])}}">Delete</a>
               
                     
                
@@ -193,6 +200,9 @@
 @endsection
    @endif
     
+
+
+
         
          
         @endif

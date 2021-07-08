@@ -175,6 +175,7 @@
                     <div class="d-flex flex-row fs-12">
                         <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
                         <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$studentpost->id}}"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+                        <a href="{{route('delete.content', ['post_id' => $studentpost->id])}}">Delete</a>
                         <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-2" href="#collapse-2"><i class="fa fa-share"></i><span class="ml-1">Reply</span></div>
                     </div>
                 </div>
@@ -199,6 +200,8 @@
                         <div class="mt-2">
                             <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['comment_id' =>$comment->comment_id])}}">{{$comment->content}}</a></p>
                         </div>
+
+                        <a href="{{route('delete.content', ['comment_id' => $comment->id])}}">Delete</a>
                         <hr> 
                     </div>
 
@@ -268,7 +271,7 @@
                     <ul class="list-group">
                         <li class="list-group-item"><a href="{{route('view.addAssignment', ['classroom_id' =>$classroom_id])}}">Add assignment</a></li>
                         <li class="list-group-item"><a href="{{route('show.studentAssignment', ['classroom_id' =>$classroom_id])}}">Grade assignment</a></li>
-                        <li class="list-group-item">Members</li>
+                        <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">View assignments</a></li>
                         {{-- <li class="list-group-item">View All<hr></li> --}}
                         <li class="list-group-item"><a href="{{route('add.result', ['classroom_id' =>$classroom_id])}}">Add results</li></a>
                         <li class="list-group-item">View other classrooms</li>
@@ -323,6 +326,7 @@
                     <div class="d-flex flex-row fs-12">
                         <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
                         <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$studentpost->id}}"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+                        <a href="{{route('delete.content', ['post_id' => $studentpost->id])}}">Delete</a>
                         <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-2" href="#collapse-2"><i class="fa fa-share"></i><span class="ml-1">Reply</span></div>
                     </div>
                 </div>
@@ -347,6 +351,7 @@
                         <div class="mt-2">
                             <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['comment_id' =>$comment->comment_id])}}">{{$comment->content}}</a></p>
                         </div>
+                        <a href="{{route('delete.content', ['comment_id' => $comment->comment_id])}}">Delete</a>
                         <hr> 
                     </div>
 

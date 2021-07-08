@@ -71,8 +71,9 @@
                         
                          <!-- Due to input -->
                         <div  class="form-outline mb-4">
-                            <input  type="teatarea" id="form1Example1" name="due" class="form-control" style="background-color:rgb(232, 237, 241);width: 80%; margin-left: 10%;padding-top: 20px;border-radius: 10px ; font-size: 13px" />
+                            <input type="datetime-local" id="form1Example1" name="due" class="form-control" style="background-color:rgb(232, 237, 241);width: 80%; margin-left: 10%;padding-top: 20px;border-radius: 10px ; font-size: 13px" >
                             <label style="margin-left: 10%; padding-bottom: 50px; font-size: 15px"  class="form-label" for="form1Example1">Due</label>
+                           
                         </div>
                         
 

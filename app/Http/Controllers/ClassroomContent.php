@@ -316,7 +316,9 @@ if( $file=$request->file('content'))
         // dd($request->input('classroom_id'));
         $classroom_id=$request->input('classroom_id');
         $teacherassignments=TeacherAssignment::latest()->paginate(100);
-        return view('Frontend.viewTeacherassignments', compact('teacherassignments','classroom_id'))
+        $studentassignments=StudentAssignment::latest()->paginate(100);
+
+        return view('Frontend.viewTeacherassignments', compact('teacherassignments', 'studentassignments','classroom_id'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 
@@ -367,6 +369,16 @@ if( $file=$request->file('content'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 
+
+    
+    public function editGrade(Request $request) {
+        // dd($request->input('result_id'));
+        $assignment_id=$request->input('assignment_id');
+        $studentassignments= StudentAssignment::latest()->paginate(100);
+        return view('Frontend.addgrade', compact('studentassignments','assignment_id'))
+             ->with('i', (request()->input('page', 1) - 1) * 100);
+    }
+
     public function updateResult(Request $request) {
         // dd($request->input('result_id'));
         //boulanessim
@@ -385,6 +397,102 @@ if( $file=$request->file('content'))
     return redirect()->route('add.result',['classroom_id' => $classroom_id]);
     
     }     
+    }
+
+
+    public function updategrade(Request $request) {
+        // dd($request->input('result_id'));
+        //boulanessim
+       $studentassignments = StudentAssignment::latest()->paginate(100);
+       foreach( $studentassignments as $studentassignment)
+       if($studentassignment->id==$request->input('assignment_id'))
+       {
+       $classroom_id=$studentassignment->assignment->classroom_id;
+       $studentassignment->update([  
+
+        'grade' => $request->input('grade'),
+       
+
+       ]);
+
+    return redirect()->route('show.studentAssignment',['classroom_id' => $classroom_id]);
+    
+    }     
+    }
+
+    public function deletecontent(Request $request) {
+      
+        // dd($request->input('studentassignment_id'));
+
+        if($request->input('studentassignment_id')!==null)
+        {     
+            $studentassignments = StudentAssignment::latest()->paginate(100);
+            foreach( $studentassignments as $studentassignment)
+            if($studentassignment->id==$request->input('studentassignment_id'))
+            {
+                
+            $classroom_id=$studentassignment->assignment->classroom_id;
+            $studentassignment->delete();
+     
+         return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_id]);
+         
+         } }
+
+       else  if($request->input('teacherassignment_id')!==null)
+         {     
+            // dd($request->input('teacherassignment_id'));
+             $teacherassignments = TeacherAssignment::latest()->paginate(100);
+             foreach( $teacherassignments as $teacherassignment)
+             if($teacherassignment->id==$request->input('teacherassignment_id'))
+             {
+               
+             $classroom_id=$teacherassignment->classroom_id;
+             $teacherassignment->delete();
+      
+          return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_id]);
+          
+          } }
+             
+         elseif ($request->input('post_id')!==null)
+         {       $studentposts = StudentPost::latest()->paginate(100);
+             foreach( $studentposts as $studentpost)
+             if($studentpost->id==$request->input('post_id'))
+             {
+             $classroom_id=$studentpost->classroom_id;
+             $studentpost->delete();
+      
+          return redirect()->route('show.classroom',['classroom_id' => $classroom_id]);
+          
+          } }
+
+          else if ($request->input('comment_id')!==null)
+          {       $comments = Comments::latest()->paginate(100);
+              foreach(  $comments as  $comment)
+              if($comment->id==$request->input('assignment_id'))
+              {
+              $classroom_id=$comment->post->classroom_id;
+
+              $comment->delete();
+       
+           return redirect()->route('show.classroom',['classroom_id' => $classroom_id]);
+           
+           } }
+
+           else 
+           {     
+          
+               $classrooms = Classroom::latest()->paginate(100);
+               foreach(  $classrooms as  $classroom)
+               if($classroom->classroom_id==$request->input('classroom_id'))
+               {
+                
+                $classroom->delete();
+              
+              
+                return redirect()->route('teacher');
+            
+            } }
+    
     }
 
     public function downloadStudentAssignment(Request $request) {

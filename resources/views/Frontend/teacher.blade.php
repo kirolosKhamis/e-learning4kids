@@ -111,6 +111,7 @@
                 <li >{{$classroom->title}}</li>
                 <li class="right-text"></li>
                 <a href="{{route('show.classroom', ['classroom_id' => $classroom->classroom_id])}}">Details</a>
+                <a href="{{route('delete.content', ['classroom_id' => $classroom->classroom_id])}}">Delete</a>
               </ul>
             </div>
           </div>

@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth:student,teacher'],function () {
     Route::get('/downloadStudentAssignment', [App\Http\Controllers\ClassroomContent::class, 'downloadStudentAssignment'])->name('download.studentAssignment');
     Route::get('/downloadPost', [App\Http\Controllers\ClassroomContent::class, 'downloadPost'])->name('download.post');
     Route::get('/downloadcomment', [App\Http\Controllers\ClassroomContent::class, ' commentDownload'])->name('download.comment');
+    Route::get('/delete', [App\Http\Controllers\ClassroomContent::class, 'deletecontent'])->name('delete.content');
     
 
     // Route::get('/', function () {
@@ -103,6 +104,8 @@ Route::group(['middleware' => 'auth:teacher'], function () {
     Route::get('/studentresults', [App\Http\Controllers\ClassroomContent::class, 'addResult'])->name('add.result');
     Route::get('/editresults', [App\Http\Controllers\ClassroomContent::class, 'editResult'])->name('edit.result');
     Route::post('/updateresults', [App\Http\Controllers\ClassroomContent::class, 'updateResult'])->name('update.result');
+    Route::get('/editGrade', [App\Http\Controllers\ClassroomContent::class, 'editGrade'])->name('edit.grade');
+    Route::post('/updategrade', [App\Http\Controllers\ClassroomContent::class, 'updategrade'])->name('update.grade');
 
 
     

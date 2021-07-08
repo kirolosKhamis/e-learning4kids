@@ -40,7 +40,7 @@
                           <th>Assignment Title</th>
                           <th>Due</th>
                           <th>Description</th>
-                          <th>Grade</th>
+                          <th>Points</th>
                         </tr>
                        
                         @foreach ($teacherassignments as $teacherassignment )
@@ -49,7 +49,7 @@
                          <td><a href="{{route('show.Assignment', ['assignment_id' =>$teacherassignment->id , 'classroom_id' =>$teacherassignment->classroom_id ])}}">{{$teacherassignment->title}}</a> </td>
                           <td>{{$teacherassignment->due}}</td>
                           <td>{{$teacherassignment->description}}</td>
-                          <td>{{$teacherassignment->grade}}</td>
+                          <td>{{$teacherassignment->points}}</td>
       
 
                         </tr>   
@@ -91,7 +91,8 @@
                           <th>Assignment Title</th>
                           <th>Due</th>
                           <th>Description</th>
-                          <th>Grade</th>
+                          <th>points</th>
+                          <th>Action  </th>
                         </tr>
                        
                         @foreach ($teacherassignments as $teacherassignment )
@@ -100,7 +101,8 @@
                           <td>{{$teacherassignment->title}} </td>
                           <td>{{$teacherassignment->due}}</td>
                           <td>{{$teacherassignment->description}}</td>
-                          <td>{{$teacherassignment->grade}}</td>
+                          <td>{{$teacherassignment->points}}</td>
+                          <td><a href="{{route('edit.result', ['assignment_id' => $teacherassignment->id])}}">edit</a>  <a href="{{route('delete.content', ['teacherassignment_id' =>$teacherassignment->id, 'classroom_id' =>$classroom_id])}}">Delete</a></td></td>
       
 
                         </tr>   
