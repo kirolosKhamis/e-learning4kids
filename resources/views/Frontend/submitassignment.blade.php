@@ -60,8 +60,8 @@
                        
                 <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
 
-                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px; margin-left:7%" >Your grade is {{$studentassignment->grade}} out of {{$studentassignment->assignment->points}}</span>
-                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px; margin-left:7%" >Turned in at    {{$studentassignment->created_at}}</span>
+                    <span class="badge badge-primary" style="color:black;background-color:white;font-size: 15px;margin-left:7%">Your grade is {{$studentassignment->grade}} out of {{$studentassignment->assignment->points}}</span>
+                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px; margin-left:7%">Turned in at{{$studentassignment->created_at}}</span>
                     {{-- <span class="badge badge-primary" style="color: black; background-color: white; font-size: 12px; margin-left: 30%">Turned in at {{$studentassignment->created_at}}</span> --}}
                     {{-- <label for="floatingInputInvalid">Invalid input</label> --}}
                     {{-- <h1 style="margin-left: 10%">Your Work </h1> 
@@ -70,7 +70,7 @@
                     <!-- upload buttom  -->
                     {{-- <input type="file" class="form-control-file" name="file" id="exampleInputFile"> --}}
                     {{-- <input type="file" class="form-control-file form-control form-control-user @error('content') is-invalid @enderror" name="content" id="exampleInputFile"  value="{{ old('content') }}" placeholder="upload file" autofocus> --}}
-                    <<a href="{{route('download.studentAssignment', ['assignment_id' =>$studentassignment->id])}}" class="form-control-file form-control form-control-user">{{$studentassignment->content}}</a>
+                    <a href="{{route('download.studentAssignment', ['assignment_id' =>$studentassignment->id])}}" class="form-control-file form-control form-control-user">{{$studentassignment->content}}</a>
                     @error('content')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

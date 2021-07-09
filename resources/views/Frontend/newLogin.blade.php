@@ -43,7 +43,7 @@
                                     </div>
                                     
                                     @isset($url)
-                                    <div> {{$url}}</div>
+                                    {{-- <div> {{$url}}</div> --}}
                                     <form method="POST" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
                                     @else
                                     <div> kkklk </div>

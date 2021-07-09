@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Chirp;
+use App\Events\ChirpAction;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');  /// user must be authunticated
-    }
+    // public function __construct()
+    // {
+    //     // $this->middleware('auth');  /// user must be authunticated
+    // }
 
     /**
      * Show the application dashboard.
@@ -25,4 +22,6 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+
 }
