@@ -330,10 +330,11 @@ if( $file=$request->file('content'))
     public function showAssignment(Request $request) {
         $classroom_id=$request->input('classroom_id');
         $assignment_id=$request->input('assignment_id');
+        // dd( $assignment_id);
+        $flag=0;
         $teacherassignments=TeacherAssignment::latest()->paginate(100);
         $studentassignments=StudentAssignment::latest()->paginate(100);
-        $flag=5;
-        return view('Frontend.submitassignment', compact('teacherassignments','assignment_id','classroom_id','studentassignments','flag'))
+        return view('Frontend.submitassignment', compact('assignment_id','classroom_id','studentassignments','teacherassignments', 'flag'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 

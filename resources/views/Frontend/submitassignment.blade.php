@@ -19,40 +19,36 @@
             <link rel="stylesheet" href="{{asset('css/mdb.min.css')}}"/> 
     </head>
     <body>
-        
-@foreach ($teacherassignments as $teacherassignment)
-@if ($teacherassignment->id==$assignment_id)
 
-@foreach ($studentassignments as $studentassignment)
-@if (($studentassignment->assignment_id==$assignment_id && $studentassignment->student_id== Auth::guard('student')->user()->user_id) )
-<p hidden>{{$flag=0}}</p>
-{{-- {{$assignment_id=$studentassignment->id}} --}}
+        {{-- {{dd($studentassignments->total())}} --}}
+    
 
-
-@if ($flag ==0)
+    @foreach ($studentassignments as $studentassignment)
+    @if ( $studentassignment->assignment_id==$assignment_id  &&  $studentassignment->student_id==Auth::guard('student')->user()->user_id)
+    {{$flag=$flag+1}}
     @section('content')    
         <div class="container" style="max-width: 1176px;margin-bottom: 182px;margin-top: 73px;">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card card-margin">
                         <div class="card-header no-border">
-                            <h5 class="card-title"><strong>{{$teacherassignment->title}}</strong></h5>
+                            <h5 class="card-title"><strong>{{$studentassignment->assignment->title}}</strong></h5>
                         </div>
                         <div class="card-body pt-0">
                             <div class="widget-49">
                                 <div class="widget-49-title-wrapper">
                                     <div class="widget-49-date-primary">
-                                        <span class="widget-49-date-day">{{date('d', strtotime($teacherassignment->created_at))}}</span>
-                                        <span class="widget-49-date-month">{{date('F', strtotime($teacherassignment->created_at))}}</span>
+                                        <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->assignment->created_at))}}</span>
+                                        <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->assignment->created_at))}}</span>
                                     </div>
                                     <div class="widget-49-meeting-info">
-                                        <span class="widget-49-pro-title">Dr. {{$teacherassignment->teacher->fname}} {{$teacherassignment->teacher->lname}}</span>
-                                        <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($teacherassignment->created_at))}}</span>
+                                        <span class="widget-49-pro-title">Dr. {{$studentassignment->assignment->teacher->fname}} {{$studentassignment->assignment->teacher->lname}}</span>
+                                        <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($studentassignment->assignment->created_at))}}</span>
                                     </div>
                                 </div>
                                 <ol class="widget-49-meeting-points">
                                     <li class="widget-49-meeting-item"><span>Description</span></li>
-                                    <li class="widget-49-meeting-item"><span>{{$teacherassignment->description}}</span></li>
+                                    <li class="widget-49-meeting-item"><span>{{$studentassignment->assignment->description}}</span></li>
                                     {{-- <li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li> --}}
                                 </ol>
                                 <div class="widget-49-meeting-action">
@@ -109,85 +105,16 @@
                 </div>
             </div>
         </div>
-    @endsection
-@else
+    @endsection 
 
-   @section('content')
-        <div class="row">
-            
-        
-            <div  class=" col-lg-9  col-md-9 col-sm-12 col-xm-9  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300"  >
-                <h1 ></h1>
-                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px;margin-left: 9%" >{{$teacherassignment->teacher->fname}} {{$teacherassignment->teacher->lname}}</span>
-                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px;margin-left: 4%" >{{$teacherassignment->created_at}}</span>
-                <br> 
-                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 20px;margin-left: 9%; margin-top: 30px" >Description</span><br>
-                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 20px;margin-left: 9%; margin-top: 30px" >{{$teacherassignment->description}}</span>
+    @endif
+    @endforeach
 
-
-
-            </div>
-
-
-
-
-                
-                    
-            <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-
-                <form action="{{route('submit.assignment', ['classroom_id' =>$classroom_id ])}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px; margin-left:7%" >Your Work</span>
-                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 12px; margin-left: 30%" > 1لم يتم التسليم</span>
-                {{-- <label for="floatingInputInvalid">Invalid input</label> --}}
-                {{-- <h1 style="margin-left: 10%">Your Work </h1> 
-                <h1 style="font-size: 15px; margin-left: 68%; margin-top: -8% "  >Turned in</h1> --}}
-
-                <!-- upload buttom  -->
-                {{-- <input type="file" class="form-control-file" name="file" id="exampleInputFile"> --}}
-                <input type="file" class="form-control-file form-control form-control-user @error('content') is-invalid @enderror" name="content" id="exampleInputFile"  value="{{ old('content') }}" placeholder="upload file" autofocus>
-                @error('content')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-
-                <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
-                <input type="hidden" name="assignment_id" value="{{$assignment_id}}">
-                
-                    <!-- Cancel button -->
-                    <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button"   class="btn btn-danger" style="margin-left: 20%;margin-top: 20px; font-size: 12px; border-radius: 7px">Cancel</button></a>
-                
-                    <!-- Submit button -->
-                    <button  type="submit" class="btn btn-primary" style="margin-left: 20%; margin-top: 20px; font-size: 12px; border-radius: 7px">Submit</button> 
-            
-                </form>     
-            
-            </div>
-
-        
-                
-
-            
-        
-
-            
-        </div>
-
-        <div class="row">
-            <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-                
-            </div>
-        </div>
-    @endsection
-@endif
-@endif
-
-@endforeach
+  
     
-@else
-
-
+    @if ($studentassignments->total()!=0 || $studentassignments->total()==0)
+    @foreach ($teacherassignments as $teacherassignment)
+    @if ($teacherassignment->id==$assignment_id)  
     @section('content')
         <div class="container" style="max-width: 1176px;margin-bottom: 182px;margin-top: 73px;">
             <div class="row">
@@ -224,7 +151,7 @@
                 <div class="col-lg-4">
                     <div class="card card-margin">
                         <div class="card-header no-border">
-                            <h5 class="card-title">Submitted Assignemnt</h5>
+                            <h5 class="card-title">Submit Assignemnt</h5>
                         </div>
                         <div class="card-body pt-0">
                             <div class="widget-49">
@@ -264,12 +191,16 @@
 
 
     @endsection
+    @endif
+    @endforeach
+    @endif
 
-
+    
 
         
-@endif  
-@endforeach
+
+      
+  
 
       
 <script src="../public/js/jquery-3.3.1.min.js"></script>
