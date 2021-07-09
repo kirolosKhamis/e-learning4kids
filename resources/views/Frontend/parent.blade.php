@@ -22,23 +22,29 @@
 
 @section('content')
 
-    <div class="row">
+    <div class="row" style="margin-bottom: 90px">
         <div class="col-lg-8 col3">
         <img class="img img-responsive" src="{{asset('images/3.jpeg')}}" alt="">
         </div>
 
-        <div class="col-lg-4 col4">
-        <h1>Parent</h1>
-        <p>Learning System for kids is an education via the Internet, network, or standalone computer. 
-            It is an online platform where students can learn,
-            teachers can create contents and Parents can monitor their children</p>
-        <a href="{{ route('studentJoin') }}"> <button type="button" class="btn btn-primary" >Join Classroom</button></a>
-        <a href="{{ route('show.result') }}"> <button type="button" class="btn btn-outline-primary">Show results</button></a>
-        </div>
+        <div class="col-lg-4 col4">   
+            <h2>Parent Dashboard</h2>
+            {{-- <p>Hello ,{{session()->get('email')}}</p> --}}
+            <p hidden>{{Auth::guard('parent')->user()->user_id}}</p>
+            
+            {{-- {{ __('You are logged in!') }} --}}
+            <p style="margin: 5px 23px 0 0;">Learning System for kids is an education via the Internet, network, or standalone computer.
+              It is an online platform where students can learn,
+               teachers can create contents and Parents can monitor their children</p>
+               <a href="{{asset('#children')}}"><button class="common-btn">Your Kids</button></a>
+            
+    
+    
+          </div>
     </div>
 
     <!--Body-->
-    <div class="row">
+    <div class="row" id="children">
         <b hidden>{{$flag=0}}</b>
         @foreach ($students as $student)
         @if ($student->parent_id == Auth::guard('parent')->user()->user_id )
@@ -58,10 +64,14 @@
         @if ($flag==0 )
         
         <div class="col-lg-4  col-md-4 col-sm-4 col-xm-4  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300">
+        </div>
+        <div class="col-lg-4  col-md-4 col-sm-4 col-xm-4 col13 wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" style="text-align: center;">
             <i class="fa fa-user fa-5x"></i>
-            <h1> You Don't Have Any <br>Chlid Register Yet</h1>
+            <h1> You Don't Have Any<br>Chlid Register Yet</h1>
             {{-- <p class="lead">Welcome to School</p> --}}
 
+        </div>
+        <div class="col-lg-4  col-md-4 col-sm-4 col-xm-4  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300">
         </div>
         @endif
     
@@ -71,7 +81,9 @@
 
     <section class="price_table text-center">
     <div class="container-fluid">
+        @if ($flag!=0)
         <h1 >Enrollment courses</h1>
+        @endif
         <div class="row">
             
 
