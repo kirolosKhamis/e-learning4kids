@@ -385,8 +385,8 @@ if( $file=$request->file('content'))
         // dd($request->input('result_id'));
         //boulanessim
 
-        dd($request->input('student_id'));
-        
+        // dd($request->input('student_id'));
+
         if($request->input('result_id')!=null)
         {
        $studentregs = StudentRegisteration::latest()->paginate(100);
