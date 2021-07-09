@@ -93,6 +93,15 @@ Route::group(['middleware' => 'auth:student'], function () {
     Route::post('/submitAssignment', [App\Http\Controllers\ClassroomContent::class, 'submitAssignment'])->name("submit.assignment");
     Route::get('/StudentCertificate', [App\Http\Controllers\ClassroomContent::class, 'showcertificate'])->name("show.certificate");
 
+    Route::get('/createClassroom', function () {
+        $courses = Course::latest()->paginate(100);
+        return view('Frontend.createClassroom', compact('courses'));
+    })->name("createClassroom");
+
+    
+    Route::get('/studentJoin', function () {
+        return view('Frontend.student-join-classroom');
+    })->name("studentJoin");
 });
 
 
@@ -142,15 +151,10 @@ Route::group(['middleware' => 'auth:parent'], function () {
 
 
 
-Route::get('/create', function () {
-    return view('Frontend.Creataccount');
-})->name("child");
 
 
-Route::get('/createClassroom', function () {
-    $courses = Course::latest()->paginate(100);
-    return view('Frontend.createClassroom', compact('courses'));
-})->name("createClassroom");
+
+
 
 /** */
 Route::get('/', function () {
@@ -191,9 +195,6 @@ Route::get('/studentClassroom', function () {
 })->name("");
 
 
-Route::get('/studentJoin', function () {
-    return view('Frontend.student-join-classroom');
-})->name("studentJoin");
 
 
 
