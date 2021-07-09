@@ -102,6 +102,13 @@ Route::group(['middleware' => 'auth:student'], function () {
     Route::get('/studentJoin', function () {
         return view('Frontend.student-join-classroom');
     })->name("studentJoin");
+
+
+    Route::get('result',[App\Http\Controllers\QuestionnaireController::class, 'showResult'])->name('result');
+    Route::match(['put',' patch'], 'questionnaire', [App\Http\Controllers\QuestionnaireController::class, 'update']);
+    Route::get('questionnaire',[App\Http\Controllers\QuestionnaireController::class, 'show']);
+    Route::post('/updateresults', [App\Http\Controllers\ClassroomContent::class, 'updateResult'])->name('update.result');
+   
 });
 
 
@@ -175,12 +182,6 @@ Route::get('/materials', function () {
 })->name("materials");
 
 
-
-Route::get('/questionnaire', function () {
-    return view('Frontend.questionnaire');
-})->name("questionnaire");
-
-
 Route::get('/registerAs', function () {
     return view('Frontend.registerAs');
 })->name("registerAs");
@@ -193,10 +194,6 @@ Route::get('/loginAs', function () {
 Route::get('/studentClassroom', function () {
     return view('Frontend.student-classroom');
 })->name("");
-
-
-
-
 
 
 Route::get('/teacherClassroom', function () {
@@ -238,12 +235,6 @@ Route::get('/studnetIndex', [App\Http\Controllers\ParentController::class, 'inde
 
 Route::resource('proucts', CreateClassroomController::class);
 Route::get('/proucts', [App\Http\Controllers\CreateClassroomController::class, 'boula'])->name("proucts");
-
-
-
-Route::get('questionnaire',[App\Http\Controllers\QuestionnaireController::class, 'show']);
-Route::get('result',[App\Http\Controllers\QuestionnaireController::class, 'showResult'])->name('result');
-Route::match(['put',' patch'], 'questionnaire', [App\Http\Controllers\QuestionnaireController::class, 'update']);
 
 
 
