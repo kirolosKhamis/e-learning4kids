@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>E-Learning for Kids</title>
-    <link rel="icon" href="{{asset('images/icon2.jpg')}}" />
+    {{-- <link rel="icon" href="{{asset('images/icon2.jpg')}}" /> --}}
     <link rel='stylesheet'href ="{{asset('css/bootstrap.css')}}"/>
             <link rel='stylesheet'href ="{{asset('css/font-awesome.min.css')}}"/>
             <link rel='stylesheet'href ="{{asset('css/style.css')}}"/>
@@ -15,7 +15,8 @@
             <link rel='stylesheet'href="{{asset('css/animate.css')}}"/>
             <link rel='stylesheet'href ="{{asset('css/childview.css')}}"/>
             <!-- MDB -->
-            <link rel="stylesheet" href="{{asset('css/mdb.min.css')}}" /> 
+            <link rel="stylesheet" href="{{asset('css/submitAssignemnt.css')}}">
+            <link rel="stylesheet" href="{{asset('css/mdb.min.css')}}"/> 
     </head>
     <body>
         
@@ -24,290 +25,260 @@
 
 @foreach ($studentassignments as $studentassignment)
 @if (($studentassignment->assignment_id==$assignment_id && $studentassignment->student_id== Auth::guard('student')->user()->user_id) )
-{{$flag=0}}
-
-
-
+<p hidden>{{$flag=0}}</p>
 {{-- {{$assignment_id=$studentassignment->id}} --}}
-    
 
 
 @if ($flag ==0)
-    
-        @section('content')
-
-       
-            <!--Body-->
+    @section('content')    
+        <div class="container" style="max-width: 1176px;margin-bottom: 182px;margin-top: 73px;">
             <div class="row">
-              
-            
-                <div  class=" col-lg-9  col-md-9 col-sm-12 col-xm-9  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300"  >
-                    <h1 ></h1>
-                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px;margin-left: 9%" >{{$teacherassignment->teacher->fname}} {{$teacherassignment->teacher->lname}}</span>
-                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px;margin-left: 4%" >{{$teacherassignment->created_at}}</span>
-                    <br> 
-                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 20px;margin-left: 9%; margin-top: 30px" >Description</span><br>
-                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 20px;margin-left: 9%; margin-top: 30px" >{{$teacherassignment->description}}</span>
-
- 
-
+                <div class="col-lg-8">
+                    <div class="card card-margin">
+                        <div class="card-header no-border">
+                            <h5 class="card-title"><strong>{{$teacherassignment->title}}</strong></h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="widget-49">
+                                <div class="widget-49-title-wrapper">
+                                    <div class="widget-49-date-primary">
+                                        <span class="widget-49-date-day">{{date('d', strtotime($teacherassignment->created_at))}}</span>
+                                        <span class="widget-49-date-month">{{date('F', strtotime($teacherassignment->created_at))}}</span>
+                                    </div>
+                                    <div class="widget-49-meeting-info">
+                                        <span class="widget-49-pro-title">Dr. {{$teacherassignment->teacher->fname}} {{$teacherassignment->teacher->lname}}</span>
+                                        <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($teacherassignment->created_at))}}</span>
+                                    </div>
+                                </div>
+                                <ol class="widget-49-meeting-points">
+                                    <li class="widget-49-meeting-item"><span>Description</span></li>
+                                    <li class="widget-49-meeting-item"><span>{{$teacherassignment->description}}</span></li>
+                                    {{-- <li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li> --}}
+                                </ol>
+                                <div class="widget-49-meeting-action">
+                                    <a href="#" class="btn btn-sm btn-flash-border-primary">View All</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-lg-4">
+                    <div class="card card-margin">
+                        <div class="card-header no-border">
+                            <h5 class="card-title"><strong>Submitted Assignemnt</strong></h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="widget-49">
+                                <div class="widget-49-title-wrapper">
+                                    <div class="widget-49-date-warning">
+                                        <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->created_at))}}</span>
+                                        <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->created_at))}}</span>
+                                    </div>
+                                    <div class="widget-49-meeting-info">
+                                        <span class="widget-49-pro-title">Turned in</span>
+                                        <span class="widget-49-meeting-time">At {{date('H:i', strtotime($studentassignment->created_at))}}</span>
+                                    </div>
+                                </div>                                
+                                <ol class="widget-49-meeting-points">
+                                    <li class="widget-49-meeting-item"><span>Your grade is {{$studentassignment->grade}} out of {{$studentassignment->assignment->points}}</span></li>
+                                    <li class="widget-49-meeting-item">
+                                        <span>You Submission
+                                            <a href="{{route('download.studentAssignment', ['assignment_id' =>$studentassignment->id])}}">{{$studentassignment->content}}</a>
+                                            @error('content')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
+                                            <input type="hidden" name="assignment_id" value="{{$assignment_id}}">
+                                        </span>                                  
+                                    </li>
+                                </ol>
 
-         
 
-
-                   
-                       
-                <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-
-                    <span class="badge badge-primary" style="color:black;background-color:white;font-size: 15px;margin-left:7%">Your grade is {{$studentassignment->grade}} out of {{$studentassignment->assignment->points}}</span>
-                    <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px; margin-left:7%">Turned in at{{$studentassignment->created_at}}</span>
-                    {{-- <span class="badge badge-primary" style="color: black; background-color: white; font-size: 12px; margin-left: 30%">Turned in at {{$studentassignment->created_at}}</span> --}}
-                    {{-- <label for="floatingInputInvalid">Invalid input</label> --}}
-                    {{-- <h1 style="margin-left: 10%">Your Work </h1> 
-                    <h1 style="font-size: 15px; margin-left: 68%; margin-top: -8% "  >Turned in</h1> --}}
-
-                    <!-- upload buttom  -->
-                    {{-- <input type="file" class="form-control-file" name="file" id="exampleInputFile"> --}}
-                    {{-- <input type="file" class="form-control-file form-control form-control-user @error('content') is-invalid @enderror" name="content" id="exampleInputFile"  value="{{ old('content') }}" placeholder="upload file" autofocus> --}}
-                    <a href="{{route('download.studentAssignment', ['assignment_id' =>$studentassignment->id])}}" class="form-control-file form-control form-control-user">{{$studentassignment->content}}</a>
-                    @error('content')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-
-                    <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
-                    <input type="hidden" name="assignment_id" value="{{$assignment_id}}">
-                   
-                     <!-- Cancel button -->
-                     <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button"   class="btn btn-danger" style="margin-left: 20%;margin-top: 20px; font-size: 12px; border-radius: 7px">Cancel</button></a>
-                    
-                     <!-- Submit button -->
-                     <button  type="button" class="btn btn-primary" style="margin-left: 20%; margin-top: 20px; font-size: 12px; border-radius: 7px">Edit</button> 
-
-                     <a href="{{route('delete.content', ['studentassignment_id' =>$studentassignment->id, 'classroom_id' =>$classroom_id])}}">Delete</a>
-              
-                    
-               
+                                <div class="widget-49-meeting-action">
+                                    {{-- <a href="#" class="btn btn-sm btn-flash-border-warning">View All</a> --}}
+                                    <button  type="button" class="btn btn-primary" style="margin:6px 10px 0 0; font-size: 12px; border-radius: 7px">Edit</button> 
+                                    {{-- <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-danger" style="font-size: 12px; border-radius: 7px">Cancel</button></a> --}}
+                                    <a href="{{route('delete.content', ['studentassignment_id' =>$studentassignment->id, 'classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-danger" style="font-size: 12px; border-radius: 7px">Delete</button></a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-            
-                    
-
-               
-          
-
-               
             </div>
-
-            <div class="row">
-                <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-                   
-                </div>
-            </div>
-
-
-          
-
-
-           
-
-
-        @endsection
-   @else
+        </div>
+    @endsection
+@else
 
    @section('content')
-
-       
-   <!--Body-->
-   <div class="row">
-     
-   
-       <div  class=" col-lg-9  col-md-9 col-sm-12 col-xm-9  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300"  >
-           <h1 ></h1>
-           <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px;margin-left: 9%" >{{$teacherassignment->teacher->fname}} {{$teacherassignment->teacher->lname}}</span>
-           <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px;margin-left: 4%" >{{$teacherassignment->created_at}}</span>
-           <br> 
-           <span class="badge badge-primary" style="color: black; background-color: white; font-size: 20px;margin-left: 9%; margin-top: 30px" >Description</span><br>
-           <span class="badge badge-primary" style="color: black; background-color: white; font-size: 20px;margin-left: 9%; margin-top: 30px" >{{$teacherassignment->description}}</span>
+        <div class="row">
+            
+        
+            <div  class=" col-lg-9  col-md-9 col-sm-12 col-xm-9  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300"  >
+                <h1 ></h1>
+                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px;margin-left: 9%" >{{$teacherassignment->teacher->fname}} {{$teacherassignment->teacher->lname}}</span>
+                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px;margin-left: 4%" >{{$teacherassignment->created_at}}</span>
+                <br> 
+                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 20px;margin-left: 9%; margin-top: 30px" >Description</span><br>
+                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 20px;margin-left: 9%; margin-top: 30px" >{{$teacherassignment->description}}</span>
 
 
 
-       </div>
+            </div>
 
 
 
 
-          
-              
-       <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
+                
+                    
+            <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
 
-        <form action="{{route('submit.assignment', ['classroom_id' =>$classroom_id ])}}" method="post" enctype="multipart/form-data">
-          @csrf
-           <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px; margin-left:7%" >Your Work</span>
-           <span class="badge badge-primary" style="color: black; background-color: white; font-size: 12px; margin-left: 30%" > 1لم يتم التسليم</span>
-           {{-- <label for="floatingInputInvalid">Invalid input</label> --}}
-           {{-- <h1 style="margin-left: 10%">Your Work </h1> 
-           <h1 style="font-size: 15px; margin-left: 68%; margin-top: -8% "  >Turned in</h1> --}}
+                <form action="{{route('submit.assignment', ['classroom_id' =>$classroom_id ])}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px; margin-left:7%" >Your Work</span>
+                <span class="badge badge-primary" style="color: black; background-color: white; font-size: 12px; margin-left: 30%" > 1لم يتم التسليم</span>
+                {{-- <label for="floatingInputInvalid">Invalid input</label> --}}
+                {{-- <h1 style="margin-left: 10%">Your Work </h1> 
+                <h1 style="font-size: 15px; margin-left: 68%; margin-top: -8% "  >Turned in</h1> --}}
 
-           <!-- upload buttom  -->
-           {{-- <input type="file" class="form-control-file" name="file" id="exampleInputFile"> --}}
-           <input type="file" class="form-control-file form-control form-control-user @error('content') is-invalid @enderror" name="content" id="exampleInputFile"  value="{{ old('content') }}" placeholder="upload file" autofocus>
-           @error('content')
-               <span class="invalid-feedback" role="alert">
-                   <strong>{{ $message }}</strong>
-               </span>
-           @enderror
+                <!-- upload buttom  -->
+                {{-- <input type="file" class="form-control-file" name="file" id="exampleInputFile"> --}}
+                <input type="file" class="form-control-file form-control form-control-user @error('content') is-invalid @enderror" name="content" id="exampleInputFile"  value="{{ old('content') }}" placeholder="upload file" autofocus>
+                @error('content')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
 
-           <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
-           <input type="hidden" name="assignment_id" value="{{$assignment_id}}">
-          
-            <!-- Cancel button -->
-            <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button"   class="btn btn-danger" style="margin-left: 20%;margin-top: 20px; font-size: 12px; border-radius: 7px">Cancel</button></a>
-           
-            <!-- Submit button -->
-            <button  type="submit" class="btn btn-primary" style="margin-left: 20%; margin-top: 20px; font-size: 12px; border-radius: 7px">Submit</button> 
-     
-        </form>     
-      
-       </div>
+                <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
+                <input type="hidden" name="assignment_id" value="{{$assignment_id}}">
+                
+                    <!-- Cancel button -->
+                    <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button"   class="btn btn-danger" style="margin-left: 20%;margin-top: 20px; font-size: 12px; border-radius: 7px">Cancel</button></a>
+                
+                    <!-- Submit button -->
+                    <button  type="submit" class="btn btn-primary" style="margin-left: 20%; margin-top: 20px; font-size: 12px; border-radius: 7px">Submit</button> 
+            
+                </form>     
+            
+            </div>
 
-   
-           
+        
+                
 
-      
- 
+            
+        
 
-      
-   </div>
+            
+        </div>
 
-
-   <div class="row">
-       <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-          
-       </div>
-   </div>
-
-
- 
-
-
-  
-
-
-@endsection
-   @endif
-
-  
-   
-
-   
-
-   @endif
+        <div class="row">
+            <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
+                
+            </div>
+        </div>
+    @endsection
+@endif
+@endif
 
 @endforeach
     
 @else
 
 
-@section('content')
+    @section('content')
+        <div class="container" style="max-width: 1176px;margin-bottom: 182px;margin-top: 73px;">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card card-margin">
+                        <div class="card-header no-border">
+                            <h5 class="card-title"><strong>{{$teacherassignment->title}}</strong></h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="widget-49">
+                                <div class="widget-49-title-wrapper">
+                                    <div class="widget-49-date-primary">
+                                        <span class="widget-49-date-day">{{date('d', strtotime($teacherassignment->created_at))}}</span>
+                                        <span class="widget-49-date-month">{{date('F', strtotime($teacherassignment->created_at))}}</span>
+                                    </div>
+                                    <div class="widget-49-meeting-info">
+                                        <span class="widget-49-pro-title">Dr. {{$teacherassignment->teacher->fname}} {{$teacherassignment->teacher->lname}}</span>
+                                        <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($teacherassignment->created_at))}}</span>
+                                    </div>
+                                </div>
+                                <ol class="widget-49-meeting-points">
+                                    <li class="widget-49-meeting-item"><span>Description</span></li>
+                                    <li class="widget-49-meeting-item"><span>{{$teacherassignment->description}}</span></li>
+                                    {{-- <li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li> --}}
+                                </ol>
+                                <div class="widget-49-meeting-action">
+                                    <a href="#" class="btn btn-sm btn-flash-border-primary">View All</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    
-<!--Body-->
-<div class="row">
-  
-
-    <div  class=" col-lg-9  col-md-9 col-sm-12 col-xm-9  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300"  >
-        <h1 ></h1>
-        <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px;margin-left: 9%" >{{$teacherassignment->teacher->fname}} {{$teacherassignment->teacher->lname}}</span>
-        <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px;margin-left: 4%" >{{$teacherassignment->created_at}}</span>
-        <br> 
-        <span class="badge badge-primary" style="color: black; background-color: white; font-size: 20px;margin-left: 9%; margin-top: 30px" >Description</span><br>
-        <span class="badge badge-primary" style="color: black; background-color: white; font-size: 20px;margin-left: 9%; margin-top: 30px" >{{$teacherassignment->description}}</span>
-
-
-
-    </div>
-
-
-
-
-       
-           
-    <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-
-     <form action="{{route('submit.assignment', ['classroom_id' =>$classroom_id ])}}" method="post" enctype="multipart/form-data">
-       @csrf
-        <span class="badge badge-primary" style="color: black; background-color: white; font-size: 15px; margin-left:7%" >Your Work</span>
-        <span class="badge badge-primary" style="color: black; background-color: white; font-size: 12px; margin-left: 30%" >لم يتم التسليم 2</span>
-        {{-- <label for="floatingInputInvalid">Invalid input</label> --}}
-        {{-- <h1 style="margin-left: 10%">Your Work </h1> 
-        <h1 style="font-size: 15px; margin-left: 68%; margin-top: -8% "  >Turned in</h1> --}}
-
-        <!-- upload buttom  -->
-        {{-- <input type="file" class="form-control-file" name="file" id="exampleInputFile"> --}}
-        <input type="file" class="form-control-file form-control form-control-user @error('content') is-invalid @enderror" name="content" id="exampleInputFile"  value="{{ old('content') }}" placeholder="upload file" autofocus>
-        @error('content')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-
-        <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
-        <input type="hidden" name="assignment_id" value="{{$assignment_id}}">
-       
-         <!-- Cancel button -->
-         <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button"   class="btn btn-danger" style="margin-left: 20%;margin-top: 20px; font-size: 12px; border-radius: 7px">Cancel</button></a>
-        
-         <!-- Submit button -->
-         <button  type="submit" class="btn btn-primary" style="margin-left: 20%; margin-top: 20px; font-size: 12px; border-radius: 7px">Submit</button> 
-  
-     </form>     
-   
-    </div>
-
-
-        
-
-   
-
-
-   
-</div>
-
-
-<div class="row">
-    <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-       
-    </div>
-</div>
-
-
-
-
+                <div class="col-lg-4">
+                    <div class="card card-margin">
+                        <div class="card-header no-border">
+                            <h5 class="card-title">Submitted Assignemnt</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="widget-49">
+                                <div class="widget-49-title-wrapper">
+                                    <div class="widget-49-date-warning">
+                                        <span class="widget-49-date-day">{{date('d', strtotime($teacherassignment->due))}}</span>
+                                        <span class="widget-49-date-month">{{date('F', strtotime($teacherassignment->due))}}</span>
+                                    </div>
+                                    <div class="widget-49-meeting-info">
+                                        <span class="widget-49-pro-title">Turn in</span>
+                                        <span class="widget-49-meeting-time">before {{date('H:i', strtotime($teacherassignment->due))}}</span>
+                                    </div>
+                                </div>     
+                                <form action="{{route('submit.assignment', ['classroom_id' =>$classroom_id ])}}" method="post" enctype="multipart/form-data">                           
+                                    @csrf
+                                    <input type="file" class="form-control-file form-control form-control-user @error('content') is-invalid @enderror" name="content" id="exampleInputFile"  value="{{ old('content') }}" placeholder="upload file" autofocus style="outline:none !important;width: -webkit-fill-available;margin: 9px 0 0 50px;">
+                                    @error('content')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
+                                    <input type="hidden" name="assignment_id" value="{{$assignment_id}}">
+                                    
+                                    <div class="widget-49-meeting-action">
+                                        <button  type="submit" class="btn btn-primary" style="margin-top: 10px; font-size: 12px; border-radius: 7px">Submit</button>
+                                    </div>
+                                    <!-- Cancel button -->
+                                    {{-- <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button"   class="btn btn-danger" style="margin-left: 20%;margin-top: 20px; font-size: 12px; border-radius: 7px">Cancel</button></a>--}}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-
-
-@endsection
+    @endsection
 
 
 
         
-         
-        @endif
-    
-        @endforeach
+@endif  
+@endforeach
 
       
-        <script src="../public/js/jquery-3.3.1.min.js"></script>
-                <script src="../public/js/bootstrap.min.js"></script>
-                <script src="../public/js/plugins.js"></script>
-                <script src="../public/js/wow.min.js"></script>
-                <script>new WOW().init();</script>
-                  <!-- MDB -->
-                <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
+<script src="../public/js/jquery-3.3.1.min.js"></script>
+<script src="../public/js/bootstrap.min.js"></script>
+<script src="../public/js/plugins.js"></script>
+<script src="../public/js/wow.min.js"></script>
+<script>new WOW().init();</script>
+    <!-- MDB -->
+<script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
 
     </body>
 </html>

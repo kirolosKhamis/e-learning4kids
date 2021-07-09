@@ -116,8 +116,7 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-center row">
 
-            
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <ul class="list-group">
                         <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">Submit assignment<hr style="margin-top: 1rem;"></a></li>
@@ -127,6 +126,8 @@
                         <li class="list-group-item">View other classrooms</li>
                     </ul>
                 </div>
+            </div>
+            <div class="col-md-8">
                 <div class="d-flex flex-column comment-section" id="myGroup">
                     <div class="bg-white p-2">
                         <form action="{{asset('post')}}" method="POST" enctype="multipart/form-data">

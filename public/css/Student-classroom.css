@@ -264,4 +264,5 @@ body {
     width: max-content;
     /* height: 0; */
     text-align: center;
+    width: -webkit-fill-available;
 }
