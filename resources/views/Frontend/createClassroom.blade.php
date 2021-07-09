@@ -32,39 +32,35 @@
       <form
        action="{{ route('proucts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        
-
-
         <div class="form-group">
-          <label for="exampleFormControlInput1">title</label>
-          <input type="text" class="form-control" id="title" name="title" placeholder="title">
+          <label for="exampleFormControlInput1">Title</label>
+          <input type="text" class="form-control" id="title" name="title" placeholder="Course Title">
         </div>
 
         <div class="form-group">
-          <label for="exampleFormControlInput1">course</label>
+          <label for="exampleFormControlInput1">Course</label>
           <br>
-          <select name="course_id" id="courses">
-
+          <select name="course_id" id="courses"  class="form-control" style="width: -webkit-fill-available;">
             @foreach ($courses as $course)
-          <option value="{{$course->course_id}}" name="course_id">{{$course->title}} </option>
-                
+              <option value="{{$course->course_id}}" name="course_id">{{$course->title}} </option>  
             @endforeach
-    
           </select>
+        </div>
+        <div class="form-group" >
+          <input type="file" class="form-control" id="file" name="file" placeholder="Upload Image" style="outline: none !important;">
+          {{-- <input type="file" class="form-control-file" name="file" id="exampleInputFile"> --}}
         </div>
          
         <div class="form-group" >
           <input type="hidden" class="form-control" id="1" name="teacher_id" value=" {{Auth::guard('teacher')->user()->user_id}}" placeholder="teacher_id">
         </div> 
 
-        <div class="form-group" >
-          <input type="file" class="form-control-file" name="file" id="exampleInputFile">
-        </div> 
+         
         
         
         
 
-           <button type="submit">add</button>
+        <button class="form-control btn btn-primary" type="submit">Add</button>
       </form>
   </div>
 </div>

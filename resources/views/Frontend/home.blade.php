@@ -43,8 +43,11 @@
           It is an online platform where students can learn,
            teachers can create contents and Parents can monitor their children</p>
 
-        <a href="{{asset('registerAs')}}"><button type="button" class="btn btn-primary">Get Started</button></a>
-        <a href="{{asset('#videoDemo')}}"><button type="button" class="btn btn-outline-primary">View Demo</button></a>
+        {{-- <a href="{{asset('registerAs')}}"><button type="button" class="btn btn-primary" style="background-color:blue">Get Started</button></a> --}}
+        <a href="{{asset('registerAs')}}"><button class="common-btn">Start Now</button></a>
+        <a href="{{asset('#videoDemo')}}"><button class="common-btn">View Demo</button></a>
+        {{-- <a href="{{asset('#videoDemo')}}"><button type="button" class="btn btn-primary">View Demo</button></a> --}}
+        
       </div>
       <div class="col-lg-8 col4">
           <div class="slideshow-container">
@@ -107,7 +110,10 @@
   <div class="row" id="videoDemo">
     <div class="col-lg-12 col6" >
 
-          <video src="{{asset('videos/1.mp4')}}" controls >1</video>
+          {{-- <video src="{{asset('videos/')}}" controls>1</video> --}}
+          <video width="400" controls>
+            <source src="{{asset('videos/1.mp4')}}" type="video/mp4">mov        
+          </video>
     </div>
 
     <div class="row" id="offer">
@@ -122,7 +128,7 @@
             <p>Teachers can only mange, upload all of the resources and materials.
               Students are to keep track in their courses with gimified System. Parents are for monitoring their children's<br>
               academic performance.</p>
-            <button class="common-btn">Start Now</button>
+              <a href="{{asset('registerAs')}}"><button class="common-btn">Start Now</button></a>
             <div class="line">
                 <span class="line-1"></span><br>
                 <span class="line-2"></span><br>

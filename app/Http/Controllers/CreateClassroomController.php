@@ -104,9 +104,10 @@ class CreateClassroomController extends Controller
             // else
             // Classroom::create($request->all());
 
-        return redirect()->intended('proucts')
-            ->with('success', 'Product created successfully.');
+        // return redirect()->intended('proucts')
+        //     ->with('success', 'Product created successfully.');
       
+        return redirect()->intended('teacher');
     }
 
     /**

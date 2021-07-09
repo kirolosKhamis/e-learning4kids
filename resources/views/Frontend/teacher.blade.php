@@ -28,7 +28,7 @@
 
       <div class="col-lg-4 col4">
         
-        <div class="container">
+        {{-- <div class="container">
           <div class="row justify-content-center">
               <div class="col-md-8">
                   <div class="card">
@@ -46,30 +46,20 @@
                   </div>
               </div>
           </div>
-        </div>
+        </div> --}}
         
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ route('logout') }}"
-             onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">
-              {{ __('Logout') }}
-          </a>
-
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-              @csrf
-          </form>
-      </div>
+       
 
 
-        <h1>Teacher</h1>
-        <p>Hello ,{{session()->get('email')}}</p>
+        <h2>Teacher Dashboard</h2>
+        {{-- <p>Hello ,{{session()->get('email')}}</p> --}}
         <p hidden>{{Auth::guard('teacher')->user()->user_id}}</p>
         @if (session('status'))
         <div class="alert alert-success" role="alert">
             {{ session('status') }}
         </div>
         @endif
-        {{ __('You are logged inll!') }}
+        {{ __('You are logged in!') }}
         <p>Learning System for kids is an education via the Internet, network, or standalone computer.
           It is an online platform where students can learn,
            teachers can create contents and Parents can monitor their children</p>
@@ -111,15 +101,27 @@
 
             <div class="price_box wow fadeInUp" data-wow-duration="2s" data-wow-offset="200">
               <div class="img">
-                <img  class="center-block" src="materials/{{$classroom->content}}" alt="img">
+                <img  class="center-block" src="materials/{{$classroom->content}}" style="width: 71%;height: auto;" alt="img">
               </div>
               <ul class="info list-unstyled">
                 {{-- <li >{{$classroom->classroom_id}}</li> --}}
                 <li>{{$classroom->title}}</li>
                 <li class="center-text"></li>
                 <a href="{{route('show.classroom', ['classroom_id' => $classroom->classroom_id])}}" style="margin: 7px 298px 0 0;">Details</a>
-                <a href="{{route('delete.content', ['classroom_id' => $classroom->classroom_id])}}" style="margin: -30px 0 0 304px; background:none"><button class="btn btn-danger"> Delete </button></a>
+                <a href="{{route('delete.content', ['classroom_id' => $classroom->classroom_id])}}" style="margin: -30px 0 0 304px; background:none"><button onclick="confirmAction()" class="btn btn-danger"> Delete </button></a>
               </ul>
+              
+              <script>
+                // The function below will start the confirmation dialog
+                function confirmAction() {
+                  let confirmAction = confirm("Are you sure to execute this action?");
+                  if (confirmAction) {
+                    alert("Action successfully executed");
+                  } else {
+                    alert("Action canceled");
+                  }
+                }
+              </script>
             </div>
           </div>
      
@@ -127,6 +129,7 @@
           @endif
 
           @endforeach
+
 
 
       </div>

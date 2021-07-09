@@ -304,7 +304,7 @@
                         <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">View assignments</a></li>
                         {{-- <li class="list-group-item">View All<hr></li> --}}
                         <li class="list-group-item"><a href="{{route('add.result', ['classroom_id' =>$classroom_id])}}">Add results</li></a>
-                        <li class="list-group-item">View other classrooms</li>
+                        <li class="list-group-item"><a href="{{route('teacher')}}">View other classrooms</a></li>
                     </ul>
                 </div>
                 <div class="d-flex flex-column comment-section" id="myGroup">

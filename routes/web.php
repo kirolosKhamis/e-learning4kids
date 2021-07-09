@@ -52,7 +52,6 @@ Route::group(['middleware' => 'auth:student,teacher'],function () {
     Route::get('/downloadcomment', [App\Http\Controllers\ClassroomContent::class, ' commentDownload'])->name('download.comment');
     Route::get('/delete', [App\Http\Controllers\ClassroomContent::class, 'deletecontent'])->name('delete.content');
     
-    
 
     // Route::get('/', function () {
     //     return view('Frontend.home');
@@ -94,18 +93,7 @@ Route::group(['middleware' => 'auth:student'], function () {
     Route::post('/submitAssignment', [App\Http\Controllers\ClassroomContent::class, 'submitAssignment'])->name("submit.assignment");
     Route::get('/StudentCertificate', [App\Http\Controllers\ClassroomContent::class, 'showcertificate'])->name("show.certificate");
 
-    Route::get('result',[App\Http\Controllers\QuestionnaireController::class, 'showResult'])->name('result');
-    Route::match(['put',' patch'], 'questionnaire', [App\Http\Controllers\QuestionnaireController::class, 'update']);
-    Route::get('questionnaire',[App\Http\Controllers\QuestionnaireController::class, 'show']);
-    Route::post('/updateresults', [App\Http\Controllers\ClassroomContent::class, 'updateResult'])->name('update.result');
-   
-   
-    
 });
-
-
-
-
 
 
 Route::group(['middleware' => 'auth:teacher'], function () {
@@ -120,6 +108,9 @@ Route::group(['middleware' => 'auth:teacher'], function () {
     Route::post('/updateresults', [App\Http\Controllers\ClassroomContent::class, 'updateResult'])->name('update.result');
     Route::get('/editGrade', [App\Http\Controllers\ClassroomContent::class, 'editGrade'])->name('edit.grade');
     Route::post('/updategrade', [App\Http\Controllers\ClassroomContent::class, 'updategrade'])->name('update.grade');
+
+
+    
 
     Route::post('/addAssignment', [App\Http\Controllers\ClassroomContent::class, 'addAssignment'])->name("add.assignment");
     Route::get('/showstudentAssignment', [App\Http\Controllers\ClassroomContent::class, 'showStudentAssignment'])->name('show.studentAssignment');
@@ -151,6 +142,10 @@ Route::group(['middleware' => 'auth:parent'], function () {
 
 
 
+Route::get('/create', function () {
+    return view('Frontend.Creataccount');
+})->name("child");
+
 
 Route::get('/createClassroom', function () {
     $courses = Course::latest()->paginate(100);
@@ -177,7 +172,9 @@ Route::get('/materials', function () {
 
 
 
-
+Route::get('/questionnaire', function () {
+    return view('Frontend.questionnaire');
+})->name("questionnaire");
 
 
 Route::get('/registerAs', function () {
@@ -243,7 +240,9 @@ Route::get('/proucts', [App\Http\Controllers\CreateClassroomController::class, '
 
 
 
-
+Route::get('questionnaire',[App\Http\Controllers\QuestionnaireController::class, 'show']);
+Route::get('result',[App\Http\Controllers\QuestionnaireController::class, 'showResult'])->name('result');
+Route::match(['put',' patch'], 'questionnaire', [App\Http\Controllers\QuestionnaireController::class, 'update']);
 
 
 
