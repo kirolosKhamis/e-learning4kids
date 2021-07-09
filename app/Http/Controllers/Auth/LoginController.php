@@ -89,6 +89,11 @@ class LoginController extends Controller
                     // if successful, then redirect to their intended location
                     $data=$request->input();
                     $request->session()->put('email', $data['email'] );
+
+
+                    if($request->input('personality_type')==null)
+                    return redirect()->intended('questionnaire');
+                    else
                     return redirect()->intended('student');
                 } 
         return redirect()->back()->withInput($request->only('email', 'remember'));

@@ -61,6 +61,10 @@ class RegisterController extends Controller
 
     protected function createStudent(Request $request)
     {
+
+        if ($request->input('personality_type')==null)
+        {
+            // dd($request->input('personality_type'));
         $request->validate( [
             'fname' => ['required', 'string', 'max:255'],
             'lname'=>['required', 'string', 'min:3'],
@@ -93,7 +97,10 @@ class RegisterController extends Controller
             'phone' => $request['phone'],
             // 'specialization' => $request['specialization'],
         ]);
-        return redirect()->intended('questionnaire');
+        return redirect()->intended('login/student');
+        }
+
+
     }
 
     public function showTeacherRegisterForm()
@@ -183,6 +190,8 @@ class RegisterController extends Controller
             'photo' => $name,
         ]);
         return redirect()->intended('parent');
+
+
     }
 
 

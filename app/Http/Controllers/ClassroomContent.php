@@ -18,6 +18,8 @@ use App\Models\TeacherPost;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
 
+use function GuzzleHttp\Promise\all;
+
 class ClassroomContent extends Controller
 {
     /**
@@ -377,9 +379,16 @@ if( $file=$request->file('content'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 
+
+
     public function updateResult(Request $request) {
         // dd($request->input('result_id'));
         //boulanessim
+
+        dd($request->input('student_id'));
+        
+        if($request->input('result_id')!=null)
+        {
        $studentregs = StudentRegisteration::latest()->paginate(100);
        foreach( $studentregs as  $studentreg)
        if($studentreg->id==$request->input('result_id'))
@@ -394,7 +403,34 @@ if( $file=$request->file('content'))
 
     return redirect()->route('add.result',['classroom_id' => $classroom_id]);
     
-    }     
+    }  }
+
+    else{
+        
+            
+              $students= Student::latest()->paginate(100);
+    
+              foreach( $students as  $student)
+              if($student->user_id==$request->input('student_id'))
+              {
+            //   $classroom_id=$studentreg->classroom_id;
+              $student->update([  
+       
+               'personality_type' => $request->input('personality_type'),
+             
+       
+              ]);
+       
+           return redirect()->route('student');
+           
+           } 
+    
+    
+    
+    
+            }
+    
+
     }
 
 

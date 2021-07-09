@@ -72,7 +72,13 @@
 
                       </table>
                       <a href="{{asset('#personality')}}"><button type="button" class="btn btn-primary" style="width:-webkit-fill-available;margin-top: 18px;">More About Personality Type</button></a>
-                      <a href="{{route('login/student')}}"><button type="button" class="btn btn-primary" style="width:-webkit-fill-available;margin-top: 18px;">Next</button></a>
+                      <form action="{{route('update.result')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="peronality_type" value="{{$key}}">
+                        <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
+                        <button type="submit">Next</button>
+                      {{-- <button type="submit" class="btn btn-primary" style="width:-webkit-fill-available;margin-top: 18px;">Next</button> --}}
+                    </form>
                       {{-- <button class="common-btn">Next</button> --}}
                     <!--end of table-->
                 </div>
