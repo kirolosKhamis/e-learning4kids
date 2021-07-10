@@ -34,6 +34,11 @@ Route::group(['middleware' => 'auth:student,teacher,parent'],function () {
     Route::get('/', function () {
         return view('Frontend.home');
     })->name("home");
+
+    Route::post('/helpAnyone', [App\Http\Controllers\DeadlineController::class, 'helpAnyone'])->name('help.anyone');
+    Route::get('sendHelpEmail', function () {
+        return view('Frontend.help');
+    });
 });
 /*-------------------------------End of Midelware Student,Teacher,Parent------------------------------------------*/
 
@@ -261,6 +266,9 @@ Route::get('spare', function () {
 Route::get('notAutherized', function () {
     return view('Frontend.notAutherized');
 })->name('notAutherized');
+
+
+
 
 
 
