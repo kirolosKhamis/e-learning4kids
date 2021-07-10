@@ -101,7 +101,8 @@
 
 
                       <!-- Cancel button -->
-                    <button type="button" class="btn btn-danger" style="margin-left: 10%; font-size: 12px; border-radius: 7px">Cancel</button>
+                    
+                    <a a href="{{route('show.classroom', ['classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-danger" style="margin-left: 10%; font-size: 12px; border-radius: 7px">Cancel</button></a>
                      <!-- Submit button -->
                      <button  type="submit" class="btn btn-primary" style="margin-left: 10px; font-size: 12px; border-radius: 7px">Submit</button> 
                 

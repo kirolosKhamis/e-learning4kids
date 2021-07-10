@@ -15,6 +15,7 @@ protected $fillable = [
     'student_id',
     'classroom_id',
     'mid_term',
+    'class_work',
     'final',
 ];
 

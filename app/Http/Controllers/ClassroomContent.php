@@ -406,6 +406,7 @@ if( $file=$request->file('content'))
 
         'mid_term' => $request->input('mid_term'),
         'final' => $request->input('final'),
+        'class_work' => $request->input('class_work'),
 
        ]);
 

@@ -277,14 +277,17 @@
           </div>
         @endif
        
-        @foreach ($studentregs as $studentreg)
-        @if ($studentreg->student_id==Auth::guard('student')->user()->user_id)
+
            
 
             <div class="col-sm-6 mb-3">
               <div class="card h-100">
-                <div class="card-body">
+
+                <div class="card-body" style="float:right">
+
                   <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
+                  @foreach ($studentregs as $studentreg)
+                  @if ($studentreg->student_id==Auth::guard('student')->user()->user_id)
                   <small>{{$studentreg->classroom->title}}</small>
                   <div class="progress mb-3" style="height: 5px">
                     
@@ -307,12 +310,14 @@
                     <div class="progress-bar bg-primary" role="progressbar" style="width: {{0+(($counter/10)*20)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                     @endif
                   </div>
+                  @endif
+                  @endforeach
                 </div>
+
               </div>
             </div>
 
-            @endif
-            @endforeach
+
           </div>
 
         </div>

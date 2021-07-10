@@ -56,9 +56,12 @@
                         @endif
                         @endforeach
 
+                       
+
                         
                     
                       </table>
+                     
 
                     <!--end of table-->
                 </div>
@@ -111,8 +114,11 @@
 
                         
                     
+
                       </table>
 
+                   
+                      
                     <!--end of table-->
                 </div>
           </div>

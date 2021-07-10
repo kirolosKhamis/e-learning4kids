@@ -37,6 +37,7 @@
                         <tr>
                           <th>Course</th>
                           <th>Mid_term</th>
+                          <th>Class_work</th>
                           <th>Final</th>
                         </tr>
                         @foreach ($studentregs as $studentreg)
@@ -44,6 +45,7 @@
                         <tr>
                           <td>{{$studentreg->classroom->course->title}}</td>
                           <td>{{$studentreg->mid_term}}</td>
+                          <td>{{$studentreg->class_work}}</td>
                           <td>{{$studentreg->final}}</td>
                         </tr>   
                         @endif

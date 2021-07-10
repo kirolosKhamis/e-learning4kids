@@ -96,7 +96,12 @@
                                     {{-- <a href="#" class="btn btn-sm btn-flash-border-warning">View All</a> --}}
                                     <button  type="button" class="btn btn-primary" style="margin:6px 10px 0 0; font-size: 12px; border-radius: 7px">Edit</button> 
                                     {{-- <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-danger" style="font-size: 12px; border-radius: 7px">Cancel</button></a> --}}
+                                    @if ($studentassignment->grade ==null)
                                     <a href="{{route('delete.content', ['studentassignment_id' =>$studentassignment->id, 'classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-danger" style="font-size: 12px; border-radius: 7px">Delete</button></a>
+                                    @endif
+
+                                    <a href="{{route('show.classroom', ['classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-primary" style="margin:6px 10px 0 0; font-size: 12px; border-radius: 7px">Back</button></a>
+                                
                                 </div>
                                 
                             </div>

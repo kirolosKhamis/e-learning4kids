@@ -37,6 +37,7 @@
                         <tr>
                           <th>student name</th>
                           <th>Mid_term</th>
+                          <th>Class_work</th>
                           <th>Final</th>
                           <th>Action</th>
                         </tr>
@@ -47,6 +48,7 @@
                           
                           <td>{{$studentreg->student->fname}} {{$studentreg->student->lname}}</td>
                           <td>{{$studentreg->mid_term}}</td>
+                          <td>{{$studentreg->class_work}}</td>
                           <td>{{$studentreg->final}}</td>
                           <td><a href="{{route('edit.result', ['result_id' => $studentreg->id])}}">edit</a></td></td>
       

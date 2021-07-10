@@ -37,6 +37,7 @@
                         <tr>
                           <th>student name</th>
                           <th>Mid_term</th>
+                          <th>Class_work</th>
                           <th>Final</th>
                         </tr>
                         @foreach ($studentregs as $studentreg)
@@ -47,8 +48,9 @@
                           @csrf
                         <tr>
                           <td>{{$studentreg->student->fname}} {{$studentreg->student->lname}}</td>
-                          <td><input type="text" name="mid_term" value="{{$studentreg->mid_term}}"></td>
-                          <td><input type="text" name="final" value="{{$studentreg->final}}"></td>
+                          <td><input type="text" style="width: fit-content" name="mid_term" value="{{$studentreg->mid_term}}"></td>
+                          <td><input type="text" style="width: fit-content"  name="class_work" value="{{$studentreg->class_work}}"></td>
+                          <td><input type="text" style="width: fit-content"  name="final" value="{{$studentreg->final}}"></td>
                         </tr>  
                         <button type="submit">Save</button>
                       </form>
