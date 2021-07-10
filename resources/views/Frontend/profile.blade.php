@@ -298,14 +298,13 @@
                           
             
                     @if ($studentreg->mid_term!==null && $studentreg->final!==null )
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{80+(($counter/10)*20)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{80+(($counter/10)*20)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">{{80+(($counter/10)*20)}}%</div> 
                     @elseif($studentreg->mid_term!==null )
                     <div class="progress-bar bg-primary" role="progressbar" style="width: {{30+(($counter/10)*20)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                     @elseif($studentreg->final!==null)
                     <div class="progress-bar bg-primary" role="progressbar" style="width: {{50+(($counter/10)*20)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                     @else
                     <div class="progress-bar bg-primary" role="progressbar" style="width: {{0+(($counter/10)*20)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-
                     @endif
                   </div>
                 </div>
@@ -321,7 +320,6 @@
       </div>
     </div>
   </div>
-{{dd($counter)}}
 @endsection
 
     <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
