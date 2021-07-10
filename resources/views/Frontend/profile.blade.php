@@ -202,6 +202,80 @@
               </div>
             </div>
           @endif
+
+          @if (Auth::guard('student')->user())
+          <div class="col-sm-6 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="d-flex align-items-center mb-3">Badges</h6>
+                {{-- ibrahim --}}
+                @foreach ($studentassignment as $studentassignment)
+                    @if ($studentassignment->student_id==Auth::user()->user_id)
+                  
+                    <p hidden> {{$assignment_id=$studentassignment->assignment_id}}</p>
+                    <p hidden> {{$assignmentgrade=$studentassignment->grade}}</p>
+                    <p hidden> {{$assignmentclassroom_id=$studentassignment->classroom_id}}</p>
+                    <p hidden> {{$assignmentlastupdate=$studentassignment->updated_at}}</p>
+
+                    @foreach ($classrooms as $classroom)
+                        @if ($classroom->classroom_id==$assignmentclassroom_id)
+                            <p> <strong> {{$nameclassroom= $classroom->title }} </strong> </p>
+
+                            @foreach ($teacherassignment as $teacherassignments)
+                                @if ($assignment_id==$teacherassignments->id)
+                                <p > {{$name= $teacherassignments->title }} </p>
+                                <p hidden> {{$points= $teacherassignments->points }} </p>
+                                <p hidden> {{$due= $teacherassignments->due }} </p>
+
+                                <p hidden > {{$badgelevel= ($assignmentgrade / $points) *100  }} </p>
+
+                                @if ($badgelevel < 25)
+                                         @if ( $assignmentlastupdate <= $due  )
+                                         <img {{--class="img img-responsive"--}} style="width: 30px; height: 30px; float: right; margin-top: -30px" src="{{asset('images/level1.jpeg')}}" alt="">
+                                          
+                                          @endif
+                                        
+                                    @elseif ( $badgelevel >= 25 && $badgelevel <50)
+                                          
+                                              @if ( $assignmentlastupdate <= $due  )
+                                              <img {{--class="img img-responsive"--}} style="width: 30px; height: 30px; float: right; margin-top: -30px" src="{{asset('images/level2.jpeg')}}" alt="">  
+                                              @endif       
+                                                                
+                                    @elseif ($badgelevel >=50  && $badgelevel < 75)
+
+                                              @if ($assignmentlastupdate <= $due )
+                                              <img {{--class="img img-responsive"--}} style="width: 30px; height: 30px; float: right; margin-top: -30px" src="{{asset('images/level3.jpeg')}}" alt="">  
+                                              @endif    
+                                    @elseif ($badgelevel >= 75 && $badgelevel <= 100)
+                                              @if ( $assignmentlastupdate <= $due  )
+                                              <img {{--class="img img-responsive"--}} style="width: 30px; float: right; margin-top: -30px" src="{{asset('images/level4.jpeg')}}" alt="">
+                                                  
+                                              @endif
+                                      
+                                @endif                                    
+                                
+                                
+                                
+                                    
+                                @endif
+                            @endforeach
+                            
+                        @endif
+                        
+                    @endforeach    
+                  
+                  
+                    
+                  
+                    
+                    @endif 
+                @endforeach
+
+              
+              </div>
+            </div>
+          </div>
+        @endif
             <div class="col-sm-6 mb-3">
               <div class="card h-100">
                 <div class="card-body">
