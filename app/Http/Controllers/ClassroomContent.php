@@ -416,7 +416,7 @@ if( $file=$request->file('content'))
         // dd($request->input('result_id'));
         //boulanessim
 
-        // dd($request->input('student_id'));
+      
 
        $students = Student::latest()->paginate(100);
        foreach( $students as  $student)
