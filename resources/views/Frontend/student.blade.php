@@ -30,7 +30,7 @@
           It is an online platform where students can learn,
            teachers can create contents and Parents can monitor their children</p>
         <a href="{{ route('studentJoin') }}"> <button type="button" class="btn btn-primary" >Join Classroom</button></a>
-        <a href="{{ route('sendEmail') }}"> <button type="button" class="btn btn-primary" >sendEmail</button></a>
+        {{-- <a href="{{ route('sendEmail') }}"> <button type="button" class="btn btn-primary" >sendEmail</button></a> --}}
         <a href="{{ route('show.result') }}"> <button type="button" class="btn btn-outline-primary">Show results</button></a>
         {{-- @isset($message)
         <p>{{$message}}</p>
