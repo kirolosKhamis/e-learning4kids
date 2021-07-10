@@ -138,7 +138,7 @@
                                 <ol class="widget-49-meeting-points">
                                     <li class="widget-49-meeting-item"><span>Description</span></li>
                                     <li class="widget-49-meeting-item"><span>{{$teacherassignment->description}}</span></li>
-                                    {{-- <li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li> --}}
+                                    <a href="{{route('download.teacherAssignment', ['tassignment_id' =>$teacherassignment->id])}}"> <li class="widget-49-meeting-item"><span>{{$teacherassignment->content}}</span></li></a>
                                 </ol>
                                 <div class="widget-49-meeting-action">
                                     <a href="#" class="btn btn-sm btn-flash-border-primary">View All</a>

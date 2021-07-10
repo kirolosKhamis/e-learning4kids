@@ -16,7 +16,7 @@
             <link rel='stylesheet'href ="{{asset('css/childview.css')}}"/>
             <link rel="stylesheet" href="{{asset('css/mdb.min.css')}}" />
        
-    </head>
+    </head> 
     <body>
     
 

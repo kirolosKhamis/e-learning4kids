@@ -37,7 +37,22 @@
             <form action="{{ route('contents.store') }}" method="POST">
                 @csrf
                 <div class="col-lg-12 col-sm-12 col5">
-                    <input class="form-control inputtext" type="text" id="classcode" name="classcode" placeholder="Enter Class Code..">
+
+                    <input type="text" class="form-control form-control-user @error('classroom_code') is-invalid @enderror"
+                        placeholder="Enter Classroom Code..."
+                        id="classroom_code" name="classroom_code" value="{{ old('classroom_code') }}" required autofocus>
+
+                        @error('classroom_code')
+                            <span class="alert-danger" role="alert">
+                                {{ $message  }}
+                            </span>
+                        @enderror
+
+                        {{-- <input id="classroom_code" type="text" name="classroom_code" class="@error('classroom_code') is-invalid @enderror"> --}}
+
+                        
+
+                    {{--  <input class="form-control inputtext" type="text" id="classcode" name="classcode" placeholder="Enter Class Code.."> --}}
                 </div>
 
                 <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">

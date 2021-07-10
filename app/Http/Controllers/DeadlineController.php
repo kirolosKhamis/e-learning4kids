@@ -17,6 +17,18 @@ class DeadlineController extends Controller
         // }
         return redirect()->back()->with('message', 'IT WORKS!');
     }
+
+
+    public function sendEmailReminder(Request $request, $id)
+    {
+        $student = Student::findOrFail($id);
+
+        Mail::send('emails.reminder', ['user' => $user], function ($m) use ($user) {
+            $m->from('hello@app.com', 'Your Application');
+
+            $m->to($user->email, $user->name)->subject('Your Reminder!');
+        });
+    }
     
 
 }

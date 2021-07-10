@@ -14,6 +14,7 @@ use App\Models\StudentPost;
 use App\Models\Teacher;
 use App\Models\TeacherAssignment;
 use App\Models\TeacherPost;
+use Illuminate\Support\Facades\Validator;
 
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
@@ -52,18 +53,25 @@ class ClassroomContent extends Controller
      */
     public function store(Request $request){
     
+
+        // redirect('register')->withErrors($validator, 'login')
+        
+        $request->validate( [
+            'classroom_code' => 'required|string|max:30|exists:classroom,classroom_code'
+        ]);        
         $classrooms = Classroom::latest()->paginate(100);
-        $code=$request->input('classcode');
+        
         foreach($classrooms as $classroom){ 
-            if($classroom->classroom_code==$code)
-            break;
-        }
-        $studentreg = StudentRegisteration::create(['student_id' => $request->input('student_id'),
-        'classroom_id' => $classroom->classroom_id,]);
+            if($classroom->classroom_code== $request->input('classroom_code')){
+                $studentreg = StudentRegisteration::create(['student_id' => $request->input('student_id'),'classroom_id' => $classroom->classroom_id]);
+
+                return redirect()->route('contents.index')
+                ->with('success', 'Product created successfully.');
+            }
 
         return redirect()->route('contents.index')
         ->with('success', 'Product created successfully.');
-             
+        }   
     }
 
     /**
@@ -539,6 +547,27 @@ if( $file=$request->file('content'))
        {
 
        $pathToFile ='materials/' . $studentassignment->content;
+    //    $studentassignment->update([  
+
+    //     'mid_term' => $request->input('mid_term'),
+    //     'final' => $request->input('final'),
+
+    //    ]);
+
+    return response()->download($pathToFile);
+    
+    }     
+    }
+
+    public function downloadTeacherAssignment(Request $request) {
+
+
+        $teacherassignments = TeacherAssignment::latest()->paginate(100);
+       foreach(  $teacherassignments as   $teacherassignment)
+       if($teacherassignment->id==$request->input('tassignment_id'))
+       {
+
+       $pathToFile ='materials/' . $teacherassignment->content;
     //    $studentassignment->update([  
 
     //     'mid_term' => $request->input('mid_term'),
