@@ -20,6 +20,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <style>
     body {
         background: #eee;
@@ -118,10 +123,24 @@
             <div class="hidediv">
             <ul class="list-group">
                 <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">Submit assignment<hr style="margin-top: 1rem;"></a></li>
-                <li class="list-group-item">Materials<hr></li>
+                {{-- <li class="list-group-item">Materials<hr></li> --}}
                 <li class="list-group-item">Members<hr></li>
-                <li class="list-group-item">View All<hr></li>
-                <li class="list-group-item">View other classrooms</li>
+                <li class="list-group-item">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">View Other Classrooms
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            @foreach ($studentregs as $studentreg)
+                                @if ($studentreg->student_id==Auth::guard('student')->user()->user_id)       
+                                    {{-- <li>{{$studentreg->classroom->teacher->fname}}</li> --}}
+                                    {{-- <input type="hidden" name="classroom_id" value="{{$studentreg->classroom_id}}"> --}} 
+                                    <li><a href="{{route('show.classroom', ['classroom_id' => $studentreg->classroom_id])}}">{{$studentreg->classroom->title}}</a></li>
+                                        
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
             </ul>
             </div>
             <div class="col-md-8" style="margin:-4px 0 0 -3px;">
@@ -161,17 +180,14 @@
                         <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$studentpost->student_id !== null ? $studentpost->student->fname :$studentpost->teacher->fname }} {{ $studentpost->student_id !== null ? $studentpost->student->lname : $studentpost->teacher->lname}}</span><span class="date text-black-50">Shared publicly &nbsp;{{date('F-d', strtotime($studentpost->created_at))}} &nbsp;{{date('H:i', strtotime($studentpost->created_at))}}</span></div>
                         
                         @if ($studentpost->student_id==Auth::user()->user_id || $studentpost->teacher_id==Auth::user()->user_id) 
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="margin-left: auto;margin: 0 38px 25px 12px 20px;margin-right: 12px;margin-top: 11px;">
-                            <i class="fa fa-ellipsis-v" style="font-size:24px"></i>
-                            <span class="sr-only">(current)</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding:7px 58px 6px 32px; width: 0;">
-                            <a href="{{route('show.profileDetails')}}"><i class="fa fa-user-o"></i> Profile</a>
-                            <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
-                   
-                            
-                            <a href="{{route('delete.content', ['post_id' => $studentpost->id])}}">Delete Post</a>
-                            
+                        <div class="dropdown" style="margin-left: auto;margin: 0 38px 25px 12px 20px;margin-right: 12px;margin-top: 11px;">
+                            <i class="fa fa-ellipsis-v" data-toggle="dropdown" style="font-size:24px;color:#007bff;">
+                            </i>
+                            <ul class="dropdown-menu">
+                                {{-- <li><a href="{{route('show.profileDetails')}}"><i class="fa fa-user-o"></i> Profile</a></li> --}}
+                                <li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+                                <li><a href="{{route('delete.content', ['post_id' => $studentpost->id])}}">Delete Post</a></li>
+                            </ul>
                         </div>
                         @endif
                     
@@ -209,19 +225,18 @@
                         <div class="d-flex flex-column justify-content-start ml-2">
                             <span class="d-block font-weight-bold name" style="font-size: 12px;">{{$comment->student_id !== null ? $comment->student->fname :$comment->teacher->fname }} {{ $comment->student_id !== null ? $comment->student->lname : $comment->teacher->lname}}
                                 <span class="date text-black-50" style="font-size: 8px;margin: 0 4px 0 2px;margin: 0 4px 0 2px;">Shared publicly &nbsp;{{date('F-d', strtotime($comment->created_at))}} &nbsp;{{date('H:i', strtotime($comment->created_at))}}</span>
+                                
                                 @if ($comment->student_id==Auth::user()->user_id || $comment->teacher_id==Auth::user()->user_id)
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="padding: 0 0 0 394px;">
-                                    <i class="fa fa-ellipsis-v" style="font-size:20px"></i>
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding:7px 58px 6px 32px; width: 0;">
-                                    <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
-                                    <a href="{{route('delete.content', ['comment_id' => $comment->comment_id])}}">Delete</a>
-                                </div>
+                                    <div class="dropdown" style="padding: 0 0 0 217px;margin-top: -16px;">
+                                        <i class="fa fa-cog" aria-hidden="true" data-toggle="dropdown" style="font-size:18px;color:#007bff;"></i>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+                                            <li><a href="{{route('delete.content', ['comment_id' =>$comment->comment_id])}}">Delete Post</a></li>
+                                        </ul>
+                                    </div>
                                 @endif
+                            
                             </span>
-                            
-                            
                         </div>
                         </div>
                         {{-- comments --}}
