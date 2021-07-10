@@ -671,11 +671,11 @@ if( $file=$request->file('content'))
         if (Auth::guard('student')->user()){
             $studentregs = StudentRegisteration::latest()->paginate(100);
             $classrooms =Classroom::all();
-            $studentassignment=StudentAssignment::all();
-            $teacherassignment= TeacherAssignment::all();
+            $studentassignments=StudentAssignment::all();
+            $teacherassignments= TeacherAssignment::all();
+            $counter=0;
 
-
-            return view('Frontend.profile',compact('studentregs','classrooms','studentassignment','teacherassignment'));
+            return view('Frontend.profile',compact('studentregs','classrooms','studentassignments','teacherassignments','counter'));
         }
      
         return view('Frontend.profile');   

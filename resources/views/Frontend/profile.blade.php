@@ -209,7 +209,7 @@
               <div class="card-body">
                 <h6 class="d-flex align-items-center mb-3">Badges</h6>
                 {{-- ibrahim --}}
-                @foreach ($studentassignment as $studentassignment)
+                @foreach ($studentassignments as $studentassignment)
                     @if ($studentassignment->student_id==Auth::user()->user_id)
                   
                     <p hidden> {{$assignment_id=$studentassignment->assignment_id}}</p>
@@ -221,11 +221,11 @@
                         @if ($classroom->classroom_id==$assignmentclassroom_id)
                             <p> <strong> {{$nameclassroom= $classroom->title }} </strong> </p>
 
-                            @foreach ($teacherassignment as $teacherassignments)
-                                @if ($assignment_id==$teacherassignments->id)
-                                <p > {{$name= $teacherassignments->title }} </p>
-                                <p hidden> {{$points= $teacherassignments->points }} </p>
-                                <p hidden> {{$due= $teacherassignments->due }} </p>
+                            @foreach ($teacherassignments as $teacherassignment)
+                                @if ($assignment_id==$teacherassignment->id)
+                                <p > {{$name= $teacherassignment->title }} </p>
+                                <p hidden> {{$points= $teacherassignment->points }} </p>
+                                <p hidden> {{$due= $teacherassignment->due }} </p>
 
                                 <p hidden > {{$badgelevel= ($assignmentgrade / $points) *100  }} </p>
 
@@ -276,33 +276,43 @@
             </div>
           </div>
         @endif
+       
+        @foreach ($studentregs as $studentreg)
+        @if ($studentreg->student_id==Auth::guard('student')->user()->user_id)
+           
+
             <div class="col-sm-6 mb-3">
               <div class="card h-100">
                 <div class="card-body">
                   <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                  <small>Web Design</small>
+                  <small>{{$studentreg->classroom->title}}</small>
                   <div class="progress mb-3" style="height: 5px">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <small>Website Markup</small>
-                  <div class="progress mb-3" style="height: 5px">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <small>One Page</small>
-                  <div class="progress mb-3" style="height: 5px">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <small>Mobile Template</small>
-                  <div class="progress mb-3" style="height: 5px">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <small>Backend API</small>
-                  <div class="progress mb-3" style="height: 5px">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                    
+                    @foreach ($studentassignments as $studentassignment)
+                      @if ($studentassignment->assignment->classroom_id== $studentreg->classroom_id && $studentassignment->student_id==Auth::user()->user_id )
+                          
+                      {{$counter=$counter+1}}
+                        
+                      @endif
+                      @endforeach
+                          
+            
+                    @if ($studentreg->mid_term!==null && $studentreg->final!==null )
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{80+(($counter/10)*20)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">{{80+(($counter/10)*20)}}%</div> 
+                    @elseif($studentreg->mid_term!==null )
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{30+(($counter/10)*20)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    @elseif($studentreg->final!==null)
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{50+(($counter/10)*20)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    @else
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{0+(($counter/10)*20)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    @endif
                   </div>
                 </div>
               </div>
             </div>
+
+            @endif
+            @endforeach
           </div>
 
         </div>
