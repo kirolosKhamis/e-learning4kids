@@ -91,8 +91,10 @@ class LoginController extends Controller
                     $request->session()->put('email', $data['email'] );
 
 
-                    if(Auth::guard('student')->user()->personality_type==null)
-                    return redirect()->intended('questionnaire');
+                    if(Auth::guard('student')->user()->personality_type==null){
+                        // dd(Auth::guard('student')->user()->personality_type);
+                        return redirect('questionnaire');
+                    }
                     else
                     return redirect()->intended('student');
                 } 
