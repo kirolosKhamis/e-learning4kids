@@ -107,7 +107,7 @@ Route::group(['middleware' => 'auth:student'], function () {
     Route::get('result',[App\Http\Controllers\QuestionnaireController::class, 'showResult'])->name('result');
     Route::match(['put',' patch'], 'questionnaire', [App\Http\Controllers\QuestionnaireController::class, 'update']);
     Route::get('questionnaire',[App\Http\Controllers\QuestionnaireController::class, 'show']);
-    Route::post('/updateresults', [App\Http\Controllers\ClassroomContent::class, 'updateResult'])->name('update.result');
+    Route::post('/updatepersonality', [App\Http\Controllers\ClassroomContent::class, 'updatepersonality'])->name('update.personality');
    
 });
 

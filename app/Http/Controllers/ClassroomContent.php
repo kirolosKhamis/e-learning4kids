@@ -405,34 +405,35 @@ if( $file=$request->file('content'))
     
     }  }
 
-    else{
-        
-            
-              $students= Student::latest()->paginate(100);
-    
-              foreach( $students as  $student)
-              if($student->user_id==$request->input('student_id'))
-              {
-            //   $classroom_id=$studentreg->classroom_id;
-              $student->update([  
-       
-               'personality_type' => $request->input('personality_type'),
-             
-       
-              ]);
-       
-           return redirect()->route('student');
-           
-           } 
-    
-    
-    
-    
-            }
+
     
 
     }
 
+
+    
+    public function updatepersonality(Request $request) {
+        // dd($request->input('result_id'));
+        //boulanessim
+
+        // dd($request->input('student_id'));
+
+       $students = Student::latest()->paginate(100);
+       foreach( $students as  $student)
+       if($student->user_id==$request->input('student_id'))
+       {
+        
+        $student->update([  
+            
+
+        'personality_type' => $request->input('personality_type'),
+        
+
+       ]);
+
+    return redirect()->route('student');
+    
+    }  }
 
     public function updategrade(Request $request) {
         // dd($request->input('result_id'));

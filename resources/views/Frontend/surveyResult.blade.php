@@ -72,7 +72,7 @@
 
                       </table>
                       <a href="{{asset('#personality')}}"><button type="button" class="btn btn-primary" style="width:-webkit-fill-available;margin-top: 18px;">More About Personality Type</button></a>
-                      <form action="{{route('update.result')}}" method="post">
+                      <form action="{{route('update.personality',['personality_type'=>$key, 'student_id'=>Auth::guard('student')->user()->user_id])}}" method="post">
                         @csrf
                         <input type="hidden" name="peronality_type" value="{{$key}}">
                         <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
