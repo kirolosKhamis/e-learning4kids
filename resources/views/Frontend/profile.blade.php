@@ -318,6 +318,32 @@
             </div>
 
 
+            <div class="col-sm-6 mb-3">
+              <div class="card h-100">
+
+                <div class="card-body" style="float:right">
+
+                  <h6 class="d-flex align-items-center mb-3">Student rank</h6>
+                  @foreach ($studentregs as $studentreg)
+                  @if ($studentreg->student_id==Auth::guard('student')->user()->user_id )
+                  <div>
+                  <small>{{$studentreg->classroom->title}}</small>
+                  @if (($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>80)
+                  <small>Rank 1</small>  
+                  @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>65)
+                  <small>Rank 2</small>  
+                  @else
+                  <small>Rank 3</small>    
+                  @endif
+                </div>
+                  @endif
+                  @endforeach
+                </div>
+
+              </div>
+            </div>
+
+
           </div>
 
         </div>
