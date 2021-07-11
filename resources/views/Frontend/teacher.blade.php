@@ -81,59 +81,43 @@
 
   <section class="price_table text-center">
     <div class="container-fluid">
-
-    
-
       <div class="row">
 
-@foreach ($classrooms as $classroom)
-    
-@if ($classroom->teacher_id==Auth::guard('teacher')->user()->user_id)
-
-
-          <div class="col-md-4 col-sm-6 col-xm-12">
-
-
+        @foreach ($classrooms as $classroom)
             
-
-
-
-
-            <div class="price_box wow fadeInUp" data-wow-duration="2s" data-wow-offset="200">
-              <div class="img">
-                <img  class="center-block" src="materials/{{$classroom->content}}" style="width: 71%;height: auto;" alt="img">
-              </div>
-              <ul class="info list-unstyled">
-                {{-- <li >{{$classroom->classroom_id}}</li> --}}
-                <li>{{$classroom->title}}</li>
-                <li class="center-text"></li>
-                <a href="{{route('show.classroom', ['classroom_id' => $classroom->classroom_id])}}" style="margin: 7px 298px 0 0;">Details</a>
-                <a href="{{route('delete.content', ['classroom_id' => $classroom->classroom_id])}}" style="margin: -30px 0 0 304px; background:none"><button onclick="confirmAction()" class="btn btn-danger"> Delete </button></a>
-              </ul>
-              
-              <script>
-                // The function below will start the confirmation dialog
-                function confirmAction() {
-                  let confirmAction = confirm("Are you sure to execute this action?");
-                  if (confirmAction) {
-                    alert("Action successfully executed");
-                  } else {
-                    alert("Action canceled");
+          @if ($classroom->teacher_id==Auth::guard('teacher')->user()->user_id)
+            <div class="col-md-4 col-sm-6 col-xm-12">
+              <div class="price_box wow fadeInUp" data-wow-duration="2s" data-wow-offset="200">
+                <div class="img">
+                  <img  class="center-block" src="materials/{{$classroom->content}}" style="width: 71%;height: auto;" alt="img">
+                </div>
+                <ul class="info list-unstyled">
+                  {{-- <li >{{$classroom->classroom_id}}</li> --}}
+                  <li>{{$classroom->title}}</li>
+                  <li class="center-text"></li>
+                  <a href="{{route('show.classroom', ['classroom_id' => $classroom->classroom_id])}}" style="margin: 7px 298px 0 0;">Details</a>
+                  <a href="{{route('delete.content', ['classroom_id' => $classroom->classroom_id])}}" style="margin: -30px 0 0 304px; background:none"><button onclick="confirmAction()" class="btn btn-danger"> Delete </button></a>
+                </ul>
+                
+                <script>
+                  // The function below will start the confirmation dialog
+                  function confirmAction() {
+                    let confirmAction = confirm("Are you sure to execute this action?");
+                    if (confirmAction) {
+                      alert("Action successfully executed");
+                    } else {
+                      alert("Action canceled");
+                    }
                   }
-                }
-              </script>
+                </script>
+              </div>
             </div>
-          </div>
-     
-          
+              
+
           @endif
 
-          @endforeach
-
-
-
+        @endforeach
       </div>
-
     </div>
 
   </section>

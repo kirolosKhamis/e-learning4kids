@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NotifyHelpEmail extends Mailable
+class HelpEmail extends Mailable
 {
     use Queueable, SerializesModels;
     public $details;
