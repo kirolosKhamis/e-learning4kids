@@ -173,6 +173,7 @@
             </div>
           </div>
           <div class="row gutters-sm">
+
             @if (Auth::guard('student')->user())
             <div class="col-sm-6 mb-3">
               <div class="card h-100">
@@ -279,7 +280,7 @@
        
 
            
-
+        @if (Auth::guard('student')->user())
             <div class="col-sm-6 mb-3">
               <div class="card h-100">
 
@@ -342,6 +343,8 @@
 
               </div>
             </div>
+
+            @endif
 
 
           </div>
