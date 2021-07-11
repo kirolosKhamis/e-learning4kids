@@ -23,10 +23,18 @@
       // Animate loader off screen
       $(".se-pre-con").fadeOut("slow");;
     });
-  </script>    
+  </script>   
+
     <!-- Start of e-learninig Zendesk Widget script -->
-<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=1185a688-6de8-4a53-8246-4cf9832b1d45"> </script>
-<!-- End of e-learninig Zendesk Widget script -->
+    {{-- <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=1185a688-6de8-4a53-8246-4cf9832b1d45"> </script> --}}
+    <!-- End of e-learninig Zendesk Widget script -->
+
+    {{-- new one --}}
+    <!-- Start of e-learning4kids Zendesk Widget script -->
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=ecdf0315-01aa-4e32-8ba1-82f3ba9242da"> </script>
+    <!-- End of e-learning4kids Zendesk Widget script -->
+
+
 </head>
 <body>
 <!-- Paste this code after body tag -->

@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 use App\Models\Student;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\NotifyEmail;
+use App\Mail\TomorrowDeadline;
 
 class notify extends Command
 {
@@ -46,7 +46,7 @@ class notify extends Command
         $data=['title'=>'programming','courseCode'=>'123456','Reg'=>'17100652'];
         foreach($emails as $email){
             // Mail::to($request->user())->send(new MailableClass);
-            Mail::To($email)->send(new NotifyEmail($data));
+            Mail::To($email)->send(new TomorrowDeadline($data));
         }
     }
 }

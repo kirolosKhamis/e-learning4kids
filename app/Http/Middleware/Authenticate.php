@@ -30,6 +30,6 @@ class Authenticate extends Middleware
         if ($request->is('parent') || $request->is('parent/*')) {
             return route('login/parent');
         }
-        // return route('notAutherized');
+        return route('notAutherized');
     }
 }
