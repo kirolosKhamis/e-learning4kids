@@ -329,12 +329,30 @@
                   @if ($studentreg->student_id==Auth::guard('student')->user()->user_id )
                   <div>
                   <small>{{$studentreg->classroom->title}}</small>
-                  @if (($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>80)
+                  @if ($studentreg->mid_term !== null && $studentreg->class_work !== null && $studentreg->final !== null )
+                  @if (($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=95)
                   <small>Rank 1</small>  
-                  @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>65)
+                  @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=90)
                   <small>Rank 2</small>  
+                  @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=85)
+                  <small>Rank 3</small>  
+                  @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=80)
+                  <small>Rank 4</small>  
+                  @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=75)
+                  <small>Rank 5</small>  
+                  @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=70)
+                  <small>Rank 6</small>  
+                  @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=65)
+                  <small>Rank 7</small>  
+                  @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=60)
+                  <small>Rank 8</small>  
+                  @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=55)
+                  <small>Rank 9</small>  
+                  @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=50)
+                  <small>Rank 10</small>  
                   @else
-                  <small>Rank 3</small>    
+                  <small>Failed</small>  
+                  @endif
                   @endif
                 </div>
                   @endif

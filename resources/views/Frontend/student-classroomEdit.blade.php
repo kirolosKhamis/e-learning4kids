@@ -185,7 +185,7 @@
                             </i>
                             <ul class="dropdown-menu">
                                 {{-- <li><a href="{{route('show.profileDetails')}}"><i class="fa fa-user-o"></i> Profile</a></li> --}}
-                                <li><a href="{{route('show.classroom',['classroom_id'=>$studentpost->classroom_id,'post_id'=>$studentpost->id])}}" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+                                <li><a href="{{route('edit.postorcomment', ['post_id' => $studentpost->id])}}" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
                                 <li><a href="{{route('delete.content', ['post_id' => $studentpost->id])}}">Delete Post</a></li>
                             </ul>
                         </div>
@@ -196,24 +196,16 @@
                             
                     
                     <div class="mt-2">
-                        @if ($post_id==null)
                         <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$studentpost->post}}</p>
-                       
-                        @elseif($studentpost->id==$post_id)
-                        <form action="{{route('update.content',['classroom_id'=>$studentpost->classroom_id, 'post_id'=>$studentpost->id])}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                        <input type="text" name="post" value="{{$studentpost->post}}">
-                        <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" > 
-                        <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
-                       </form>
-                        @else
-                        <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$studentpost->post}}</p> 
-                        @endif
                         {{-- <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> --}}
                     </div>
 
                     <div class="mt-2">
-                        <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['post_id' =>$studentpost->id])}}">{{$studentpost->content}}</a></p>
+                        {{-- <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['post_id' =>$studentpost->id])}}">{{$studentpost->content}}</a></p> --}}
+                        <form action="" method="post">
+                        <input type="text" name="post">
+                        <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" >
+                    </form>
                     </div>
                 </div>
                 <div class="bg-white p-2">
@@ -397,7 +389,7 @@
                             </i>
                             <ul class="dropdown-menu">
                                 {{-- <li><a href="{{route('show.profileDetails')}}"><i class="fa fa-user-o"></i> Profile</a></li> --}}
-                                <li><a href="{{route('show.classroom',['classroom_id'=>$studentpost->classroom_id,'post_id'=>$studentpost->id])}}" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+                                <li><a href="{{route('edit.postorcomment', ['post_id' => $studentpost->id])}}" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
                                 <li><a href="{{route('delete.content', ['post_id' => $studentpost->id])}}">Delete Post</a></li>
                             </ul>
                         </div>
@@ -405,23 +397,15 @@
 
                     </div>
                     <div class="mt-2">
-                        @if ($post_id==null)
                         <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$studentpost->post}}</p>
-                        
-                        @elseif($studentpost->id==$post_id)
-                        <form action="{{route('update.content',['classroom_id'=>$studentpost->classroom_id, 'post_id'=>$studentpost->id])}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                        <input type="text" name="post" value="{{$studentpost->post}}">
-                        <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" > 
-                        <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
-                       </form>
-                        @else
-                        <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$studentpost->post}}</p> 
-                        @endif
                     </div>
 
                     <div class="mt-2">
-                        <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['post_id' =>$studentpost->id])}}">{{$studentpost->content}}</a></p>
+                        {{-- <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['post_id' =>$studentpost->id])}}">{{$studentpost->content}}</a></p> --}}
+                        <form action="{{route('update.content'),['post_id'=>$studentpost->id]}}" method="post">
+                            <input type="text" name="post">
+                            <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" >
+                        </form>
                     </div>
                 </div>
 

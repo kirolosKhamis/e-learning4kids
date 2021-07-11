@@ -315,7 +315,8 @@ if( $file=$request->file('content'))
         $classrooms = Classroom::latest()->paginate(100);
         $studentposts = StudentPost::latest()->paginate(100);
         $comments=Comments::latest()->paginate(100);
-        return view('Frontend.student-classroom', compact('studentregs','classrooms','classroom_id','studentposts','comments'))
+        $post_id=$request->input('post_id');
+        return view('Frontend.student-classroom', compact('studentregs','classrooms','classroom_id','studentposts','comments','post_id'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 
@@ -378,7 +379,7 @@ if( $file=$request->file('content'))
     }
 
 
-    
+
     public function editGrade(Request $request) {
         // dd($request->input('result_id'));
         $assignment_id=$request->input('assignment_id');
@@ -418,6 +419,43 @@ if( $file=$request->file('content'))
     
 
     }
+
+
+    public function updateContent(Request $request) {
+        
+        // dd($request->all());
+           
+        if($request->input('post_id')!=null)
+        {
+           
+       $studentposts = StudentPost::latest()->paginate(100);
+       foreach( $studentposts as  $studentpost)
+       if($studentpost->id==$request->input('post_id'))
+       {
+        $file=$request->file('file');
+
+        $name=$file->getClientOriginalName();
+
+        $file->move('materials',$name);
+
+       $classroom_id=$studentpost->classroom_id;
+       $studentpost->update([  
+
+        'post' => $request->input('post'),
+        'content' => $name,
+        
+
+       ]);
+
+    return redirect()->route('show.classroom',['classroom_id' => $classroom_id]);
+    
+    }  }
+
+
+    
+
+    }
+
 
 
     

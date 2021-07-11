@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth:student,teacher'],function () {
     Route::get('/downloadPost', [App\Http\Controllers\ClassroomContent::class, 'downloadPost'])->name('download.post');
     Route::get('/downloadcomment', [App\Http\Controllers\ClassroomContent::class, ' commentDownload'])->name('download.comment');
     Route::get('/delete', [App\Http\Controllers\ClassroomContent::class, 'deletecontent'])->name('delete.content');
+    Route::post('/updateContent', [App\Http\Controllers\ClassroomContent::class, 'updateContent'])->name('update.content');
+    Route::get('/editPostorComment', [App\Http\Controllers\ClassroomContent::class, 'editPostorComment'])->name('edit.postorcomment');
     
 
     // Route::get('/', function () {
