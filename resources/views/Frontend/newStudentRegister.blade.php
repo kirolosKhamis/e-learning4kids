@@ -24,7 +24,7 @@
 
 <body class="bg-gradient-primary">
 
-    <div class="container" style="margin-top: -50px">
+    <div class="container" style="margin-top: -55px">
 
         <div class="card o-hidden border-0 shadow-lg my-5" style="margin:86px 0 0 0;">
             <div class="card-body p-0">
@@ -151,7 +151,7 @@
                                 <a class="small" href="{{asset('newForget')}}">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="{{asset('newLogin')}}">Already have an account? Login!</a>
+                                <a class="small" href="{{route('login/student')}}">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>

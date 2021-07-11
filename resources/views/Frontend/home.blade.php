@@ -31,7 +31,7 @@
 
     {{-- new one --}}
     <!-- Start of e-learning4kids Zendesk Widget script -->
-    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=ecdf0315-01aa-4e32-8ba1-82f3ba9242da"> </script>
+    {{-- <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=ecdf0315-01aa-4e32-8ba1-82f3ba9242da"> </script> --}}
     <!-- End of e-learning4kids Zendesk Widget script -->
 
 

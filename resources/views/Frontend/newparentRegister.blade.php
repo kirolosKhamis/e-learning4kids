@@ -158,13 +158,13 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="{{asset('register')}}"> I am not Parent</a>
+                                <a class="small" href="{{route('registerAs')}}"> I am not Parent</a>
                             </div>
                             <div class="text-center">
                                 <a class="small" href="{{asset('newForget')}}">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="{{asset('newLogin')}}">Already have an account? Login!</a>
+                                <a class="small" href="{{route('login/student')}}">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>

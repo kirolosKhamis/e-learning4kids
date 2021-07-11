@@ -24,7 +24,7 @@
 
 <body class="bg-gradient-primary">
 
-    <div class="container" style="margin-top: -75px">
+    <div class="container" style="margin-top: -92px">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
@@ -158,13 +158,13 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="{{asset('register')}}"> I am not Teacher</a>
+                                <a class="small" href="{{route('registerAs')}}"> I am not Teacher</a>
                             </div>
                             <div class="text-center">
                                 <a class="small" href="{{asset('newForget')}}">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="{{asset('newLogin')}}">Already have an account? Login!</a>
+                                <a class="small" href="{{route('login/teacher')}}">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
