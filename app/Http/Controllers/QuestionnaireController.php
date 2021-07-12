@@ -35,7 +35,7 @@ class QuestionnaireController extends Controller
         //     dump($key);
         // }
         // die();
-        $personalTypes = ['extraversion' => $type1/8, 'agreeableness'=>$type2/9, 'consientiousness'=>$type3/9, 'neuroticism'=>$type4/8, 'openess'=>$type5/10];
+        $personalTypes = ['extraversion' => $type1/8, 'agreeableness'=>$type2/9, 'consientiousness'=>$type3/9, 'neuroticism'=>$type4/8, 'openness'=>$type5/10];
         return view('Frontend.surveyResult',compact('personalTypes') );
     }
 

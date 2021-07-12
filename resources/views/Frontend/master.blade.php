@@ -96,7 +96,10 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding:7px 58px 6px 33px; width: 0;">
                                   <a href="{{route('show.profileDetails')}}"><i class="fa fa-user-o"></i> Profile</a>
                                   <a href="{{route('show.accountsetting')}}" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
-                                  <a href="{{route('sendHelpEmail')}}" class="dropdown-item"><i class="fa fa-sliders"></i> Help</a>
+                                  @if (!Auth::guard('teacher')->user())
+                                       <a href="{{route('sendHelpEmail')}}" class="dropdown-item"><i class="fa fa-sliders"></i> Help</a>
+                                  @endif
+                                 
                                   <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                           document.getElementById('logout-form').submit();">
                                           <i class="material-icons" style="font-size: 19px;">&#xE8AC;</i>Logout

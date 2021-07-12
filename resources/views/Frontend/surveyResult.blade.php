@@ -59,7 +59,7 @@
                         </tr>
                         <tr>
                           <td>Openness</td>
-                          <td>{{number_format($personalTypes['openess'], 2, '.', ',')}}                          
+                          <td>{{number_format($personalTypes['openness'], 2, '.', ',')}}                          
                         </tr>
                         @foreach ($personalTypes as $key => $value)
                           @if ($value==$max)
