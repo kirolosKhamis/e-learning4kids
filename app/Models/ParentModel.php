@@ -24,7 +24,7 @@ class ParentModel extends Authenticatable
         'lname',
         'email',
         'address',
-        'password','phone','relation','age','number_of_children','photo'
+        'password','phone','relation','age','number_of_children','photo', 'updated_at'
     ];
 
     /**

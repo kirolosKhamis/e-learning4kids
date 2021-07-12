@@ -25,7 +25,7 @@ class Student extends Authenticatable
         'lname',
         'email',
         'address','term',
-        'password','parent_id','phone','expire','photo','personality_type'
+        'password','parent_id','phone','expire','photo','personality_type', 'updated_at'
     ];
 
     /**

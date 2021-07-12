@@ -16,7 +16,7 @@ protected $fillable = [
     'classroom_id',
     'mid_term',
     'class_work',
-    'final',
+    'final', 'updated_at'
 ];
 
 public function student() 

@@ -15,6 +15,7 @@ use App\Models\Teacher;
 use App\Models\TeacherAssignment;
 use App\Models\TeacherPost;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
@@ -412,6 +413,7 @@ if( $file=$request->file('content'))
         'mid_term' => $request->input('mid_term'),
         'final' => $request->input('final'),
         'class_work' => $request->input('class_work'),
+        'updated_at'=>Carbon::now('Africa/Cairo'),
 
        ]);
 
@@ -437,6 +439,7 @@ if( $file=$request->file('content'))
        foreach( $studentposts as  $studentpost)
        if($studentpost->id==$request->input('post_id'))
        {
+          
         $classroom_id=$studentpost->classroom_id;
            if($file=$request->file('file'))
         {
@@ -444,21 +447,23 @@ if( $file=$request->file('content'))
 
         $file->move('materials',$name);
 
-    
+       
        $studentpost->update([  
-
+         
         'post' => $request->input('post'),
         'content' => $name,
+        'updated_at'=>Carbon::now('Africa/Cairo'),
         
 
        ]);}
 
        else
        {       
-           
+        // dd(Carbon::now('Africa/Cairo'));
         $studentpost->update([  
 
         'post' => $request->input('post'),
+        'updated_at'=>Carbon::now('Africa/Cairo'),
         
        ]);}
 
@@ -486,6 +491,7 @@ if( $file=$request->file('content'))
     
         'comments' => $request->input('comment'),
         'content' => $name,
+        'updated_at'=>Carbon::now('Africa/Cairo'),
         
     
        ]);}
@@ -494,6 +500,7 @@ if( $file=$request->file('content'))
        $comment->update([  
     
         'comments' => $request->input('comment'),
+        'updated_at'=>Carbon::now('Africa/Cairo'),
         
         
     
@@ -528,6 +535,7 @@ if($file=$request->file('file'))
     'points' => $request->input('points'),
     'due' => $request->input('due'),
     'content' => $name,
+    'updated_at'=>Carbon::now(),
     
     
     ]);}
@@ -540,6 +548,7 @@ if($file=$request->file('file'))
         'topic' => $request->input('topic'),
         'points' => $request->input('points'),
         'due' => $request->input('due'),
+        'updated_at'=>Carbon::now('Africa/Cairo'),
         
         
         
@@ -568,6 +577,7 @@ if($file=$request->file('file'))
     $studentassignment->update([  
     
     'content' => $name,
+    'updated_at'=>Carbon::now('Africa/Cairo'),
     
     
     ]);}
@@ -601,7 +611,7 @@ return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_
             
 
         'personality_type' => $request->input('personality_type'),
-        
+        'updated_at'=>Carbon::now('Africa/Cairo'),
 
        ]);
 
@@ -620,6 +630,7 @@ return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_
        $studentassignment->update([  
 
         'grade' => $request->input('grade'),
+        'updated_at'=>Carbon::now('Africa/Cairo'),
        
 
        ]);
@@ -897,7 +908,8 @@ return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_
         'phone'=>$request->input('phone'),
         'address'=>$request->input('address'),
         'password' => Hash::make($request['password']),
-        'photo' => $name
+        'photo' => $name,
+        'updated_at'=>Carbon::now('Africa/Cairo'),
         ]);}
 
 
@@ -923,6 +935,7 @@ return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_
             'phone'=>$request->input('phone'),
             'address'=>$request->input('address'),
             'password' => Hash::make($request['password']),
+            'updated_at'=>Carbon::now('Africa/Cairo'),
             ]);
 
         }

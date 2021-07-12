@@ -15,6 +15,6 @@ class Course extends Model
 
     protected $fillable = [
         'specialization',
-        'title'
+        'title', 'updated_at'
     ];
 }

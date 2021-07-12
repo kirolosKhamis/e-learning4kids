@@ -24,7 +24,7 @@ class Teacher extends Authenticatable
         'lname',
         'email',
         'address',
-        'password','phone','age','specialization','name_of_school','photo'
+        'password','phone','age','specialization','name_of_school','photo', 'updated_at',
     ];
 
     /**

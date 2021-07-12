@@ -17,6 +17,7 @@ class TeacherPost extends Model
         'classroom_id',
         'content',
         'post',
+        'updated_at',
     
     ];
 }

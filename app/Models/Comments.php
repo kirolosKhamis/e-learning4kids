@@ -17,7 +17,7 @@ protected $fillable = [
     'content',
     'post_id',
     'student_id',
-    'teacher_id',
+    'teacher_id', 'updated_at'
    
     
 

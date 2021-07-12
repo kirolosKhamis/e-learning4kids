@@ -18,6 +18,7 @@ protected $fillable = [
     'classroom_id',
     'post',
     'content',
+    'updated_at',
     
 
 ];

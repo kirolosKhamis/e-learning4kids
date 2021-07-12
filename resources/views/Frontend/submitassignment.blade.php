@@ -39,12 +39,12 @@
                             <div class="widget-49">
                                 <div class="widget-49-title-wrapper">
                                     <div class="widget-49-date-primary">
-                                        <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->assignment->created_at))}}</span>
-                                        <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->assignment->created_at))}}</span>
+                                        <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->assignment->updated_at))}}</span>
+                                        <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->assignment->updated_at))}}</span>
                                     </div>
                                     <div class="widget-49-meeting-info">
                                         <span class="widget-49-pro-title">Dr. {{$studentassignment->assignment->teacher->fname}} {{$studentassignment->assignment->teacher->lname}}</span>
-                                        <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($studentassignment->assignment->created_at))}}</span>
+                                        <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($studentassignment->assignment->updated_at))}}</span>
                                     </div>
                                 </div>
                                 <ol class="widget-49-meeting-points">
@@ -68,12 +68,12 @@
                             <div class="widget-49">
                                 <div class="widget-49-title-wrapper">
                                     <div class="widget-49-date-warning">
-                                        <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->created_at))}}</span>
-                                        <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->created_at))}}</span>
+                                        <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->updated_at))}}</span>
+                                        <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->updated_at))}}</span>
                                     </div>
                                     <div class="widget-49-meeting-info">
                                         <span class="widget-49-pro-title">Turned in</span>
-                                        <span class="widget-49-meeting-time">At {{date('H:i', strtotime($studentassignment->created_at))}}</span>
+                                        <span class="widget-49-meeting-time">At {{date('H:i', strtotime($studentassignment->updated_at))}}</span>
                                     </div>
                                 </div>                                
                                 <ol class="widget-49-meeting-points">
@@ -126,12 +126,12 @@
                         <div class="widget-49">
                             <div class="widget-49-title-wrapper">
                                 <div class="widget-49-date-primary">
-                                    <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->assignment->created_at))}}</span>
-                                    <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->assignment->created_at))}}</span>
+                                    <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->assignment->updated_at))}}</span>
+                                    <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->assignment->updated_at))}}</span>
                                 </div>
                                 <div class="widget-49-meeting-info">
                                     <span class="widget-49-pro-title">Dr. {{$studentassignment->assignment->teacher->fname}} {{$studentassignment->assignment->teacher->lname}}</span>
-                                    <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($studentassignment->assignment->created_at))}}</span>
+                                    <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($studentassignment->assignment->updated_at))}}</span>
                                 </div>
                             </div>
                             <ol class="widget-49-meeting-points">
@@ -155,12 +155,12 @@
                         <div class="widget-49">
                             <div class="widget-49-title-wrapper">
                                 <div class="widget-49-date-warning">
-                                    <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->created_at))}}</span>
-                                    <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->created_at))}}</span>
+                                    <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->updated_at))}}</span>
+                                    <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->updated_at))}}</span>
                                 </div>
                                 <div class="widget-49-meeting-info">
                                     <span class="widget-49-pro-title">Turned in</span>
-                                    <span class="widget-49-meeting-time">At {{date('H:i', strtotime($studentassignment->created_at))}}</span>
+                                    <span class="widget-49-meeting-time">At {{date('H:i', strtotime($studentassignment->updated_at))}}</span>
                                 </div>
                             </div>                                
                             <ol class="widget-49-meeting-points">
@@ -244,12 +244,12 @@
                             <div class="widget-49">
                                 <div class="widget-49-title-wrapper">
                                     <div class="widget-49-date-primary">
-                                        <span class="widget-49-date-day">{{date('d', strtotime($teacherassignment->created_at))}}</span>
-                                        <span class="widget-49-date-month">{{date('F', strtotime($teacherassignment->created_at))}}</span>
+                                        <span class="widget-49-date-day">{{date('d', strtotime($teacherassignment->updated_at))}}</span>
+                                        <span class="widget-49-date-month">{{date('F', strtotime($teacherassignment->updated_at))}}</span>
                                     </div>
                                     <div class="widget-49-meeting-info">
                                         <span class="widget-49-pro-title">Dr. {{$teacherassignment->teacher->fname}} {{$teacherassignment->teacher->lname}}</span>
-                                        <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($teacherassignment->created_at))}}</span>
+                                        <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($teacherassignment->updated_at))}}</span>
                                     </div>
                                 </div>
                                 <ol class="widget-49-meeting-points">
@@ -328,12 +328,12 @@
                         <div class="widget-49">
                             <div class="widget-49-title-wrapper">
                                 <div class="widget-49-date-primary">
-                                    <span class="widget-49-date-day">{{date('d', strtotime($teacherassignment->created_at))}}</span>
-                                    <span class="widget-49-date-month">{{date('F', strtotime($teacherassignment->created_at))}}</span>
+                                    <span class="widget-49-date-day">{{date('d', strtotime($teacherassignment->updated_at))}}</span>
+                                    <span class="widget-49-date-month">{{date('F', strtotime($teacherassignment->updated_at))}}</span>
                                 </div>
                                 <div class="widget-49-meeting-info">
                                     <span class="widget-49-pro-title">Dr. {{$teacherassignment->teacher->fname}} {{$teacherassignment->teacher->lname}}</span>
-                                    <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($teacherassignment->created_at))}}</span>
+                                    <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($teacherassignment->updated_at))}}</span>
                                 </div>
                             </div>
                             <ol class="widget-49-meeting-points">

@@ -20,6 +20,6 @@ class Product extends Model
 
     protected $fillable = [
         'teacher_id','classroom_id',
-        'content','created_at'  
+        'content','created_at'  , 'updated_at'
     ];
 }

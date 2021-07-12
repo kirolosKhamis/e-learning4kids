@@ -15,7 +15,7 @@ class Classroom extends Model
 
     protected $fillable = [
         'classroom_code','title',
-        'course_id','teacher_id', 'content',  
+        'course_id','teacher_id', 'content','updated_at' 
     ];
 
     public function course() 

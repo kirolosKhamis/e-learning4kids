@@ -14,7 +14,7 @@ class TeacherAssignment extends Model
     						
      protected $fillable = [
          'teacher_id','classroom_id',
-         'title','description', 'topic', 'points', 'due', 'content', 
+         'title','description', 'topic', 'points', 'due', 'content',  'updated_at',
      ];
  
      public function classroom() 

@@ -178,7 +178,7 @@
                 <div class="bg-white p-2">
                     <div class="d-flex flex-row user-info"><img class="rounded-circle" src="materials/{{$studentpost->student_id !== null ? $studentpost->student->photo :$studentpost->teacher->photo }}"  width="40">
                         {{-- <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"> --}}
-                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$studentpost->student_id !== null ? $studentpost->student->fname :$studentpost->teacher->fname }} {{ $studentpost->student_id !== null ? $studentpost->student->lname : $studentpost->teacher->lname}}</span><span class="date text-black-50">Shared publicly &nbsp;{{date('F-d', strtotime($studentpost->created_at))}} &nbsp;{{date('H:i', strtotime($studentpost->created_at))}}</span></div>
+                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$studentpost->student_id !== null ? $studentpost->student->fname :$studentpost->teacher->fname }} {{ $studentpost->student_id !== null ? $studentpost->student->lname : $studentpost->teacher->lname}}</span><span class="date text-black-50">Shared publicly &nbsp;{{date('F-d', strtotime($studentpost->updated_at))}} &nbsp;{{date('H:i', strtotime($studentpost->updated_at))}}</span></div>
                         
                         @if ($studentpost->student_id==Auth::user()->user_id || $studentpost->teacher_id==Auth::user()->user_id) 
                         <div class="dropdown" style="margin-left: auto;margin: 0 38px 25px 12px 20px;margin-right: 12px;margin-top: 11px;">
@@ -237,7 +237,7 @@
                         {{-- name and date --}}
                         <div class="d-flex flex-column justify-content-start ml-2">
                             <span class="d-block font-weight-bold name" style="font-size: 12px;">{{$comment->student_id !== null ? $comment->student->fname :$comment->teacher->fname }} {{ $comment->student_id !== null ? $comment->student->lname : $comment->teacher->lname}}
-                                <span class="date text-black-50" style="font-size: 8px;margin: 0 4px 0 2px;margin: 0 4px 0 2px;">Shared publicly &nbsp;{{date('F-d', strtotime($comment->created_at))}} &nbsp;{{date('H:i', strtotime($comment->created_at))}}</span>
+                                <span class="date text-black-50" style="font-size: 8px;margin: 0 4px 0 2px;margin: 0 4px 0 2px;">Shared publicly &nbsp;{{date('F-d', strtotime($comment->updated_at))}} &nbsp;{{date('H:i', strtotime($comment->updated_at))}}</span>
                                 
                                 @if ($comment->student_id==Auth::user()->user_id || $comment->teacher_id==Auth::user()->user_id)
                                     <div class="dropdown" style="padding: 0 0 0 217px;margin-top: -16px;">
@@ -402,7 +402,7 @@
             <div class="d-flex flex-column comment-section" id="myGroup">
                 <div class="bg-white p-2">
                     <div class="d-flex flex-row user-info"><img class="rounded-circle" src="materials/{{$studentpost->student_id !== null ? $studentpost->student->photo :$studentpost->teacher->photo }}"  width="40">
-                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$studentpost->student_id !== null ? $studentpost->student->fname :$studentpost->teacher->fname }} {{ $studentpost->student_id !== null ? $studentpost->student->lname : $studentpost->teacher->lname}}</span><span class="date text-black-50">Shared publicly &nbsp;{{date('F-d', strtotime($studentpost->created_at))}} &nbsp;{{date('H:i', strtotime($studentpost->created_at))}}</span></div>
+                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{$studentpost->student_id !== null ? $studentpost->student->fname :$studentpost->teacher->fname }} {{ $studentpost->student_id !== null ? $studentpost->student->lname : $studentpost->teacher->lname}}</span><span class="date text-black-50">Shared publicly &nbsp;{{date('F-d', strtotime($studentpost->updated_at))}} &nbsp;{{date('H:i', strtotime($studentpost->updated_at))}}</span></div>
                         @if ($studentpost->student_id==Auth::user()->user_id || $studentpost->teacher_id==Auth::user()->user_id) 
                         <div class="dropdown" style="margin-left: auto;margin: 0 38px 25px 12px 20px;margin-right: 12px;margin-top: 11px;">
                             <i class="fa fa-ellipsis-v" data-toggle="dropdown" style="font-size:24px;color:#007bff;">
@@ -456,7 +456,7 @@
                         <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="materials/{{$comment->student_id !== null ? $comment->student->photo :$comment->teacher->photo}}"width="35" height="32">
                         {{-- name and date --}}
                             <div class="d-flex flex-column justify-content-start ml-2">
-                                <span class="d-block font-weight-bold name" style="font-size: 12px;">{{$comment->student_id !== null ? $comment->student->fname :$comment->teacher->fname }} {{ $comment->student_id !== null ? $comment->student->lname : $comment->teacher->lname}}<span class="date text-black-50" style="font-size: 8px;margin: 0 4px 0 2px;margin: 0 4px 0 2px;">Shared publicly &nbsp;{{date('F-d', strtotime($comment->created_at))}} &nbsp;{{date('H:i', strtotime($comment->created_at))}}</span>
+                                <span class="d-block font-weight-bold name" style="font-size: 12px;">{{$comment->student_id !== null ? $comment->student->fname :$comment->teacher->fname }} {{ $comment->student_id !== null ? $comment->student->lname : $comment->teacher->lname}}<span class="date text-black-50" style="font-size: 8px;margin: 0 4px 0 2px;margin: 0 4px 0 2px;">Shared publicly &nbsp;{{date('F-d', strtotime($comment->updated_at))}} &nbsp;{{date('H:i', strtotime($comment->updated_at))}}</span>
                                     @if ($comment->student_id==Auth::user()->user_id || $comment->teacher_id==Auth::user()->user_id)
                                     <div class="dropdown" style="padding: 0 0 0 217px;margin-top: -16px;">
                                         <i class="fa fa-cog" aria-hidden="true" data-toggle="dropdown" style="font-size:18px;color:#007bff;"></i>
