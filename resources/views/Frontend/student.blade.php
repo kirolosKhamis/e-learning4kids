@@ -66,7 +66,7 @@
           <div class="col-md-4 col-sm-6 col-xm-12">
             <div class="price_box wow fadeInUp" data-wow-duration="2s" data-wow-offset="200">
               <div class="img">
-                <img  class="center-block" src="materials/{{$studentreg->classroom->content}}" alt="img">
+                <img  class="center-block" src="materials/{{$studentreg->classroom->content}}" width="130" height="200" alt="img">
               </div>
               <ul class="info list-unstyled">
                 <li>{{$studentreg->classroom->title}}</li>
