@@ -149,16 +149,12 @@ class ClassroomContent extends Controller
     {
 
         $request->validate([
-            'post' => 'required'
+           
         ]);
 // dd($request->all());
         
 if( $file=$request->file('file'))
     {
-
-
-        // dd( $request->all());
-
         $name=$file->getClientOriginalName();
 
         $file->move('materials',$name);
@@ -188,7 +184,7 @@ if( $file=$request->file('file'))
 
 // dd($request->all());
         $request->validate([
-            'comments' => 'required'
+         
         ]);
 // dd($request->all());
         
@@ -437,23 +433,36 @@ if( $file=$request->file('content'))
         {
            
        $studentposts = StudentPost::latest()->paginate(100);
+       
        foreach( $studentposts as  $studentpost)
        if($studentpost->id==$request->input('post_id'))
        {
-        $file=$request->file('file');
-
+        $classroom_id=$studentpost->classroom_id;
+           if($file=$request->file('file'))
+        {
         $name=$file->getClientOriginalName();
 
         $file->move('materials',$name);
 
-       $classroom_id=$studentpost->classroom_id;
+    
        $studentpost->update([  
 
         'post' => $request->input('post'),
         'content' => $name,
         
 
-       ]);
+       ]);}
+
+       else
+       {       
+           
+        $studentpost->update([  
+
+        'post' => $request->input('post'),
+        
+       ]);}
+
+
 
     return redirect()->route('show.classroom',['classroom_id' => $classroom_id]);
     
@@ -462,24 +471,34 @@ if( $file=$request->file('content'))
     else if($request->input('comment_id')!=null)
     {
     //   dd($request->input('comment_id'));
+   $classroom_id=$request->input('classroom_id');
    $comments = Comments::latest()->paginate(100);
    foreach( $comments as  $comment)
    if($comment->comment_id==$request->input('comment_id'))
    {
-    $file=$request->file('file');
+    if($file=$request->file('file'))
+    {    $name=$file->getClientOriginalName();
 
-    $name=$file->getClientOriginalName();
-
-    $file->move('materials',$name);
-
-   $classroom_id=$request->input('classroom_id');
-   $comment->update([  
-
-    'comments' => $request->input('comment'),
-    'content' => $name,
+        $file->move('materials',$name);
     
+       
+       $comment->update([  
+    
+        'comments' => $request->input('comment'),
+        'content' => $name,
+        
+    
+       ]);}
 
-   ]);
+       else
+       $comment->update([  
+    
+        'comments' => $request->input('comment'),
+        
+        
+    
+       ]);
+
 
 return redirect()->route('show.classroom',['classroom_id' => $classroom_id]);
 
@@ -490,27 +509,42 @@ else if($request->input('assignment_id')!=null && $request->input('sudentassignm
 {
 //   dd($request->input('comment_id'));
 $teacherassignments = TeacherAssignment::latest()->paginate(100);
+$classroom_id=$request->input('classroom_id');
 foreach( $teacherassignments as  $teacherassignment)
 if($teacherassignment->id==$request->input('assignment_id'))
 {
-$file=$request->file('file');
 
-$name=$file->getClientOriginalName();
+if($file=$request->file('file'))
+{$name=$file->getClientOriginalName();
 
-$file->move('materials',$name);
+    $file->move('materials',$name);
+    
+   
+    $teacherassignment->update([  
+    
+    'title' => $request->input('title'),
+    'description' => $request->input('description'),
+    'topic' => $request->input('topic'),
+    'points' => $request->input('points'),
+    'due' => $request->input('due'),
+    'content' => $name,
+    
+    
+    ]);}
 
-$classroom_id=$request->input('classroom_id');
-$teacherassignment->update([  
+    else
+    $teacherassignment->update([  
+    
+        'title' => $request->input('title'),
+        'description' => $request->input('description'),
+        'topic' => $request->input('topic'),
+        'points' => $request->input('points'),
+        'due' => $request->input('due'),
+        
+        
+        
+        ]);
 
-'title' => $request->input('title'),
-'description' => $request->input('description'),
-'topic' => $request->input('topic'),
-'points' => $request->input('points'),
-'due' => $request->input('due'),
-'content' => $name,
-
-
-]);
 
 return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_id]);
 
@@ -521,22 +555,24 @@ else if($request->input('sudentassignment_id')!=null)
 {
 
 $studentassignments = StudentAssignment::latest()->paginate(100);
+$classroom_id=$request->input('classroom_id');
 foreach( $studentassignments as  $studentassignment)
 if($studentassignment->id==$request->input('sudentassignment_id'))
 {
-$file=$request->file('file');
+if($file=$request->file('file'))
+{$name=$file->getClientOriginalName();
 
-$name=$file->getClientOriginalName();
+    $file->move('materials',$name);
+    
+   
+    $studentassignment->update([  
+    
+    'content' => $name,
+    
+    
+    ]);}
 
-$file->move('materials',$name);
 
-$classroom_id=$request->input('classroom_id');
-$studentassignment->update([  
-
-'content' => $name,
-
-
-]);
 
 return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_id]);
 
@@ -838,8 +874,8 @@ return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_
         ]);
         $modelType=null;
 
-        $file=$request->file('file');
-        $name=$file->getClientOriginalName();
+      if(  $file=$request->file('file'))
+      {        $name=$file->getClientOriginalName();
 
         $file->move('materials',$name);
         
@@ -862,17 +898,38 @@ return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_
         'address'=>$request->input('address'),
         'password' => Hash::make($request['password']),
         'photo' => $name
-        ]);
-        // $fname=$request->input('fname');
-        // $lname=$request->input('lname');
-        // $email=Auth::user()->email;
-        // $phone=$request->input('phone');
-        // $address=$request->input('address');
-    //     return redirect()->route('show.profileDetails');
-    // }
-    // $date=['fname'=>$fname]
+        ]);}
+
+
+        else
+        {
+         
+            
+            if (Auth::guard('student')->user()){
+                $modelType=Student::where('user_id',Auth::user()->user_id)->First();
+                
+            }
+            elseif(Auth::guard('parent')->user()){
+                
+                $modelType=ParentModel::where('user_id',Auth::user()->user_id)->First();
+               
+            }
+            elseif(Auth::guard('teacher')->user()){
+                $modelType=Teacher::where('user_id',Auth::user()->user_id)->First();
+            }
+            $modelType->update([
+            'fname'=>$request->input('fname'),
+            'lname'=>$request->input('lname'),
+            'phone'=>$request->input('phone'),
+            'address'=>$request->input('address'),
+            'password' => Hash::make($request['password']),
+            ]);
+
+        }
+
+
     return redirect()->route('show.profileDetails');
-    // ->with('i', (request()->input('page', 1) - 1) * 100);
+  
 }
 
     public function showcertificate (Request $request) {
