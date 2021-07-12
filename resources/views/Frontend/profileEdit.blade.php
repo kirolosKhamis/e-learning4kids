@@ -13,73 +13,8 @@
     <link rel='stylesheet'href ="{{asset('css/style.css')}}"/>
     <link rel='stylesheet'href="{{asset('css/media.css')}}"/>
     <link rel='stylesheet'href="{{asset('css/animate.css')}}"/>
-    
-    <style type="text/css">
-      body {
-            margin: 0;
-            padding-top: 100px;
-            color: #2e323c;
-            background: #f5f6fa;
-            position: relative;
-            height: 100%; 
-          }
-        .account-settings .user-profile {
-            margin: 0 0 1rem 0;
-            padding-bottom: 1rem;
-            text-align: center;
-              }
-        .account-settings .user-profile .user-avatar {
-            margin: 0 0 1rem 0;
-        }
-        .account-settings .user-profile .user-avatar img {
-            width: 90px;
-            height: 90px;
-            -webkit-border-radius: 100px;
-            -moz-border-radius: 100px;
-            border-radius: 100px;
-        }
-        .account-settings .user-profile h5.user-name {
-            margin: 0 0 0.5rem 0;
-        }
-        .account-settings .user-profile h6.user-email {
-            margin: 0;
-            font-size: 1.4rem;
-            font-weight: 400;
-            color: #9fa8b9;
-        }
-        .account-settings .about {
-            margin: -4rem 0 0 0;
-            text-align: center;
-        }
-        .account-settings .about h5 {
-            margin: 0 0 0 0;
-            color: #007ae1;
-        }
-        .account-settings .about p {
-            font-size: 1.2rem;
-        }
-        .form-control {
-            border: 1px solid #cfd1d8;
-            -webkit-border-radius: 1.5px;
-            -moz-border-radius: 1.5px;
-            border-radius: 1.5px;
-            font-size: 1.5rem;
-            background: #ffffff;
-            color: #2e323c;
-            /* padding-left: 5px */
-        }
+    <link rel="stylesheet" href="{{asset('css/profileEdit.css')}}">
 
-        .card {
-            background: #ffffff;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            border: 0;
-            margin-bottom: 5rem;
-        }
-
-</style>
-      
 </head>
 <body>
 
@@ -143,32 +78,30 @@
                       </div>
                     </div>
                   <div class="row gutters">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                      <h6 class="mt-3 mb-2 text-primary" style="margin-left: 60px; font-weight: bold; font-size: 1.5rem">Password</h6>
-                    </div>
-                    {{-- <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-10" style="margin-left: 60px">
-                      <div class="form-group">
-                        <label for="currentpassword"> New Password</label>
-                        <input type="newpassword" class="form-control" id="newpassword" placeholder="New Password">
+                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-10" style="margin-left: 60px">
+                      <div class="form-group" style="margin-left: 6px;width: 335px;">
+                        <label for="currentpassword">Current Password</label>
+                        <input type="password" class="form-control" id="confirmpassword" value="{{Auth::user()->password}}" placeholder="Current Password">
                       </div>
-                    </div> --}}
+                    </div>
                     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-10" style="margin-left: 40px">
-                      <div class="form-group">
+                      <div class="form-group" style="    margin: 0px 8px 0px 3px;">
                         <label for="password">New Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter New Password">
                       </div>
                     </div>
 
-                    <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-10"style= "margin-left: 44px;margin: 11px 0 4px 43px;">
                       <input type="file" class="form-control-file" name="file" id="exampleInputFile">
-                          {{-- @error('relation')
+                        @error('relation')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
                               </span>
-                          @enderror --}}
-                  </div>
+                          @enderror
+                    </div>
                     
                   </div>
+
                   <div class="row gutters">
                     <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11">
                       <div class="text-right">

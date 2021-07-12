@@ -70,20 +70,16 @@ class LoginController extends Controller
         return view('Frontend.newLogin', ['url' => 'parent']);
     }
 
-    // protected function validator(Request $request)
-    // {
-    //    return $request->validate([
-    //         'email'   => 'required|email',
-    //         'password' => 'required|min:8'
-    //     ]);
-    // }
-
+    // $request->validate( [
+    //     'classroom_code' => 'required|string|max:30|exists:classroom,classroom_code'
+    // ]);
 
     public function studentLogin(Request $request)
     {
+        // dd($request->password);
         $this->validate($request, [
             'email'   => 'required|email|string|max:255|exists:student',
-            'password' => 'required|min:6'
+            'password' => 'required|min:8'
         ]);
         if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password])) {
                     // if successful, then redirect to their intended location
@@ -105,7 +101,7 @@ class LoginController extends Controller
     {
         $this->validate($request, [
             'email'   => 'required|email|string|max:255|exists:teacher',
-            'password' => 'required|min:6'
+            'password' => 'required|min:8'
         ]);
         if (Auth::guard('teacher')->attempt(['email' => $request->email, 'password' => $request->password])) {
                     // if successful, then redirect to their intended location
@@ -128,7 +124,7 @@ class LoginController extends Controller
     public function parentLogin (Request $request) {
         $this->validate($request, [
             'email'   => 'required|email|string|max:255|exists:parent',                   
-            'password' => 'required|min:6'
+            'password' => 'required|min:8'
         ]);
         if (Auth::guard('parent')->attempt(['email' => $request->email, 'password' => $request->password])) {
                     // if successful, then redirect to their intended location
