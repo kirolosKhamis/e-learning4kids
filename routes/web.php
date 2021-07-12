@@ -64,9 +64,9 @@ Route::group(['middleware' => 'auth:student,teacher'],function () {
     Route::get('/editPostorComment', [App\Http\Controllers\ClassroomContent::class, 'editPostorComment'])->name('edit.postorcomment');
     
 
-    // Route::get('/', function () {
-    //     return view('Frontend.home');
-    // })->name("home");
+    Route::get('viewAllMembers', function () {
+        return view('Frontend.viewMembers');
+    })->name("viewMemebrs");
     
 
 });
