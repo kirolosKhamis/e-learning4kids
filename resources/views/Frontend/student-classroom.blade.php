@@ -217,15 +217,23 @@
                         <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;"><a href="{{route('download.post', ['post_id' =>$studentpost->id])}}">{{$studentpost->content}}</a></p>
                     </div>
                 </div>
+                
+                @foreach($comments as $comment)
+                @if ($comment->post_id==$studentpost->id)
+                
+                 <p hidden>{{$counter=$counter+1}}</p>
+                @endif
+                @endforeach
+
                 <div class="bg-white p-2">
                     <div class="d-flex flex-row fs-12">
                         <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
-                        <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$studentpost->id}}"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+                        <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$studentpost->id}}">{{$counter}}<i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
                         <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-2" href="#collapse-2"><i class="fa fa-share"></i><span class="ml-1">Reply</span></div>
                     </div>
                 </div>
                 
-
+               
                 {{-- @if ($studentpost->content!=null)
                     <img height="50px" width="50px" src="materials/{{$studentpost->content}}" alt="">
                 @endif --}}
@@ -437,10 +445,16 @@
                     </div>
                 </div>
 
+                @foreach($comments as $comment)
+                @if ($comment->post_id==$studentpost->id)
+                 <p hidden>{{$counter=$counter+1}}</p>
+                @endif
+                @endforeach
+                 
                 <div class="bg-white p-2">
                     <div class="d-flex flex-row fs-12">
                         <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
-                        <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$studentpost->id}}"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+                        <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$studentpost->id}}">{{$counter}}<i class="fa fa-commenting-o"></i><span class="ml-1"> Comment</span></div>
                         <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-2" href="#collapse-2"><i class="fa fa-share"></i><span class="ml-1">Reply</span></div>
                     </div>
                 </div>
@@ -451,7 +465,6 @@
                 @endif --}}
             @foreach($comments as $comment)
                 @if ($comment->post_id==$studentpost->id)
- 
                     <div id="collapse-{{$studentpost->id}}" class="bg-light p-2 collapse" data-parent="#myGroup">                                                                                       
                         <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="materials/{{$comment->student_id !== null ? $comment->student->photo :$comment->teacher->photo}}"width="35" height="32">
                         {{-- name and date --}}

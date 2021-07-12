@@ -314,8 +314,9 @@ if( $file=$request->file('content'))
         $comments=Comments::latest()->paginate(100);
         $post_id=$request->input('post_id');
         $comment_id=$request->input('comment_id');
+        $counter=0;
         // dd( $classroom_id);
-        return view('Frontend.student-classroom', compact('studentregs','classrooms','classroom_id','studentposts','comments','post_id','comment_id'))
+        return view('Frontend.student-classroom', compact('studentregs','classrooms','classroom_id','studentposts','comments','post_id','comment_id','counter'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 
