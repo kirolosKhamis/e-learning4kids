@@ -242,7 +242,7 @@
                                     <div class="dropdown" style="padding: 0 0 0 217px;margin-top: -16px;">
                                         <i class="fa fa-cog" aria-hidden="true" data-toggle="dropdown" style="font-size:18px;color:#007bff;"></i>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+                                            <li><a href="{{route('show.classroom',['classroom_id'=>$comment->post->classroom_id,'comment_id'=>$comment->comment_id])}}" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
                                             <li><a href="{{route('delete.content', ['comment_id' =>$comment->comment_id])}}">Delete Post</a></li>
                                         </ul>
                                     </div>
@@ -253,7 +253,19 @@
                         </div>
                         {{-- comments --}}
                         <div class="mt-2">
-                            <p class="comment-text" style="font-size: 13px;margin:-8px 0 0px 43px">{{$comment->comments}}</p>
+                            @if ($comment_id==null)
+                            <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$comment->comments}}</p>
+                            
+                            @elseif($comment->comment_id==$comment_id)
+                            <form action="{{route('update.content',['classroom_id'=>$comment->post->classroom_id, 'comment_id'=>$comment->comment_id])}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                            <input type="text" name="comment" value="{{$comment->comments}}">
+                            <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" > 
+                            <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
+                           </form>
+                            @else
+                            <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$comment->comments}}</p> 
+                            @endif
                         </div>
 
                         <div class="mt-2">
@@ -449,7 +461,7 @@
                                     <div class="dropdown" style="padding: 0 0 0 217px;margin-top: -16px;">
                                         <i class="fa fa-cog" aria-hidden="true" data-toggle="dropdown" style="font-size:18px;color:#007bff;"></i>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+                                            <li><a href="{{route('show.classroom',['classroom_id'=>$comment->post->classroom_id,'comment_id'=>$comment->comment_id])}}" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
                                             <li><a href="{{route('delete.content', ['comment_id' =>$comment->comment_id])}}">Delete Post</a></li>
                                         </ul>
                                     </div>
@@ -459,7 +471,19 @@
                         </div>
                         {{-- comments --}}
                         <div class="mt-2">
-                            <p class="comment-text" style="font-size: 13px;margin:-8px 0 0px 43px">{{$comment->comments}}</p>
+                            @if ($comment_id==null)
+                            <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$comment->comments}}</p>
+                            
+                            @elseif($comment->comment_id==$comment_id)
+                            <form action="{{route('update.content',['classroom_id'=>$comment->post->classroom_id, 'comment_id'=>$comment->comment_id])}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                            <input type="text" name="comment" value="{{$comment->comments}}">
+                            <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" > 
+                            <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
+                           </form>
+                            @else
+                            <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$comment->comments}}</p> 
+                            @endif
                         </div>
 
                         <div class="mt-2">

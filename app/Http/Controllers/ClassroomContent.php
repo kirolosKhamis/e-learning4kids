@@ -316,7 +316,9 @@ if( $file=$request->file('content'))
         $studentposts = StudentPost::latest()->paginate(100);
         $comments=Comments::latest()->paginate(100);
         $post_id=$request->input('post_id');
-        return view('Frontend.student-classroom', compact('studentregs','classrooms','classroom_id','studentposts','comments','post_id'))
+        $comment_id=$request->input('comment_id');
+        // dd( $classroom_id);
+        return view('Frontend.student-classroom', compact('studentregs','classrooms','classroom_id','studentposts','comments','post_id','comment_id'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 
@@ -450,6 +452,32 @@ if( $file=$request->file('content'))
     return redirect()->route('show.classroom',['classroom_id' => $classroom_id]);
     
     }  }
+
+    else if($request->input('comment_id')!=null)
+    {
+    //   dd($request->input('comment_id'));
+   $comments = Comments::latest()->paginate(100);
+   foreach( $comments as  $comment)
+   if($comment->comment_id==$request->input('comment_id'))
+   {
+    $file=$request->file('file');
+
+    $name=$file->getClientOriginalName();
+
+    $file->move('materials',$name);
+
+   $classroom_id=$request->input('classroom_id');
+   $comment->update([  
+
+    'comments' => $request->input('comment'),
+    'content' => $name,
+    
+
+   ]);
+
+return redirect()->route('show.classroom',['classroom_id' => $classroom_id]);
+
+}  }
 
 
     
