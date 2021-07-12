@@ -35,10 +35,13 @@ Route::group(['middleware' => 'auth:student,teacher,parent'],function () {
         return view('Frontend.home');
     })->name("home");
 
-    Route::post('/helpAnyone', [App\Http\Controllers\DeadlineController::class, 'helpAnyone'])->name('help.anyone');
+   
     Route::get('sendHelpEmail', function () {
         return view('Frontend.help');
-    });
+    })->name('sendHelpEmail');
+    
+    Route::post('/helpAnyone', [App\Http\Controllers\DeadlineController::class, 'helpAnyone'])->name('help.anyone');
+    
 });
 /*-------------------------------End of Midelware Student,Teacher,Parent------------------------------------------*/
 

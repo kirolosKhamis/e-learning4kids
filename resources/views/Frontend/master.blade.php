@@ -5,6 +5,31 @@
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
   {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
 
+
+  <style>
+    /* width */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey; 
+      border-radius: 5px;
+    }
+     
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #0b9bb8; 
+      border-radius: 10px;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #afafaf; 
+    }
+    </style>
+    </head>   
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
 
@@ -68,9 +93,10 @@
                                     {{ Auth::user()->lname }}
                                     <span class="sr-only">(current)</span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding:7px 58px 6px 32px; width: 0;">
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding:7px 58px 6px 33px; width: 0;">
                                   <a href="{{route('show.profileDetails')}}"><i class="fa fa-user-o"></i> Profile</a>
-                                  <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+                                  <a href="{{route('show.accountsetting')}}" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+                                  <a href="{{route('sendHelpEmail')}}" class="dropdown-item"><i class="fa fa-sliders"></i> Help</a>
                                   <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                           document.getElementById('logout-form').submit();">
                                           <i class="material-icons" style="font-size: 19px;">&#xE8AC;</i>Logout

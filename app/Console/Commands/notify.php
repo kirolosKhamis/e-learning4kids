@@ -41,9 +41,10 @@ class notify extends Command
      */
     public function handle()
     {
-
+        // Carbon::now()->addDays(-1)
         $studentRegs=StudentRegisteration::all();
         $teacherAssignments=TeacherAssignment::where('due', '>=', Carbon::tomorrow())->get();
+        
         // dd($teacherAssignment);
         foreach( $teacherAssignments as  $teacherAssignment){
             // dd($teacherassignment->classroom_id);

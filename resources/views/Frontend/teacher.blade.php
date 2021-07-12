@@ -64,9 +64,8 @@
           It is an online platform where students can learn,
            teachers can create contents and Parents can monitor their children</p>
 
-           <a href="{{asset('#classroom')}}"><button type="button" class="btn btn-outline-primary">View Classrooms</button></a>
-
-        <a href="{{route('createClassroom')}}"><button type="button" class="btn btn-outline-primary">Create Classroom</button></a>
+           <a href="{{ asset('#classroom') }}"> <button type="button" class="btn btn-primary" >View Classrooms</button></a>
+           <a href="{{ route('createClassroom') }}"> <button type="button" class="btn btn-info" >Create Classroom</button></a>
 
 
       </div>
@@ -93,8 +92,13 @@
                 </div>
                 <ul class="info list-unstyled">
                   {{-- <li >{{$classroom->classroom_id}}</li> --}}
-                  <li>{{$classroom->title}}</li>
-                  <li class="center-text"></li>
+                  <li id="myInput">{{$classroom->title}}</li>
+                  <li class="center-text" style="margin: 0 35px;"></li>
+                  <li> Class Code: {{$classroom->classroom_code}}</li>
+
+
+
+                  
                   <a href="{{route('show.classroom', ['classroom_id' => $classroom->classroom_id])}}" style="margin: 7px 298px 0 0;">Details</a>
                   <a href="{{route('delete.content', ['classroom_id' => $classroom->classroom_id])}}" style="margin: -30px 0 0 304px; background:none"><button onclick="confirmAction()" class="btn btn-danger"> Delete </button></a>
                 </ul>

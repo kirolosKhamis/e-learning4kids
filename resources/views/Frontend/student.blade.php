@@ -32,7 +32,7 @@
         <a href="{{ route('studentJoin') }}"> <button type="button" class="btn btn-primary" >Join Classroom</button></a>
         <a href="{{ route('sendEmail') }}"> <button type="button" class="btn btn-primary" >sendEmail</button></a>
         
-        <a href="{{ route('show.result') }}"> <button type="button" class="btn btn-outline-primary">Show results</button></a>
+        <a href="{{ route('show.result') }}"> <button type="button" class="btn btn-info">Show results</button></a>
         {{-- @isset($message)
         <p>{{$message}}</p>
         @endisset --}}

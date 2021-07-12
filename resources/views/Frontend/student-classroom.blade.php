@@ -121,13 +121,13 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-center row">
             <div class="hidediv">
-                <ul class="list-group">
+                <ul class="list-group" style="box-shadow: 1px 3px 16px 5px rgb(0 0 0 / 16%);">
                     <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">Submit assignment<hr style="margin-top: 1rem;"></a></li>
                     {{-- <li class="list-group-item">Materials<hr></li> --}}
                     <li class="list-group-item">Members<hr></li>
                     <li class="list-group-item">
                         <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">View Other Classrooms
+                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="font-size: 11px;">View Other Classrooms
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 @foreach ($studentregs as $studentreg)
@@ -145,18 +145,19 @@
             </div>
             <div class="col-md-8" style="margin:-4px 0 0 -3px;">
                 <div class="d-flex flex-column comment-section" id="myGroup">
-                    <div class="bg-white p-2">
+                    <div class="bg-white p-2" style="height: 181px;box-shadow: 1px 3px 16px 5px rgb(0 0 0 / 16%);">
                         <form action="{{asset('post')}}" method="POST" enctype="multipart/form-data">
                             @csrf 
                         <div class="mt-2">
-                            <div  class="bg-light p-2" data-parent="#myGroup">
-                                <textarea name="post" class="form-control ml-1 shadow-none textarea" placeholder=" Student announce...."></textarea> 
+                            <div  class="bg-light p-2" data-parent="#myGroup" style="height: 159px;">
+                                <textarea name="post" class="form-control ml-1 shadow-none textarea" placeholder=" Student announce...." style="height: 45px;margin-top: 17px;"></textarea> 
                                 <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
                                 <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
                                 
-                                <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" >
-                                
+                                {{-- <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" >
+                                 --}}
                                 <div class="mt-2 text-right">
+                                    <input type="file" class="form-control-file" style="margin: 20px 0px -27px 5px;" name="file" id="exampleInputFile" >                                
                                     <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post comment</button>
                                     <button class="btn btn-danger btn-sm shadow-none" type="reset"  style="height: 29px;width: 110px;font-size: small;">Cancel</button>
                                 </div>
@@ -334,7 +335,7 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-center row">
             <div class="hidediv">
-                <ul class="list-group">
+                <ul class="list-group" style="box-shadow: 1px 3px 16px 5px rgb(0 0 0 / 16%);">
                     <li class="list-group-item"><a href="{{route('view.addAssignment', ['classroom_id' =>$classroom_id])}}">Add assignment</a></li>
                     <li class="list-group-item"><a href="{{route('show.studentAssignment', ['classroom_id' =>$classroom_id])}}">Grade assignment</a></li>
                     <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">View assignments</a></li>
@@ -358,18 +359,17 @@
             
             <div class="col-md-8" style="margin:-4px 0 0 -3px;">
                 <div class="d-flex flex-column comment-section" id="myGroup">
-                    <div class="bg-white p-2">
+                    <div class="bg-white p-2" style="height: 181px;box-shadow: 1px 3px 16px 5px rgb(0 0 0 / 16%);border-radius: 4;">
                         <form action="{{asset('post')}}" method="POST" enctype="multipart/form-data">
                             @csrf 
                         <div class="mt-2">
-                            <div  class="bg-light p-2" data-parent="#myGroup">
-                                <textarea name="post" class="form-control ml-1 shadow-none textarea"id="Teacherannounce" placeholder=" Teacher announce...."></textarea> 
+                            <div  class="bg-light p-2" data-parent="#myGroup" style="height: 159px;">
+                                <textarea name="post" class="form-control ml-1 shadow-none textarea"id="Teacherannounce" placeholder=" Teacher announce...." style="height: 45px;margin-top: 17px;"></textarea> 
                                 <input type="hidden" name="teacher_id" value="{{Auth::guard('teacher')->user()->user_id}}">
                                 <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
                                 
-                                <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" >
-                                
                                 <div class="mt-2 text-right">
+                                    <input type="file" class="form-control-file" style="margin: 20px 0px -27px 5px;" name="file" id="exampleInputFile" >
                                     <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post comment</button>
                                     <button class="btn btn-danger btn-sm shadow-none" type="reset"  style="height: 29px;width: 110px;font-size: small;">Cancel</button>
                                 </div>

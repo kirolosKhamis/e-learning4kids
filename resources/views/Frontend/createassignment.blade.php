@@ -25,14 +25,11 @@
        <form action="{{route('add.assignment')}}" method="post" enctype="multipart/form-data">
         @csrf
             <!--Body-->
-            <div class="row">
+            <div class="row" style="margin-top: 41px;">
               
              
 
                 <div  class=" col-lg-9  col-md-9 col-sm-12 col-xm-9  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
-                    
-                
-
                     
                      <!-- Title input -->
                     <div  class="form-outline mb-4">
@@ -40,7 +37,6 @@
                         <label style="margin-left: 10%; padding-bottom: 50px; font-size: 15px"  class="form-label" for="form1Example1">Title</label>
                     </div>
 
-             
                      <!-- Description input -->
                     <div  class="form-outline mb-4">
                         <textarea  type="teatarea" id="form1Example1" name="description"  class="form-control" style="background-color:rgb(232, 237, 241); width: 80%;height:80%; margin-left: 10%;padding-top: 20px;border-radius: 10px ; font-size: 13px" ></textarea>
@@ -50,11 +46,6 @@
  
 
                 </div>
-
-         
-                   
-
-            
                 
                 <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300">
                         <!-- Topic input -->
@@ -71,16 +62,15 @@
                         
                          <!-- Due to input -->
                         <div  class="form-outline mb-4">
-                            <input type="datetime-local" id="form1Example1" name="due" class="form-control" style="background-color:rgb(232, 237, 241);width: 80%; margin-left: 10%;padding-top: 20px;border-radius: 10px ; font-size: 13px" >
+                            <input type="datetime-local" id="form1Example1" name="due" class="form-control" style="background-color:rgb(232, 237, 241);width: 80%; margin-left: 10%;padding-top: 20px;border-radius: 12px ; font-size: 13px;height: 50px;"" >
                             <label style="margin-left: 10%; padding-bottom: 50px; font-size: 15px"  class="form-label" for="form1Example1">Due</label>
-                           
                         </div>
                         
 
                         <div  class="form-outline mb-4">
-                            <input type="file" class="form-control-file" name="file" id="exampleInputFile">
+                            <input type="file" class="form-control-file" name="file" id="exampleInputFile" style="margin: 14px 0 26px 58px;">
                             <input type="hidden" name="teacher_id" value="{{Auth::guard('teacher')->user()->user_id}}"> <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
-                            <label style="margin-left: 10%; padding-bottom: 50px; font-size: 15px" class="form-label" for="form1Example1">File</label>
+                            {{-- <label style="margin-left: 10%; padding-bottom: 50px; font-size: 15px" class="form-label" for="form1Example1">File</label> --}}
                         </div>
                    
                
@@ -97,9 +87,6 @@
               
             
                 <div  class=" col-lg-12  col-md-12 col-sm-12 col-xm-12  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" style="margin-top: -60px" >
-                    
-
-
                       <!-- Cancel button -->
                     
                     <a a href="{{route('show.classroom', ['classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-danger" style="margin-left: 10%; font-size: 12px; border-radius: 7px">Cancel</button></a>

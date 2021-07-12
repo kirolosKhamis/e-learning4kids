@@ -30,7 +30,7 @@
                      {{-- <p>  {{$teacherName}} </p> --}}
               
 
-            </div> --}}
+            </div>
 
                 @foreach ($students as $student)
                     @if ($student->user_id==$student_id)    
@@ -59,7 +59,7 @@
                 {{-- <h1 >Enrollment courses  </h1> --}}
                 <div class="row">
                        <!-- tabele -->
-                       <table id="bigFive">
+                       <table id="bigFive" style="width: 81%;margin: 10px 10%;">
                         <tr>
                           <th style="background:white;color: black;font-weight: normal; text-align: center">Student Name</th>
                           <th style="background:white;color: black;font-weight: normal; text-align: center"> {{$studentfname}}  {{$studentlname}}</th>
@@ -70,18 +70,30 @@
                         </tr>
                         <tr>
                           <td>Teacher Name</td>
-                          <td>{{ $teacherName}} </td>
+                          <td>Dr. {{$teacherName}} </td>
                         </tr>
                         <tr>
                           <td>Rank</td>
-                          <td>{{ $studentrank }}</td>
+                            @if ($studentrank!=null)
+                              <td>{{ $studentrank }}</td> 
+                            @else
+                              <td>N/A</td>
+                            @endif
                         </tr>
-                        <td>MidTerm</td>
-                        <td>{{ $studentmidterm }}</td>
+                        <td>Mid-Term</td>
+                          @if ($studentmidterm!=null)
+                            <td>{{$studentmidterm}}</td> 
+                          @else
+                            <td>N/A</td>
+                          @endif
                       </tr>
                         <tr>
                           <td>Final</td>
-                          <td>{{ $studentfinal }}</td>
+                            @if ($studentfinal!=null)
+                              <td>{{$studentfinal}}</td> 
+                            @else
+                              <td>N/A</td>
+                            @endif
                         </tr>
                         <tr>
                       

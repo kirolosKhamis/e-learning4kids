@@ -28,6 +28,8 @@ class DeadlineController extends Controller
                 
         //     }
         // }
+
+        
         $emails= Student::pluck('email')->toArray();
         $data=['title'=>'programming','courseCode'=>'123456','Reg'=>'17100652'];
         // Mail::To("k.k.nashed@gmail.com")->send(new NotifyEmail($data));
