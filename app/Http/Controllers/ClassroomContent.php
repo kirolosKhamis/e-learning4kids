@@ -327,6 +327,7 @@ if( $file=$request->file('content'))
         $classroom_id=$request->input('classroom_id');
         $teacherassignments=TeacherAssignment::latest()->paginate(100);
         $studentassignments=StudentAssignment::latest()->paginate(100);
+        
 
         return view('Frontend.viewTeacherassignments', compact('teacherassignments', 'studentassignments','classroom_id'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
@@ -343,18 +344,23 @@ if( $file=$request->file('content'))
     public function showAssignment(Request $request) {
         $classroom_id=$request->input('classroom_id');
         $assignment_id=$request->input('assignment_id');
+      
+       
         // dd( $assignment_id);
         $flag=0;
         $teacherassignments=TeacherAssignment::latest()->paginate(100);
         $studentassignments=StudentAssignment::latest()->paginate(100);
-        return view('Frontend.submitassignment', compact('assignment_id','classroom_id','studentassignments','teacherassignments', 'flag'))
+        $sudentassignment_id=$request->input('sudentassignment_id');
+        return view('Frontend.submitassignment', compact('assignment_id','classroom_id','studentassignments','teacherassignments', 'flag','sudentassignment_id'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 
     public function viewAddassignment(Request $request) {
         $classroom_id=$request->input('classroom_id');
+        $assignment_id=$request->input('assignment_id');
         $teacherassignments=TeacherAssignment::latest()->paginate(100);
-        return view('Frontend.createassignment', compact('classroom_id'))
+       
+        return view('Frontend.createassignment', compact('classroom_id','assignment_id','teacherassignments'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 
@@ -476,6 +482,63 @@ if( $file=$request->file('content'))
    ]);
 
 return redirect()->route('show.classroom',['classroom_id' => $classroom_id]);
+
+}  }
+
+
+else if($request->input('assignment_id')!=null && $request->input('sudentassignment_id')==null )
+{
+//   dd($request->input('comment_id'));
+$teacherassignments = TeacherAssignment::latest()->paginate(100);
+foreach( $teacherassignments as  $teacherassignment)
+if($teacherassignment->id==$request->input('assignment_id'))
+{
+$file=$request->file('file');
+
+$name=$file->getClientOriginalName();
+
+$file->move('materials',$name);
+
+$classroom_id=$request->input('classroom_id');
+$teacherassignment->update([  
+
+'title' => $request->input('title'),
+'description' => $request->input('description'),
+'topic' => $request->input('topic'),
+'points' => $request->input('points'),
+'due' => $request->input('due'),
+'content' => $name,
+
+
+]);
+
+return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_id]);
+
+}  }
+
+
+else if($request->input('sudentassignment_id')!=null)
+{
+
+$studentassignments = StudentAssignment::latest()->paginate(100);
+foreach( $studentassignments as  $studentassignment)
+if($studentassignment->id==$request->input('sudentassignment_id'))
+{
+$file=$request->file('file');
+
+$name=$file->getClientOriginalName();
+
+$file->move('materials',$name);
+
+$classroom_id=$request->input('classroom_id');
+$studentassignment->update([  
+
+'content' => $name,
+
+
+]);
+
+return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_id]);
 
 }  }
 

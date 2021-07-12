@@ -18,8 +18,8 @@
             <link rel="stylesheet" href="{{asset('css/mdb.min.css')}}" />
     </head>
     <body>
-
-
+      
+        @if ($assignment_id==null)
         @section('content')
 
        <form action="{{route('add.assignment')}}" method="post" enctype="multipart/form-data">
@@ -115,6 +115,114 @@
         </form>
 
         @endsection
+
+        @else
+
+
+        @section('content')
+         @foreach ($teacherassignments as $teacherassignment)
+             @if ($teacherassignment->id==$assignment_id)
+
+        <form action="{{route('update.content',['assignment_id'=>$teacherassignment->id])}}" method="post" enctype="multipart/form-data">
+         @csrf
+             <!--Body-->
+             <div class="row">
+               
+              
+ 
+                 <div  class=" col-lg-9  col-md-9 col-sm-12 col-xm-9  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
+                     
+                 
+ 
+                     
+                      <!-- Title input -->
+                     <div  class="form-outline mb-4">
+                         <textarea  type="teatarea" id="form1Example1" name="title" value="{{$teacherassignment->title}}" class="form-control" style="background-color:rgb(232, 237, 241); width: 80%; margin-left: 10%;padding-top: 20px;border-radius: 10px ; font-size: 13px" >{{$teacherassignment->title}}</textarea>
+                         <label style="margin-left: 10%; padding-bottom: 50px; font-size: 15px"  class="form-label" for="form1Example1">Title</label>
+                     </div>
+ 
+              
+                      <!-- Description input -->
+                     <div  class="form-outline mb-4">
+                         <textarea  type="teatarea" id="form1Example1" name="description" value="{{$teacherassignment->description}}"  class="form-control" style="background-color:rgb(232, 237, 241); width: 80%;height:80%; margin-left: 10%;padding-top: 20px;border-radius: 10px ; font-size: 13px" >{{$teacherassignment->description}}</textarea>
+                         <label style="margin-left: 10%; padding-bottom: 50px; font-size: 15px" class="form-label" for="form1Example1">Description</label>
+                     </div>
+ 
+  
+ 
+                 </div>
+ 
+          
+                    
+ 
+             
+                 
+                 <div  class="col-lg-3  col-md-3 col-sm-12 col-xm-3  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300">
+                         <!-- Topic input -->
+                         <div  class="form-outline mb-4">
+                             <input  type="teatarea" id="form1Example1" name="topic" value="{{$teacherassignment->topic}}"  class="form-control" style="background-color:rgb(232, 237, 241);width: 80%; margin-left: 10%;padding-top: 20px;border-radius: 10px ; font-size: 13px" />
+                             <label style="margin-left: 10%; padding-bottom: 50px; font-size: 15px" class="form-label" for="form1Example1">Topic</label>
+                         </div>
+                         
+                          <!-- Points input -->
+                         <div  class="form-outline mb-4">
+                             <input  type="teatarea" id="form1Example1" name="points" value="{{$teacherassignment->points}}"  class="form-control" style="background-color:rgb(232, 237, 241);width: 80%; margin-left: 10%;padding-top: 20px;border-radius: 10px; font-size: 13px" />
+                             <label style="margin-left: 10%; padding-bottom: 50px; font-size: 15px" class="form-label" for="form1Example1">Points</label>
+                         </div>
+                         
+                          <!-- Due to input -->
+                         <div  class="form-outline mb-4">
+                             <input type="datetime-local" id="form1Example1" name="due" value="{{$teacherassignment->due}}" class="form-control" style="background-color:rgb(232, 237, 241);width: 80%; margin-left: 10%;padding-top: 20px;border-radius: 10px ; font-size: 13px" >
+                             <label style="margin-left: 10%; padding-bottom: 50px; font-size: 15px"  class="form-label" for="form1Example1">Due</label>
+                            
+                         </div>
+                         
+ 
+                         <div  class="form-outline mb-4">
+                             <input type="file" class="form-control-file" name="file" id="exampleInputFile">
+                             <input type="hidden" name="teacher_id" value="{{Auth::guard('teacher')->user()->user_id}}"> <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
+                             <label style="margin-left: 10%; padding-bottom: 50px; font-size: 15px" class="form-label" for="form1Example1">File</label>
+                         </div>
+                    
+                
+                
+                 </div>
+                
+           
+ 
+            
+             </div>
+ 
+ 
+             <div class="row">
+               
+             
+                 <div  class=" col-lg-12  col-md-12 col-sm-12 col-xm-12  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" style="margin-top: -60px" >
+                     
+ 
+ 
+                       <!-- Cancel button -->
+                     
+                     <a a href="{{route('show.classroom', ['classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-danger" style="margin-left: 10%; font-size: 12px; border-radius: 7px">Cancel</button></a>
+                      <!-- Submit button -->
+                      <button  type="submit" class="btn btn-primary" style="margin-left: 10px; font-size: 12px; border-radius: 7px">Save</button> 
+                 
+                 
+                 </div>
+             </div>
+ 
+ 
+            
+         </form>
+ 
+         @endsection
+            
+
+
+         @endif
+
+         @endforeach
+        @endif
         
             
 

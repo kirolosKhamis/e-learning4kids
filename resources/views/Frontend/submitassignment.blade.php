@@ -22,10 +22,11 @@
 
         {{-- {{dd($studentassignments->total())}} --}}
     
-
+    @if (Auth::guard('student')->user())
     @foreach ($studentassignments as $studentassignment)
     @if ( $studentassignment->assignment_id==$assignment_id  &&  $studentassignment->student_id==Auth::guard('student')->user()->user_id)
     {{$flag=$flag+1}}
+    @if ( $sudentassignment_id==null)   
     @section('content')    
         <div class="container" style="max-width: 1176px;margin-bottom: 182px;margin-top: 73px;">
             <div class="row">
@@ -94,7 +95,8 @@
 
                                 <div class="widget-49-meeting-action">
                                     {{-- <a href="#" class="btn btn-sm btn-flash-border-warning">View All</a> --}}
-                                    <button  type="button" class="btn btn-primary" style="margin:6px 10px 0 0; font-size: 12px; border-radius: 7px">Edit</button> 
+                                    
+                                    <a href="{{route('show.Assignment', ['sudentassignment_id' =>$studentassignment->id, 'assignment_id'=>$assignment_id, 'classroom_id' =>$studentassignment->classroom_id ])}}"><button  type="button"  class="btn btn-primary" style="margin:6px 10px 0 0; font-size: 12px; border-radius: 7px">Edit</button> </a>
                                     {{-- <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-danger" style="font-size: 12px; border-radius: 7px">Cancel</button></a> --}}
                                     @if ($studentassignment->grade ==null)
                                     <a href="{{route('delete.content', ['studentassignment_id' =>$studentassignment->id, 'classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-danger" style="font-size: 12px; border-radius: 7px">Delete</button></a>
@@ -111,9 +113,119 @@
             </div>
         </div>
     @endsection 
+    @else
+    @section('content')    
+    <div class="container" style="max-width: 1176px;margin-bottom: 182px;margin-top: 73px;">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card card-margin">
+                    <div class="card-header no-border">
+                        <h5 class="card-title"><strong>{{$studentassignment->assignment->title}}</strong></h5>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="widget-49">
+                            <div class="widget-49-title-wrapper">
+                                <div class="widget-49-date-primary">
+                                    <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->assignment->created_at))}}</span>
+                                    <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->assignment->created_at))}}</span>
+                                </div>
+                                <div class="widget-49-meeting-info">
+                                    <span class="widget-49-pro-title">Dr. {{$studentassignment->assignment->teacher->fname}} {{$studentassignment->assignment->teacher->lname}}</span>
+                                    <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($studentassignment->assignment->created_at))}}</span>
+                                </div>
+                            </div>
+                            <ol class="widget-49-meeting-points">
+                                <li class="widget-49-meeting-item"><span>Description</span></li>
+                                <li class="widget-49-meeting-item"><span>{{$studentassignment->assignment->description}}</span></li>
+                                {{-- <li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li> --}}
+                            </ol>
+                            <div class="widget-49-meeting-action">
+                                <a href="#" class="btn btn-sm btn-flash-border-primary">View All</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card card-margin">
+                    <div class="card-header no-border">
+                        <h5 class="card-title"><strong>Submitted Assignemnt</strong></h5>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="widget-49">
+                            <div class="widget-49-title-wrapper">
+                                <div class="widget-49-date-warning">
+                                    <span class="widget-49-date-day">{{date('d', strtotime($studentassignment->created_at))}}</span>
+                                    <span class="widget-49-date-month">{{date('F', strtotime($studentassignment->created_at))}}</span>
+                                </div>
+                                <div class="widget-49-meeting-info">
+                                    <span class="widget-49-pro-title">Turned in</span>
+                                    <span class="widget-49-meeting-time">At {{date('H:i', strtotime($studentassignment->created_at))}}</span>
+                                </div>
+                            </div>                                
+                            <ol class="widget-49-meeting-points">
+                                <li class="widget-49-meeting-item"><span>Your grade is {{$studentassignment->grade}} out of {{$studentassignment->assignment->points}}</span></li>
+                                <li class="widget-49-meeting-item">
+                                    <span>You Submission
+                                        <form action="{{route('update.content', ['classroom_id' =>$classroom_id, 'sudentassignment_id'=>$sudentassignment_id ])}}" method="post" enctype="multipart/form-data">                           
+                                            @csrf
+                                            <input type="file" class="form-control-file form-control form-control-user @error('content') is-invalid @enderror" name="file" id="exampleInputFile"  value="{{ old('content') }}" placeholder="upload file" autofocus style="outline:none !important;width: -webkit-fill-available;margin: 9px 0 0 50px;">
+                                            @error('content')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
+                                            <input type="hidden" name="assignment_id" value="{{$assignment_id}}">
+                                            
+                                            <div class="widget-49-meeting-action">
+                                                <button  type="submit" class="btn btn-primary" style="margin-top: 10px; font-size: 12px; border-radius: 7px">Save</button>
+                                                @if ($studentassignment->grade ==null)
+                                                <a href="{{route('delete.content', ['studentassignment_id' =>$studentassignment->id, 'classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-danger" style="font-size: 12px; border-radius: 7px">Delete</button></a>
+                                                @endif
+                
+                                                <a href="{{route('show.classroom', ['classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-primary" style="margin:6px 10px 0 0; font-size: 12px; border-radius: 7px">Back</button></a>
+                                            </div>
+                                            <!-- Cancel button -->
+                                            {{-- <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button"   class="btn btn-danger" style="margin-left: 20%;margin-top: 20px; font-size: 12px; border-radius: 7px">Cancel</button></a>--}}
+                                        </form>
+                                        @error('content')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
+                                        <input type="hidden" name="assignment_id" value="{{$assignment_id}}">
+                                    </span>                                  
+                                </li>
+                            </ol>
 
+
+                            <div class="widget-49-meeting-action">
+                                {{-- <a href="#" class="btn btn-sm btn-flash-border-warning">View All</a> --}}
+                                
+                                
+                                {{-- <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button" class="btn btn-danger" style="font-size: 12px; border-radius: 7px">Cancel</button></a> --}}
+
+                            
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection 
     @endif
-    @endforeach
+
+
+
+
+
+
+ @endif
+ @endforeach
 
   
     
@@ -198,6 +310,61 @@
     @endsection
     @endif
     @endforeach
+    @endif
+    @else
+{{-- here --}}
+
+@foreach ($teacherassignments as $teacherassignment)
+@if ($teacherassignment->id==$assignment_id)  
+@section('content')
+    <div class="container" style="max-width: 1176px;margin-bottom: 182px;margin-top: 73px;">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card card-margin">
+                    <div class="card-header no-border">
+                        <h5 class="card-title"><strong>{{$teacherassignment->title}}</strong></h5>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="widget-49">
+                            <div class="widget-49-title-wrapper">
+                                <div class="widget-49-date-primary">
+                                    <span class="widget-49-date-day">{{date('d', strtotime($teacherassignment->created_at))}}</span>
+                                    <span class="widget-49-date-month">{{date('F', strtotime($teacherassignment->created_at))}}</span>
+                                </div>
+                                <div class="widget-49-meeting-info">
+                                    <span class="widget-49-pro-title">Dr. {{$teacherassignment->teacher->fname}} {{$teacherassignment->teacher->lname}}</span>
+                                    <span class="widget-49-meeting-time">Created at {{date('H:i', strtotime($teacherassignment->created_at))}}</span>
+                                </div>
+                            </div>
+                            <ol class="widget-49-meeting-points">
+                                <li class="widget-49-meeting-item"><span>Description</span></li>
+                                <li class="widget-49-meeting-item"><span>{{$teacherassignment->description}}</span></li>
+                                <a href="{{route('download.teacherAssignment', ['tassignment_id' =>$teacherassignment->id])}}"> <li class="widget-49-meeting-item"><span>{{$teacherassignment->content}}</span></li></a>
+                            </ol>
+                            <div class="widget-49-meeting-action">
+                                <a href="{{route('view.addAssignment',['classroom_id'=>$teacherassignment->classroom_id, 'assignment_id'=>$teacherassignment])}}" class="btn btn-sm btn-flash-border-primary">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+@endsection
+@endif
+@endforeach
+
+
+
+
+
+
+
+
     @endif
 
     

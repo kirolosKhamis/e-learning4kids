@@ -21,7 +21,7 @@
 
 <!-- header -->
 @if (Auth::guard('student')->user())
-    
+
 
 @section('content')
 
@@ -101,11 +101,12 @@
                         @foreach ($teacherassignments as $teacherassignment )
                         @if ($teacherassignment->classroom_id==$classroom_id)
                         <tr>
-                          <td>{{$teacherassignment->title}} </td>
+                          <td><a href="{{route('show.Assignment', ['assignment_id' =>$teacherassignment->id , 'classroom_id' =>$teacherassignment->classroom_id ])}}">{{$teacherassignment->title}} </a></td>
+                          <a href="{{route('show.Assignment', ['assignment_id' =>$teacherassignment->id , 'classroom_id' =>$teacherassignment->classroom_id ])}}"></a>
                           <td>{{$teacherassignment->due}}</td>
                           <td>{{$teacherassignment->description}}</td>
                           <td>{{$teacherassignment->points}}</td>
-                          <td><a href="{{route('edit.result', ['assignment_id' => $teacherassignment->id])}}">edit</a>  <a href="{{route('delete.content', ['teacherassignment_id' =>$teacherassignment->id, 'classroom_id' =>$classroom_id])}}">Delete</a></td></td>
+                          <td><a href="{{route('view.addAssignment',['classroom_id'=>$teacherassignment->classroom_id, 'assignment_id'=>$teacherassignment])}}">edit</a>  <a href="{{route('delete.content', ['teacherassignment_id' =>$teacherassignment->id, 'classroom_id' =>$classroom_id])}}">Delete</a></td></td>
       
 
                         </tr>   
