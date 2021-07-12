@@ -4,19 +4,35 @@ use App\Mail\TomorrowDeadline;
 use App\Mail\HelpEmail;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\TeacherAssignment;
+use App\Models\StudentRegisteration;
 use Illuminate\Support\Facades\Mail;
-
+use Carbon\Carbon;
 class DeadlineController extends Controller
 {
 
     public function index(){
+
+        // $studentRegs=StudentRegisteration::all();
+        // $teacherAssignments=TeacherAssignment::where('due', '>=', Carbon::tomorrow())->get();
+        // // dd($teacherAssignment);
+        // foreach( $teacherAssignments as  $teacherAssignment){
+            
+        //     // dd($teacherassignment->classroom_id);
+        //     foreach($studentRegs as $studentReg){
+        //         if ($studentReg->classroom_id==$teacherAssignment->classroom_id){
+        //         //    $studentReg->student->email
+        //          $data=['title'=>'programming','courseCode'=>'123456','Reg'=>'17100652'];
+        //            Mail::To( $studentReg->student->email)->send(new TomorrowDeadline($data));
+        //         }
+                
+        //     }
+        // }
         $emails= Student::pluck('email')->toArray();
         $data=['title'=>'programming','courseCode'=>'123456','Reg'=>'17100652'];
         // Mail::To("k.k.nashed@gmail.com")->send(new NotifyEmail($data));
         Mail::To("support@e-learning4kids.com")->cc("k.k.nashed@gmail.com")->send(new TomorrowDeadline($data));
-        // foreach($emails as $email){           
-        //     Mail::To($email)->send(new NotifyEmail($data));
-        // }
+        
         return redirect()->back()->with('message', 'IT WORKS!');
     }
     public function helpAnyone(Request $request){
