@@ -72,9 +72,9 @@
                 <li>{{$studentreg->classroom->title}}</li>
                 {{-- <li >{{$studentreg->classroom_id}}</li> --}}
                 <li class="right-text"></li>
-                <li>{{$studentreg->classroom->teacher->fname}}</li>
+                <li>Mr. {{$studentreg->classroom->teacher->fname}} {{$studentreg->classroom->teacher->lname}}</li>
                 <input type="hidden" name="classroom_id" value="{{$studentreg->classroom_id}}">
-                <a href="{{route('show.classroom', ['classroom_id' => $studentreg->classroom_id])}}">Details</a>
+                <a href="{{route('show.classroom', ['classroom_id' => $studentreg->classroom_id])}}">Open</a>
               </ul>
             </div>	
           </div> 

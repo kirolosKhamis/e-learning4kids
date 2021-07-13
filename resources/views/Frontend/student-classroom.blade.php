@@ -151,7 +151,7 @@
                             @csrf 
                         <div class="mt-2">
                             <div  class="bg-light p-2" data-parent="#myGroup" style="height: 159px;">
-                                <textarea name="post" class="form-control ml-1 shadow-none textarea" placeholder=" Student announce...." style="height: 45px;margin-top: 17px;font-size: 12px;"></textarea> 
+                                <textarea name="post" class="form-control ml-1 shadow-none textarea" placeholder=" Insert your post...." style="height: 45px;margin-top: 17px;font-size: 12px;"></textarea> 
                                 <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
                                 <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
                                 
@@ -159,8 +159,8 @@
                                  --}}
                                 <div class="mt-2 text-right">
                                     <input type="file" class="form-control-file" style="margin: 20px 0px -27px 5px;" name="file" id="exampleInputFile" >                                
-                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post comment</button>
-                                    <button class="btn btn-danger btn-sm shadow-none" type="reset"  style="height: 29px;width: 110px;font-size: small;">Cancel</button>
+                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post</button>
+                                    <button class="btn btn-danger btn-sm shadow-none" type="reset"  style="height: 29px;width: 110px; font-size: small;">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -239,7 +239,7 @@
                     <div class="d-flex flex-row fs-12">
                         <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
                         <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$studentpost->id}}">{{$counter}}<i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
-                        <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-2" href="#collapse-2"><i class="fa fa-share"></i><span class="ml-1">Reply</span></div>
+                        
                     </div>
                 </div>
                 
@@ -321,7 +321,7 @@
                         <input type="hidden" name="post_id" value="{{$studentpost->id}}">
                         <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
                         <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
-                        <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post comment</button></div>
+                        <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Comment</button></div>
                     </div>
                 </form>
             </div>
@@ -369,7 +369,7 @@
                     <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">View assignments</a></li>
                     <li class="list-group-item"><a href="{{route('showAllMemebers', ['class_id'=>$classroom_id])}}">Members</a><hr></li>
                     {{-- <li class="list-group-item">View All<hr></li> --}}
-                    <li class="list-group-item"><a href="{{route('add.result', ['classroom_id' =>$classroom_id])}}">Add results</li></a>
+                    <li class="list-group-item"><a href="{{route('add.result', ['classroom_id' =>$classroom_id])}}">Grade exams</li></a>
                     <li class="list-group-item">                   
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" style="color:#007bff;font-size: 12px;" type="button" data-toggle="dropdown">View Other Classrooms
@@ -393,13 +393,13 @@
                             @csrf 
                         <div class="mt-2">
                             <div  class="bg-light p-2" data-parent="#myGroup" style="height: 159px;">
-                                <textarea name="post" class="form-control ml-1 shadow-none textarea"id="Teacherannounce" placeholder=" Teacher announce...." style="height: 45px;margin-top: 17px;font-size: 12px;"></textarea> 
+                                <textarea name="post" class="form-control ml-1 shadow-none textarea"id="Teacherannounce" placeholder=" insert your post...." style="height: 45px;margin-top: 17px;font-size: 12px;"></textarea> 
                                 <input type="hidden" name="teacher_id" value="{{Auth::guard('teacher')->user()->user_id}}">
                                 <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
                                 
                                 <div class="mt-2 text-right">
                                     <input type="file" class="form-control-file" style="margin: 20px 0px -27px 5px;" name="file" id="exampleInputFile" >
-                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post comment</button>
+                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post</button>
                                     <button class="btn btn-danger btn-sm shadow-none" type="reset"  style="height: 29px;width: 110px;font-size: small;">Cancel</button>
                                 </div>
 
@@ -485,7 +485,7 @@
                     <div class="d-flex flex-row fs-12">
                         <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
                         <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$studentpost->id}}">{{$counter}}<i class="fa fa-commenting-o"></i><span class="ml-1"> Comment</span></div>
-                        <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-2" href="#collapse-2"><i class="fa fa-share"></i><span class="ml-1">Reply</span></div>
+                        
                     </div>
                 </div>
                 
@@ -562,7 +562,7 @@
                         <input type="hidden" name="post_id" value="{{$studentpost->id}}">
                         <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
                         <input type="hidden" name="teacher_id" value="{{Auth::guard('teacher')->user()->user_id}}">
-                        <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post comment</button></div>
+                        <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Comment</button></div>
                     </div>
                 </form>
             </div>

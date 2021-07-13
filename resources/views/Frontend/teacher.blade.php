@@ -99,8 +99,8 @@
 
 
                   
-                  <a href="{{route('show.classroom', ['classroom_id' => $classroom->classroom_id])}}" style="margin:15px 298px 0px 0">Details</a>
-                  <a href="{{route('delete.content', ['classroom_id' => $classroom->classroom_id])}}" style="margin: -30px 0 0 304px; background:none"><button onclick="confirmAction()" class="btn btn-danger"> Delete </button></a>
+                  <a href="{{route('show.classroom', ['classroom_id' => $classroom->classroom_id])}}" >Open</a>
+                  <a href="{{route('delete.content', ['classroom_id' => $classroom->classroom_id])}}" style="background-color: red;     margin-top: 2%;"> Delete </a>
                 </ul>
                 
                 <script>
