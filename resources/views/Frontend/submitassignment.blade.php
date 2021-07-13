@@ -281,8 +281,8 @@
                                     @csrf
                                     <input type="file" class="form-control-file form-control form-control-user @error('content') is-invalid @enderror" name="content" id="exampleInputFile"  value="{{ old('content') }}" placeholder="upload file" autofocus style="outline:none !important;width: -webkit-fill-available;margin: 9px 0 0 50px;">
                                     @error('content')
-                                        <span class="invalid-feedback" role="alert" style="margin: 7px 0 0 50px;">
-                                            <strong>{{ $message }}</strong>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong style="color: red;">{{ $message }}</strong>
                                         </span>
                                     @enderror
                                     <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">

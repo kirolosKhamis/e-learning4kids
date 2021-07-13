@@ -659,6 +659,10 @@ return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_
     }  }
 
     public function updategrade(Request $request) {
+        
+        $request->validate([
+            'grade' => 'integer|required|min:0|max:2',
+        ]);
         // dd($request->input('result_id'));
         //boulanessim
        $studentassignments = StudentAssignment::latest()->paginate(100);

@@ -44,7 +44,7 @@
                        
                         @foreach ($studentassignments as $studentassignment )
                         @if ($studentassignment->id==$assignment_id)
-                        <form action="{{route('update.grade', ['assignment_id' =>$studentassignment->id])}}}}" method="post">
+                        <form action="{{route('update.grade', ['assignment_id' =>$studentassignment->id])}}" method="post">
                           @csrf
                         <tr>
                           
@@ -52,12 +52,19 @@
                           <td>{{$studentassignment->assignment->title}}</td>
                           <td><a href="{{route('download.studentAssignment', ['assignment_id' =>$studentassignment->id])}}">{{$studentassignment->content}}</a></td></td>
                           {{-- <td>{{$studentassignment->content}}</td> --}}
-                          <td><input type="text" name="grade" value="{{$studentassignment->grade}}"></td>
+                          <td><input type="text" name="grade" value="{{$studentassignment->grade}}" class="@error('content') is-invalid @enderror"></td>
                          
-                          <td> <button type="submit">Save</button></td></td>
-      
+                          <td> <button type="submit">Save</button></td>
+                        
+                          @error('grade')
+                          <span class="invalid-feedback" role="alert" style="margin: 7px 0 0 50px;">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                          
 
                         </tr>  
+                        
                       </form> 
                         @endif
                         @endforeach
