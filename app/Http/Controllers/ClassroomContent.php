@@ -916,110 +916,106 @@ return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_
 //     return response()->download($pathToFile);
 // }
 
-    public function updateInfo(Request $request)
-    {
-        // $request->all();
-        $request->validate([
-            'fname' => 'required',
-            'lname' => 'required',
-            'phone' => 'required|max:11',
-            'address' => 'required',
-            // 'password' => 'required'
-        ]);
-        $modelType=null;
 
-      if( $request->file('file')!=null && $request->input('password')!=null )
-      {        
-          
-        $file=$request->file('file');
-        
-        $name=$file->getClientOriginalName();
+public function updateInfo(Request $request)
+{
+    // $request->all();
+    $request->validate([
+        'fname' => 'required',
+        'lname' => 'required',
+        'phone' => 'required|max:11',
+        'address' => 'required',
+        // 'password' => 'required'
+    ]);
+    $modelType=null;
 
-        $file->move('materials',$name);
+  
+      
+
+    
+    if (Auth::guard('student')->user()){
+        $modelType=Student::where('user_id',Auth::user()->user_id)->First();
         
-        if (Auth::guard('student')->user()){
-            $modelType=Student::where('user_id',Auth::user()->user_id)->First();
-            
-        }
-        elseif(Auth::guard('parent')->user()){
-            
-            $modelType=ParentModel::where('user_id',Auth::user()->user_id)->First();
-           
-        }
-        elseif(Auth::guard('teacher')->user()){
-            $modelType=Teacher::where('user_id',Auth::user()->user_id)->First();
-        }
-        $modelType->update([
+    }
+    elseif(Auth::guard('parent')->user()){
+        
+        $modelType=ParentModel::where('user_id',Auth::user()->user_id)->First();
+       
+    }
+    elseif(Auth::guard('teacher')->user()){
+        $modelType=Teacher::where('user_id',Auth::user()->user_id)->First();
+    }
+
+  
+  if($request->input('password')!==null &&  $request->file('file')!=null)
+  {  
+      $file=$request->file('file');
+      $name=$file->getClientOriginalName();
+
+      $file->move('materials',$name);
+
+    $modelType->update([
         'fname'=>$request->input('fname'),
         'lname'=>$request->input('lname'),
         'phone'=>$request->input('phone'),
         'address'=>$request->input('address'),
         'password' => Hash::make($request['password']),
-        'photo' => $name,
         'updated_at'=>Carbon::now('Africa/Cairo'),
+        'photo' => $name,
         ]);}
+  
+  
+  
+    elseif ($request->input('password')==null &&  $request->file('file')!=null)
+    {    $file=$request->file('file');
+    
+        $name=$file->getClientOriginalName();
 
+        $file->move('materials',$name);
 
-        else
-        {
+        $modelType->update([
+            'fname'=>$request->input('fname'),
+            'lname'=>$request->input('lname'),
+            'phone'=>$request->input('phone'),
+            'address'=>$request->input('address'),
+            'updated_at'=>Carbon::now('Africa/Cairo'),
+            'photo' => $name,
+            ]);
+    
+    
+    
+    }
          
 
-            
-            if (Auth::guard('student')->user()){
-                $modelType=Student::where('user_id',Auth::user()->user_id)->First();
-                
-            }
-            elseif(Auth::guard('parent')->user()){
-                
-                $modelType=ParentModel::where('user_id',Auth::user()->user_id)->First();
-               
-            }
-            elseif(Auth::guard('teacher')->user()){
-                $modelType=Teacher::where('user_id',Auth::user()->user_id)->First();
-            }
-            if($request->input('password')==null &&  $request->file('file')!=null)
-            {   
-                $file=$request->file('file');
-        
-                $name=$file->getClientOriginalName();
-        
-                $file->move('materials',$name);
-                $modelType->update([
-                'fname'=>$request->input('fname'),
-                'lname'=>$request->input('lname'),
-                'phone'=>$request->input('phone'),
-                'address'=>$request->input('address'),
-                'password' => Hash::make($request['password']),
-                'updated_at'=>Carbon::now('Africa/Cairo'),
-                'photo' => $name,
-                ]);}
 
 
-            else if($request->file('file')==null && $request->input('password')!=null  )
-            $modelType->update([
-                'fname'=>$request->input('fname'),
-                'lname'=>$request->input('lname'),
-                'phone'=>$request->input('phone'),
-                'address'=>$request->input('address'),
-                'password' => Hash::make($request['password']),
-                'updated_at'=>Carbon::now('Africa/Cairo'),
-                ]);
-
-                else
-
-                $modelType->update([
-                    'fname'=>$request->input('fname'),
-                    'lname'=>$request->input('lname'),
-                    'phone'=>$request->input('phone'),
-                    'address'=>$request->input('address'),
-                    'updated_at'=>Carbon::now('Africa/Cairo'),
-                    ]);
-
-        }
+    else if($request->file('file')==null && $request->input('password')!=null  ){    
+        $modelType->update([
+    'fname'=>$request->input('fname'),
+    'lname'=>$request->input('lname'),
+    'phone'=>$request->input('phone'),
+    'address'=>$request->input('address'),
+    'password' => Hash::make($request['password']),
+    'updated_at'=>Carbon::now('Africa/Cairo'),
+    ]);}
 
 
-    return redirect()->route('show.profileDetails');
-  
+    else
+
+    $modelType->update([
+        'fname'=>$request->input('fname'),
+        'lname'=>$request->input('lname'),
+        'phone'=>$request->input('phone'),
+        'address'=>$request->input('address'),
+        'updated_at'=>Carbon::now('Africa/Cairo'),
+        ]);
+
+
+
+
+
+return redirect()->route('show.profileDetails');
+
 }
 
     public function showcertificate (Request $request) {

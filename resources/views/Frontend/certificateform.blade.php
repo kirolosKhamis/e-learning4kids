@@ -58,7 +58,7 @@
                                         <div style="display: flex;align-items: center; justify-content: center">
                                             <div class="container1" >
                                               <div class="logo">
-                                                <img class="img1 img img-responsive" src="{{asset('images/photos/final.png')}}">
+                                                {{-- <img class="img1 img img-responsive" src="{{asset('images/photos/final.png')}}"> --}}
                                             </div>
 
                                             <div class="marquee">
