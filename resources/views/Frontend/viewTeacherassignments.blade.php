@@ -47,7 +47,7 @@
                         @if ($teacherassignment->classroom_id==$classroom_id)
                         <tr>
                          <td><a href="{{route('show.Assignment', ['assignment_id' =>$teacherassignment->id , 'classroom_id' =>$teacherassignment->classroom_id ])}}">{{$teacherassignment->title}}</a> </td>
-                          <td>{{$teacherassignment->due}}</td>
+                          <td>{{date('d-F-Y  H:i' , strtotime($teacherassignment->due))}}</td>
                           <td>{{$teacherassignment->description}}</td>
                           <td>{{$teacherassignment->points}}</td>
       
@@ -103,7 +103,7 @@
                         <tr>
                           <td><a href="{{route('show.Assignment', ['assignment_id' =>$teacherassignment->id , 'classroom_id' =>$teacherassignment->classroom_id ])}}">{{$teacherassignment->title}} </a></td>
                           <a href="{{route('show.Assignment', ['assignment_id' =>$teacherassignment->id , 'classroom_id' =>$teacherassignment->classroom_id ])}}"></a>
-                          <td>{{$teacherassignment->due}}</td>
+                          <td>{{date('d-F-Y  H:i' , strtotime($teacherassignment->due))}}</td>
                           <td>{{$teacherassignment->description}}</td>
                           <td>{{$teacherassignment->points}}</td>
                           <td><a href="{{route('view.addAssignment',['classroom_id'=>$teacherassignment->classroom_id, 'assignment_id'=>$teacherassignment])}}">edit</a>  <a href="{{route('delete.content', ['teacherassignment_id' =>$teacherassignment->id, 'classroom_id' =>$classroom_id])}}">Delete</a></td></td>

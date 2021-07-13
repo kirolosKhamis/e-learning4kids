@@ -151,7 +151,7 @@
                             @csrf 
                         <div class="mt-2">
                             <div  class="bg-light p-2" data-parent="#myGroup" style="height: 159px;">
-                                <textarea name="post" class="form-control ml-1 shadow-none textarea" placeholder=" Student announce...." style="height: 45px;margin-top: 17px;"></textarea> 
+                                <textarea name="post" class="form-control ml-1 shadow-none textarea" placeholder=" Student announce...." style="height: 45px;margin-top: 17px;font-size: 12px;"></textarea> 
                                 <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
                                 <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
                                 
@@ -199,14 +199,23 @@
                     
                     <div class="mt-2">
                         @if ($post_id==null)
-                        <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$studentpost->post}}</p>
+                            <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$studentpost->post}}</p>
                        
                         @elseif($studentpost->id==$post_id)
                         <form action="{{route('update.content',['classroom_id'=>$studentpost->classroom_id, 'post_id'=>$studentpost->id])}}" method="post" enctype="multipart/form-data">
                             @csrf
-                        <input type="text" name="post" value="{{$studentpost->post}}">
-                        <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" > 
-                        <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
+                            <textarea name="post" class="form-control ml-1 shadow-none textarea" placeholder=" Student announce...." style="height: 45px;margin-top: 17px;font-size: 12px;">{{$studentpost->post}}</textarea>
+                            {{-- <input type="text" name="post" value="{{$studentpost->post}}"> --}}
+                            {{-- <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" > 
+                             --}}
+
+                             <div class="mt-2 text-right">
+                                <input type="file" class="form-control-file" style="margin: 20px 0px -27px 5px;" name="file" id="exampleInputFile" >                                
+                                <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
+                                <a href="{{route('show.classroom',['classroom_id'=>$studentpost->classroom_id])}}"><button class="btn btn-danger btn-sm shadow-none" type="button"  style="height: 29px;width: 110px;font-size: small;">Cancel</button></a>
+                           
+                            </div>
+                            {{-- <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button> --}}
                        </form>
                         @else
                         <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$studentpost->post}}</p> 
@@ -269,9 +278,19 @@
                             @elseif($comment->comment_id==$comment_id)
                             <form action="{{route('update.content',['classroom_id'=>$comment->post->classroom_id, 'comment_id'=>$comment->comment_id])}}" method="post" enctype="multipart/form-data">
                                 @csrf
-                            <input type="text" name="comment" value="{{$comment->comments}}">
-                            <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" > 
-                            <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
+
+                                <textarea name="comment" class="form-control ml-1 shadow-none textarea" placeholder="" style="height: 45px;margin-top: 17px;font-size: 12px;">{{$comment->comments}}</textarea>
+
+
+                                <div class="mt-2 text-right">
+                                    <input type="file" class="form-control-file" style="margin: 20px 0px -27px 5px;" name="file" id="exampleInputFile" >                                
+                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
+                                    <a href="{{route('show.classroom',['classroom_id'=>$studentpost->classroom_id])}}"><button class="btn btn-danger btn-sm shadow-none" type="button"  style="height: 29px;width: 110px;font-size: small;">Cancel</button></a>
+                            
+                                </div>
+                            {{-- <input type="text" name="comment" value="{{$comment->comments}}"> --}}
+                            {{-- <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" >  --}}
+                            {{-- <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button> --}}
                            </form>
                             @else
                             <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$comment->comments}}</p> 
@@ -295,7 +314,7 @@
                     
                     <div id="collapse-{{$studentpost->id}}" class="bg-light p-2 collapse" data-parent="#myGroup">
                         <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="materials/{{$studentpost->student_id !== null ? $studentpost->student->photo :$studentpost->teacher->photo }}"  width="35" height="32">
-                            <textarea name="comments" class="form-control ml-1 shadow-none textarea"></textarea> 
+                            <textarea name="comments" class="form-control ml-1 shadow-none textarea" style="font-size: 12px;" ></textarea> 
                             <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile">
                         </div>
                             
@@ -374,7 +393,7 @@
                             @csrf 
                         <div class="mt-2">
                             <div  class="bg-light p-2" data-parent="#myGroup" style="height: 159px;">
-                                <textarea name="post" class="form-control ml-1 shadow-none textarea"id="Teacherannounce" placeholder=" Teacher announce...." style="height: 45px;margin-top: 17px;"></textarea> 
+                                <textarea name="post" class="form-control ml-1 shadow-none textarea"id="Teacherannounce" placeholder=" Teacher announce...." style="height: 45px;margin-top: 17px;font-size: 12px;"></textarea> 
                                 <input type="hidden" name="teacher_id" value="{{Auth::guard('teacher')->user()->user_id}}">
                                 <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
                                 
@@ -433,9 +452,18 @@
                         @elseif($studentpost->id==$post_id)
                         <form action="{{route('update.content',['classroom_id'=>$studentpost->classroom_id, 'post_id'=>$studentpost->id])}}" method="post" enctype="multipart/form-data">
                             @csrf
-                        <input type="text" name="post" value="{{$studentpost->post}}">
-                        <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" > 
-                        <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
+
+                            <textarea name="post" class="form-control ml-1 shadow-none textarea" placeholder="" style="height: 45px;margin-top: 17px; font-size: 12px;font-size: 12px;">{{$studentpost->post}}</textarea>
+                            <div class="mt-2 text-right">
+                                <input type="file" class="form-control-file" style="margin: 20px 0px -27px 5px;" name="file" id="exampleInputFile" >                                
+                                <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
+                                <a href="{{route('show.classroom',['classroom_id'=>$studentpost->classroom_id])}}"><button class="btn btn-danger btn-sm shadow-none" type="button"  style="height: 29px;width: 110px;font-size: small;">Cancel</button></a>
+                        
+                            </div>
+
+                            {{-- <input type="text" name="post" value="{{$studentpost->post}}"> --}}
+                            {{-- <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" > 
+                            <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button> --}}
                        </form>
                         @else
                         <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$studentpost->post}}</p> 
@@ -492,9 +520,18 @@
                             @elseif($comment->comment_id==$comment_id)
                             <form action="{{route('update.content',['classroom_id'=>$comment->post->classroom_id, 'comment_id'=>$comment->comment_id])}}" method="post" enctype="multipart/form-data">
                                 @csrf
-                            <input type="text" name="comment" value="{{$comment->comments}}">
-                            <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile" > 
-                            <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
+
+                                <textarea name="comment" class="form-control ml-1 shadow-none textarea" placeholder="" style="height: 45px;margin-top: 17px;font-size: 12px;">{{$comment->comments}}</textarea>
+
+
+                                <div class="mt-2 text-right">
+                                    <input type="file" class="form-control-file" style="margin: 20px 0px -27px 5px;" name="file" id="exampleInputFile" >                                
+                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button>
+                                    <a href="{{route('show.classroom',['classroom_id'=>$studentpost->classroom_id])}}"><button class="btn btn-danger btn-sm shadow-none" type="button"  style="height: 29px;width: 110px;font-size: small;">Cancel</button></a>
+                            
+                                </div>
+
+                                {{-- <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Edit</button> --}}
                            </form>
                             @else
                             <p class="comment-text" style="font-size: 13px;margin: 12px 0 5px 43px;">{{$comment->comments}}</p> 
@@ -512,14 +549,13 @@
                     @endif --}}
                 @endif
             @endforeach 
-
                 <form action="{{route('post.comment')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     
                     <div id="collapse-{{$studentpost->id}}" class="bg-light p-2 collapse" data-parent="#myGroup">
                         
                         <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="materials/{{$studentpost->student_id !== null ? $studentpost->student->photo :$studentpost->teacher->photo }}"  width="35" height="32">
-                            <textarea name="comments" class="form-control ml-1 shadow-none textarea" placeholder="Add comment"></textarea> 
+                            <textarea name="comments" class="form-control ml-1 shadow-none textarea" placeholder="Add comment" style="font-size: 12px;"></textarea> 
                             <input type="file" class="form-control-file" style="width: 294px;margin-top: 6px;" name="file" id="exampleInputFile">
                         </div>
                             

@@ -229,12 +229,15 @@ if( $file=$request->file('file'))
     {
         // dd($request->all());
         $request->validate([
-            'title' => 'required'
+            'title' => 'required',
+            'description'=>'required',
+            'topic'=>'required',
+            'points'=>'integer|required|min:0|max:2',
+            'due'=>'required',
         ]);
 
         
-if( $file=$request->file('file'))
-    {
+    if( $file=$request->file('file')){
 
 
         // dd( $request->all());
@@ -270,10 +273,10 @@ if( $file=$request->file('file'))
         // $namee=$filee->getClientOriginalName();
         // dd($namee);
 
-        // $request->validate([
-        //     "content"=$namee => 'required|exists:student_assignment';
+        $request->validate([
+            'content'=> 'required'
 
-        // ]);
+        ]);
   
         $classroom_id=$request->input('classroom_id');
         $assignment_id=$request->input('assignment_id');
@@ -360,6 +363,7 @@ if( $file=$request->file('content'))
     }
 // student can show the assignment to submit 
     public function showAssignment(Request $request) {
+        
         $classroom_id=$request->input('classroom_id');
         $assignment_id=$request->input('assignment_id');
       
@@ -374,6 +378,11 @@ if( $file=$request->file('content'))
     }
 
     public function viewAddassignment(Request $request) {
+
+
+        // dd($request->all());
+
+
         $classroom_id=$request->input('classroom_id');
         $assignment_id=$request->input('assignment_id');
         $teacherassignments=TeacherAssignment::latest()->paginate(100);
@@ -451,6 +460,7 @@ if( $file=$request->file('content'))
     public function updateContent(Request $request) {
         
         // dd($request->all());
+
            
         if($request->input('post_id')!=null)
         {
@@ -535,6 +545,14 @@ return redirect()->route('show.classroom',['classroom_id' => $classroom_id]);
 
 else if($request->input('assignment_id')!=null && $request->input('sudentassignment_id')==null )
 {
+
+    $request->validate([
+        'title' => 'required',
+        'description'=>'required',
+        'topic'=>'required',
+        'points'=>'integer|required|min:0|max:2',
+        'due'=>'required',
+    ]);
 //   dd($request->input('comment_id'));
 $teacherassignments = TeacherAssignment::latest()->paginate(100);
 $classroom_id=$request->input('classroom_id');
@@ -900,14 +918,18 @@ return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|max:11',
             'address' => 'required',
-            'password' => 'required'
+            // 'password' => 'required'
         ]);
         $modelType=null;
 
-      if(  $file=$request->file('file'))
-      {        $name=$file->getClientOriginalName();
+      if( $request->file('file')!=null && $request->input('password')!=null )
+      {        
+          
+        $file=$request->file('file');
+        
+        $name=$file->getClientOriginalName();
 
         $file->move('materials',$name);
         
@@ -937,6 +959,7 @@ return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_
         else
         {
          
+
             
             if (Auth::guard('student')->user()){
                 $modelType=Student::where('user_id',Auth::user()->user_id)->First();
@@ -950,14 +973,43 @@ return redirect()->route('show.teacherAssignment',['classroom_id' => $classroom_
             elseif(Auth::guard('teacher')->user()){
                 $modelType=Teacher::where('user_id',Auth::user()->user_id)->First();
             }
+            if($request->input('password')==null &&  $request->file('file')!=null)
+            {   
+                $file=$request->file('file');
+        
+                $name=$file->getClientOriginalName();
+        
+                $file->move('materials',$name);
+                $modelType->update([
+                'fname'=>$request->input('fname'),
+                'lname'=>$request->input('lname'),
+                'phone'=>$request->input('phone'),
+                'address'=>$request->input('address'),
+                'password' => Hash::make($request['password']),
+                'updated_at'=>Carbon::now('Africa/Cairo'),
+                'photo' => $name,
+                ]);}
+
+
+            else if($request->file('file')==null && $request->input('password')!=null  )
             $modelType->update([
-            'fname'=>$request->input('fname'),
-            'lname'=>$request->input('lname'),
-            'phone'=>$request->input('phone'),
-            'address'=>$request->input('address'),
-            'password' => Hash::make($request['password']),
-            'updated_at'=>Carbon::now('Africa/Cairo'),
-            ]);
+                'fname'=>$request->input('fname'),
+                'lname'=>$request->input('lname'),
+                'phone'=>$request->input('phone'),
+                'address'=>$request->input('address'),
+                'password' => Hash::make($request['password']),
+                'updated_at'=>Carbon::now('Africa/Cairo'),
+                ]);
+
+                else
+
+                $modelType->update([
+                    'fname'=>$request->input('fname'),
+                    'lname'=>$request->input('lname'),
+                    'phone'=>$request->input('phone'),
+                    'address'=>$request->input('address'),
+                    'updated_at'=>Carbon::now('Africa/Cairo'),
+                    ]);
 
         }
 

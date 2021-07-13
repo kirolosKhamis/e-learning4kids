@@ -156,6 +156,7 @@
             </div>
           </div>
 
+          @if (Auth::guard('student')->user())
           {{-- gamifications --}}
           <div class="row gutters-sm">
             {{-- certificate--}}
@@ -257,8 +258,6 @@
                 </div>
               </div>
             @endif
-       
-
            
             @if (Auth::guard('student')->user() && Auth::guard('student')->user()->personality_type=="openness" || Auth::guard('student')->user()->personality_type=="consientiousness" || Auth::guard('student')->user()->personality_type=="extraversion")
                 {{-- progress bar --}}
@@ -344,6 +343,7 @@
             @endif
 
           </div>
+          @endif
 
         </div>
 

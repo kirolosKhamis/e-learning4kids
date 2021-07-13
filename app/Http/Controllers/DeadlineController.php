@@ -39,11 +39,15 @@ class DeadlineController extends Controller
     }
     public function helpAnyone(Request $request){
         // $emails= Student::pluck('email')->toArray();
-        
-        $request->input('name');
-        $request->input('email');
-        $request->input('subject');
-        $request->input('message');
+        // dd($request->all());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+            // 'password' => 'required'
+        ]);
+
         $data=['name'=>$request->input('name'),'email'=>$request->input('email'),'subject'=>$request->input('subject'),'message'=>$request->input('message')];
         Mail::To("support@e-learning4kids.com")->cc($request->input('email'))->send(new HelpEmail($data));
         // foreach($emails as $email){           

@@ -171,7 +171,7 @@
                                             @csrf
                                             <input type="file" class="form-control-file form-control form-control-user @error('content') is-invalid @enderror" name="file" id="exampleInputFile"  value="{{ old('content') }}" placeholder="upload file" autofocus style="outline:none !important;width: -webkit-fill-available;margin: 9px 0 0 50px;">
                                             @error('content')
-                                                <span class="invalid-feedback" role="alert">
+                                                <span class="invalid-feedback" role="alert" style="margin: 7px 0 0 50px;">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
@@ -189,11 +189,6 @@
                                             <!-- Cancel button -->
                                             {{-- <a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}"><button type="button"   class="btn btn-danger" style="margin-left: 20%;margin-top: 20px; font-size: 12px; border-radius: 7px">Cancel</button></a>--}}
                                         </form>
-                                        @error('content')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                         <input type="hidden" name="student_id" value="{{Auth::guard('student')->user()->user_id}}">
                                         <input type="hidden" name="assignment_id" value="{{$assignment_id}}">
                                     </span>                                  
@@ -286,7 +281,7 @@
                                     @csrf
                                     <input type="file" class="form-control-file form-control form-control-user @error('content') is-invalid @enderror" name="content" id="exampleInputFile"  value="{{ old('content') }}" placeholder="upload file" autofocus style="outline:none !important;width: -webkit-fill-available;margin: 9px 0 0 50px;">
                                     @error('content')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback" role="alert" style="margin: 7px 0 0 50px;">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror

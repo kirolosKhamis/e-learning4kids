@@ -34,7 +34,12 @@
         @csrf
         <div class="form-group">
           <label for="exampleFormControlInput1">Title</label>
-          <input type="text" class="form-control" id="title" name="title" placeholder="Course Title">
+          <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Course Title">
+          @error('title')
+              <span class="invalid-feedback" role="alert">
+                  <strong style="color: red">{{ $message }}</strong>
+              </span>
+          @enderror
         </div>
 
         <div class="form-group">
@@ -49,6 +54,7 @@
         <div class="form-group" >
           <input type="file" class="form-control" id="file" name="file" placeholder="Upload Image" style="outline: none !important;">
           {{-- <input type="file" class="form-control-file" name="file" id="exampleInputFile"> --}}
+          
         </div>
          
         <div class="form-group" >

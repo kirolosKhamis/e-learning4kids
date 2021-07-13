@@ -56,25 +56,45 @@
                     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-10" style="margin-left: 50px">
                       <div class="form-group">
                         <label for="fname">First Name</label>
-                        <input type="text" class="form-control"  id="fname" name="fname" placeholder=""  value="{{Auth::user()->fname}}">
+                        <input type="text" class="form-control @error('fname') is-invalid @enderror"  id="fname" name="fname" placeholder=""  value="{{Auth::user()->fname}}">
+                        @error('fname')
+                            <span class="invalid-feedback" role="alert">
+                                <strong style="color:red">{{ $message }}</strong>
+                            </span>
+                        @enderror
                       </div>
                     </div>
                     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-10" style="margin-left: 50px">
                       <div class="form-group">
                         <label for="lname">Last Name</label>
-                        <input type="lname" class="form-control" id="lname" name="lname" placeholder=""  value="{{Auth::user()->lname}}">
+                        <input type="lname" class="form-control @error('lname') is-invalid @enderror" id="lname" name="lname" placeholder=""  value="{{Auth::user()->lname}}">
+                        @error('lname')
+                            <span class="invalid-feedback" role="alert">
+                                <strong style="color:red">{{ $message }}</strong>
+                            </span>
+                        @enderror
                       </div>
                     </div>
                     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-10" style="margin-left: 50px">
                       <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="phone" class="form-control" id="phone" name="phone" placeholder="" value="{{Auth::user()->phone}}">
+                        <input type="phone" class="form-control @error('lname') is-invalid @enderror" id="phone" name="phone" placeholder="" value="{{Auth::user()->phone}}">
+                        @error('phone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong style="color:red">{{ $message }}</strong>
+                            </span>
+                        @enderror
                       </div>
                     </div>
                     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-10" style="margin-left: 50px">
                       <div class="form-group">
                         <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address"  name="address" placeholder="" value="{{Auth::user()->address}}">
+                        <input type="text" class="form-control  @error('address') is-invalid @enderror" id="address"  name="address" placeholder="" value="{{Auth::user()->address}}">
+                        @error('address')
+                          <span class="invalid-feedback" role="alert">
+                              <strong style="color:red">{{ $message }}</strong>
+                          </span>
+                        @enderror
                       </div>
                     </div>
                   <div class="row gutters">
@@ -87,17 +107,17 @@
                     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-10" style="margin-left: 40px">
                       <div class="form-group" style="    margin: 0px 8px 0px 3px;">
                         <label for="password">New Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter New Password">
+                        <input type="password" class="form-control @error('address') is-invalid @enderror" id="password" name="password" placeholder="Enter New Password">
+                        @error('password')
+                          <span class="invalid-feedback" role="alert">
+                              <strong style="color:red">{{ $message }}</strong>
+                          </span>
+                        @enderror
                       </div>
                     </div>
 
                     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-10"style= "margin-left: 44px;margin: 11px 0 4px 43px;">
                       <input type="file" class="form-control-file" name="file" id="exampleInputFile">
-                        @error('relation')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-                          @enderror
                     </div>
                     
                   </div>
