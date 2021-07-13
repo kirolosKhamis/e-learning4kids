@@ -331,6 +331,21 @@ if( $file=$request->file('content'))
              ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 
+
+
+    public function showAllMemebers(Request $request) {
+        // dd($request->input('classroom_id'));
+        $class_id=$request->input('class_id');
+        // $teacherassignments=TeacherAssignment::latest()->paginate(100);
+        $StudentRegs=StudentRegisteration::latest()->paginate(100);
+        $students=Student::latest()->paginate(100);
+        
+      
+        return view('Frontend.viewMembers', compact('students', 'StudentRegs','class_id'))
+        ->with('i', (request()->input('page', 1) - 1) * 100);
+    }
+
+
     public function showStudentAssignment(Request $request) {
         // dd($request->input('classroom_id'));
         $classroom_id=$request->input('classroom_id');

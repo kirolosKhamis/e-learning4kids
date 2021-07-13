@@ -28,16 +28,31 @@
         </div>
         <div class="col-md-8">
           <div class="card mb-3">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="mb-0">First Name</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  name
-                </div>
-              </div>
-              <hr>
+            <div class="card-body"> 
+              @foreach ($StudentRegs as $studentRegs)
+                @if ($studentRegs->classroom_id==$class_id)
+                    @foreach ($students as $student)
+                      @if ( $studentRegs->student_id==$student->user_id)
+                      <div class="row"> 
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">{{$student->fname}} {{$student->lname}}</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{$student->email}}
+                        </div>
+                      </div>
+                      <hr>
+                      @endif 
+                    @endforeach
+                @endif
+              @endforeach
+              
+                
+
+
+
+
+                
               
               {{-- <hr> --}}
               {{-- <div class="row">

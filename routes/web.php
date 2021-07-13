@@ -63,10 +63,12 @@ Route::group(['middleware' => 'auth:student,teacher'],function () {
     Route::post('/updateContent', [App\Http\Controllers\ClassroomContent::class, 'updateContent'])->name('update.content');
     Route::get('/editPostorComment', [App\Http\Controllers\ClassroomContent::class, 'editPostorComment'])->name('edit.postorcomment');
     
+    Route::get('/showAllMemebers', [App\Http\Controllers\ClassroomContent::class, 'showAllMemebers'])->name('showAllMemebers');
+    
 
-    Route::get('viewAllMembers', function () {
-        return view('Frontend.viewMembers');
-    })->name("viewMemebrs");
+    // Route::get('viewAllMembers', function () {
+    //     return view('Frontend.viewMembers');
+    // })->name("viewMemebrs");
     
 
 });

@@ -124,7 +124,8 @@
                 <ul class="list-group" style="box-shadow: 1px 3px 16px 5px rgb(0 0 0 / 16%);">
                     <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">Submit assignment<hr style="margin-top: 1rem;"></a></li>
                     {{-- <li class="list-group-item">Materials<hr></li> --}}
-                    <li class="list-group-item">Members<hr></li>
+                    {{-- $classroom_id --}}
+                    <li class="list-group-item"><a href="{{route('showAllMemebers', ['class_id'=>$classroom_id])}}">Members</a><hr></li>
                     <li class="list-group-item">
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="font-size: 11px;">View Other Classrooms
@@ -347,6 +348,7 @@
                     <li class="list-group-item"><a href="{{route('view.addAssignment', ['classroom_id' =>$classroom_id])}}">Add assignment</a></li>
                     <li class="list-group-item"><a href="{{route('show.studentAssignment', ['classroom_id' =>$classroom_id])}}">Grade assignment</a></li>
                     <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">View assignments</a></li>
+                    <li class="list-group-item"><a href="{{route('showAllMemebers', ['class_id'=>$classroom_id])}}">Members</a><hr></li>
                     {{-- <li class="list-group-item">View All<hr></li> --}}
                     <li class="list-group-item"><a href="{{route('add.result', ['classroom_id' =>$classroom_id])}}">Add results</li></a>
                     <li class="list-group-item">                   
