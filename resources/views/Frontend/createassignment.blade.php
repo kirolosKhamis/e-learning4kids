@@ -160,9 +160,6 @@
                              <input type="hidden" name="teacher_id" value="{{Auth::guard('teacher')->user()->user_id}}" > <input type="hidden" name="classroom_id" value="{{$classroom_id}}">
                             
                          </div>
-                         
- 
-                        
                 
                 
                  </div>

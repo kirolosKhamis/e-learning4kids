@@ -120,7 +120,7 @@
 
           {{-- <video src="{{asset('videos/')}}" controls>1</video> --}}
           <video width="400" controls>
-            <source src="{{asset('videos/1.mp4')}}" type="video/mp4">mov        
+            <source src="{{asset('videos/01.mp4')}}" type="video/mp4">mov        
           </video>
     </div>
 
@@ -162,12 +162,12 @@
         <div class="col-lg-4 feature-col">
           <img src="{{asset('images/pic-2.png')}}" alt="">
           <h4>Expert Teachers</h4>
-          <p>Learn from industry experts who are passionate about teaching</p>
+          <p>Learn from expert teachers who are passionate about teaching</p>
         </div>
         <div class="col-lg-4 feature-col">
           <img src="{{asset('images/pic-3.png')}}" alt="">
             <h4>Unlimited Access</h4>
-            <p>Choose what you'd like to learn from our extensive supscriptio library</p>
+            <p>Choose what you'd like to learn from our learning system</p>
         </div>
 
     </div>
