@@ -319,6 +319,10 @@
 @section('content')
     <div class="container" style="max-width: 1176px;margin-bottom: 182px;margin-top: 73px;">
         <div class="row">
+
+
+            <div class="col-lg-2">
+            </div>
             <div class="col-lg-8">
                 <div class="card card-margin">
                     <div class="card-header no-border">
@@ -342,13 +346,14 @@
                                 <a href="{{route('download.teacherAssignment', ['tassignment_id' =>$teacherassignment->id])}}"> <li class="widget-49-meeting-item"><span>{{$teacherassignment->content}}</span></li></a>
                             </ol>
                             <div class="widget-49-meeting-action">
-                                <a href="{{route('view.addAssignment',['classroom_id'=>$teacherassignment->classroom_id, 'assignment_id'=>$teacherassignment])}}" class="btn btn-sm btn-flash-border-primary">Edit</a>
+                                <a href="{{route('view.addAssignment',['classroom_id'=>$teacherassignment->classroom_id, 'assignment_id'=>$teacherassignment])}}" class="btn btn-primary btn-flash-border-primary" style="width: 110px;font-size: small;">Edit</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <div class="col-lg-2">
+            </div>
 
         </div>
     </div>
