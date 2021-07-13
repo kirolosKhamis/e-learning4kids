@@ -52,6 +52,7 @@
         <div class=" col-lg-4  col-md-4 col-sm-4 col-xm-4  col13  wow fadeInDown"data-wow-duration="1s" data-wow-offset="300" >
             <i class="fa fa-user fa-5x"></i>
             <h1> {{$student->fname}}</h1>
+            <button class="common-btn"  style="margin-left: 90px" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-5" href="#collapse-{{$student->user_id}}">{{$student->fname}} </button>
             {{-- <h1><button onclick="myFunction()" type="button" class="btn btn-primary">View {{$student->fname}} Courses</button></h1> --}}
             {{-- <button onclick="myFunction()">View {{$student->fname}} Courses</button> --}}
             {{-- <p class="lead">Welcome to School</p> --}}
@@ -91,9 +92,13 @@
             @foreach ($students as $student)
             <p hidden>{{$teacherName=''}}{{$courseTitle=''}}</p>
                 @if ($student->parent_id == Auth::guard('parent')->user()->user_id)
-                    <p hidden>{{$student_id= $student->user_id }}</p>
-            
-                    @foreach ($studentregistrations as $studentregistration)
+                <p hidden>{{$student_id= $student->user_id }}</p>
+                    
+                    
+                   
+                    <div class="row collapse" style="margin-top: 15px" id="collapse-{{$student->user_id}}" class="bg-light p-2 collapse" >
+                   
+                        @foreach ($studentregistrations as $studentregistration)
                         @if ($studentregistration->student_id==$student_id)    
                                 
                                 @foreach ($classrooms as $classroom)
@@ -111,8 +116,9 @@
                                             @if ($course->course_id==$classroom->course_id)
                                                 <p hidden > {{$courseTitle=$course->title}}</p>
                                                 {{-- <p hidden > {{$course_id=$course->course_id}}</p> --}}
-                                                
-                                                <div class="col-md-4 col-sm-6 col-xm-12">
+                                          
+                                     
+                                                <div class="col-md-4 col-sm-6 col-xm-12"  >
                                                     <div class="price_box wow fadeInUp" data-wow-duration="2s" data-wow-offset="200">
                                                         <div class="img">
                                                         <img  class="center-block" src="../public/images/cart/1.jpg" alt="img">
@@ -126,24 +132,27 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-
-
+                                                
+                                         
                                             @endif
                                         @endforeach
-
+                                        
+                                        
                                         
 
                                     @endif
                                     
-                                @endforeach    
+                                @endforeach 
                         @endif
 
                         
                     @endforeach
+                </div> 
                     
                 @endif
 
             @endforeach
+        
         {{-- </div>              --}}
         </div>
 

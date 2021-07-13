@@ -58,8 +58,13 @@ class ClassroomContent extends Controller
         // redirect('register')->withErrors($validator, 'login')
         
         $request->validate( [
-            'classroom_code' => 'required|string|max:30|exists:classroom,classroom_code'
-        ]);        
+            'classroom_code' => 'required|string|max:30|exists:classroom,classroom_code',
+            
+        ]);
+        // $request->validate( [
+        //     'classroom_code' => 'unique:classroom,classroom_code',
+            
+        // ]);
         $classrooms = Classroom::latest()->paginate(100);
         
         foreach($classrooms as $classroom){ 
@@ -69,7 +74,7 @@ class ClassroomContent extends Controller
                 return redirect()->route('contents.index')
                 ->with('success', 'Product created successfully.');
             }
-
+            
         return redirect()->route('contents.index')
         ->with('success', 'Product created successfully.');
         }   

@@ -30,7 +30,7 @@
                      {{-- <p>  {{$teacherName}} </p> --}}
               
 
-            </div>
+            {{-- </div> --}}
 
                 @foreach ($students as $student)
                     @if ($student->user_id==$student_id)    
@@ -41,17 +41,50 @@
                @endforeach
 
 
-                @foreach ($studentregs as $studentregs)
-                    @if ($studentregs->classroom_id==$classroom_id ) 
-                    @if ($studentregs->student_id==$student_id)
+                @foreach ($studentregs as $studentreg)
+                    @if ($studentreg->classroom_id==$classroom_id ) 
+                    @if ($studentreg->student_id==$student_id)
                     {{-- <p > {{$classroom_id }} </p>    
                     <p > {{$student_id}} </p>  --}}
-                    <p hidden> {{ $studentrank    = $studentregs->rank }} </p>
-                    <p hidden> {{ $studentmidterm = $studentregs->mid_term }} </p>
-                    <p hidden> {{ $studentfinal   = $studentregs->final }} </p>
+                    <p hidden> {{ $studentmidterm = $studentreg->mid_term }} </p>
+                    <p hidden> {{ $studentfinal   = $studentreg->final }} </p>
+                    <p hidden> {{ $studentclasswork   = $studentreg->class_work }} </p>
+                    <p hidden> {{ $rank= $studentreg->rank }} </p>
                     @endif
                     @endif
                 @endforeach
+
+              {{-- rank --}}
+              @foreach ($studentregs as $studentreg)
+              @if ($studentreg->student_id==$student_id) 
+                @if ($studentreg->mid_term !== null && $studentreg->class_work !== null && $studentreg->final !== null )
+                      @if (($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=95)
+                          <small hidden>{{$rank='Rank 1'}}</small>  
+                          @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=90)
+                          <small hidden>{{$rank='Rank 2'}}</small>  
+                          @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=85)
+                          <small hidden>{{$rank='Rank 3'}}</small>  
+                          @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=80)
+                          <small hidden>{{$rank='Rank 4'}}</small>  
+                          @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=75)
+                          <small hidden>{{$rank='Rank 5'}}</small>  
+                          @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=70)
+                          <small hidden>{{$rank='Rank 6'}}</small>  
+                          @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=65)
+                          <small hidden> {{$rank='Rank 7'}}</small>  
+                          @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=60)
+                          <small hidden> {{$rank='Rank 8'}}</small>  
+                          @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=55)
+                          <small hidden>{{$rank='Rank 9'}}</small>  
+                          @elseif(($studentreg->mid_term + $studentreg->final + $studentreg->class_work)>=50)
+                          <small hidden>{{'$rank=Rank 10'}}</small>  
+                          @else
+                          <small hidden>{{$rank='Failed'}}</small>  
+                      @endif
+                  @endif
+               @endif
+          @endforeach
+              
 
 
             <section class="price_table text-center">
@@ -74,8 +107,8 @@
                         </tr>
                         <tr>
                           <td>Rank</td>
-                            @if ($studentrank!=null)
-                              <td>{{ $studentrank }}</td> 
+                            @if ($rank!=null)
+                              <td>{{ $rank }}</td> 
                             @else
                               <td>N/A</td>
                             @endif
@@ -95,7 +128,17 @@
                               <td>N/A</td>
                             @endif
                         </tr>
+
                         <tr>
+                          <td>Class Work</td>
+                            @if ($studentclasswork!=null)
+                              <td>{{$studentclasswork}}</td> 
+                            @else
+                              <td>N/A</td>
+                            @endif
+                        </tr>
+                        {{-- <tr> --}}
+
                       
                       </table>
                      
