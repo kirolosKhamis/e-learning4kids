@@ -13,8 +13,18 @@
     <link rel='stylesheet'href ="{{asset('css/style.css')}}"/>
     <link rel='stylesheet'href="{{asset('css/media.css')}}"/>
     <link rel='stylesheet'href="{{asset('css/animate.css')}}"/>
+    {{-- <link rel='stylesheet'href="{{asset('css/css/questionairResultStyle.css')}}"/> --}}
     <link rel='stylesheet'href="{{asset('css/questionairResultStyle.css')}}"/>
+    {{-- <link rel='stylesheet'href="{{asset('css/questionairResultStyle.css')}}"/> --}}
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> --}}
+    <style>#bigFive th {
+      padding-top: 2%;
+      padding-bottom: 2%;
+      text-align: left;
+      background-color: #2073d9;
+      color: white;
+      
+    }</style>
 </head>
 
 <body>
@@ -50,19 +60,10 @@
                           <td>{{date('d-F-Y  H:i' , strtotime($teacherassignment->due))}}</td>
                           <td>{{$teacherassignment->description}}</td>
                           <td>{{$teacherassignment->points}}</td>
-      
-
                         </tr>   
                         @endif
                         @endforeach
-
-                       
-
-                        
-                    
                       </table>
-                     
-
                     <!--end of table-->
                 </div>
           </div>

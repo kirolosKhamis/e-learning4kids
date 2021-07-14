@@ -117,7 +117,7 @@
     </div>  
         
     </div>
-    
+    {{-- <div class="row" style=""></div> --}}
     <div class="container mt-5">
         <div class="d-flex justify-content-center row">
             <div class="hidediv">
@@ -144,6 +144,21 @@
                     </li>
                 </ul>
             </div>
+            <div class="showdiv">
+                <ul class="list-group" style="box-shadow: 1px 3px 16px 5px rgb(0 0 0 / 16%);">
+                    <li class="list-group-item" style="float: left;">                   
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" style="color:#007bff;font-size: 12px;" type="button" data-toggle="dropdown">Classroom List
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">Submit assignment<hr style="margin-top: 1rem;"></a></li>
+                                <li class="list-group-item"><a href="{{route('showAllMemebers', ['class_id'=>$classroom_id])}}">Members</a><hr></li>
+                            </ul>
+                        </div>                       
+                    </li>
+                </ul>
+            </div>
+            
             <div class="col-md-8" style="margin:-4px 0 0 -3px;">
                 <div class="d-flex flex-column comment-section" id="myGroup">
                     <div class="bg-white p-2" style="height: 181px;box-shadow: 1px 3px 16px 5px rgb(0 0 0 / 16%);">
@@ -159,8 +174,8 @@
                                  --}}
                                 <div class="mt-2 text-right">
                                     <input type="file" class="form-control-file" style="margin: 20px 0px -27px 5px;" name="file" id="exampleInputFile" >                                
-                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post</button>
-                                    <button class="btn btn-danger btn-sm shadow-none" type="reset"  style="height: 29px;width: 110px; font-size: small;">Cancel</button>
+                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;    width: 18%;font-size: small;">Post</button>
+                                    <button class="btn btn-danger btn-sm shadow-none" type="reset"  style="height: 29px;    width: 18%; font-size: small;">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -262,7 +277,7 @@
                                         <i class="fa fa-cog" aria-hidden="true" data-toggle="dropdown" style="font-size:18px;color:#007bff;"></i>
                                         <ul class="dropdown-menu">
                                             <li><a href="{{route('show.classroom',['classroom_id'=>$comment->post->classroom_id,'comment_id'=>$comment->comment_id])}}" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
-                                            <li><a href="{{route('delete.content', ['comment_id' =>$comment->comment_id])}}">Delete Post</a></li>
+                                            <li><a href="{{route('delete.content', ['comment_id' =>$comment->comment_id])}}" >Delete Post</a></li>
                                         </ul>
                                     </div>
                                 @endif
@@ -359,7 +374,38 @@
         </div>
     </div>
 
+ 
     {{-- make post for teacher --}}
+
+
+    
+    {{-- <div class="row" style="width: 11px;background-color: black;">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span><div class="dropdown">
+            <button class="btn dropdown-toggle" style="color:#007bff;font-size: 12px;" type="button" data-toggle="dropdown">View Other Classrooms
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                @foreach ($classrooms as $classroom)
+                    @if ($classroom->teacher_id==Auth::guard('teacher')->user()->user_id)       
+                        <li><a href="{{route('show.classroom', ['classroom_id' =>  $classroom->classroom_id])}}">{{ $classroom->title}}</a></li>     
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </span>   
+    </div> --}}
+    {{-- <div class="container mt-6">
+       <span><a href="{{route('view.addAssignment', ['classroom_id' =>$classroom_id])}}">Add assignment</a></span>
+       <span><a href="{{route('show.studentAssignment', ['classroom_id' =>$classroom_id])}}">Grade assignment</a></span>
+       <span><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">View assignments</a></span>
+       <span><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">View assignments</a></span>
+       <span><a href="{{route('showAllMemebers', ['class_id'=>$classroom_id])}}">Members</a></span>
+       <span><a href="{{route('add.result', ['classroom_id' =>$classroom_id])}}">Grade exams</a></span>
+        </div> --}}
     <div class="container mt-5">
         <div class="d-flex justify-content-center row">
             <div class="hidediv">
@@ -385,6 +431,25 @@
                     </li>
                 </ul>
             </div>
+
+            <div class="showdiv">
+                <ul class="list-group" style="box-shadow: 1px 3px 16px 5px rgb(0 0 0 / 16%);">
+                    <li class="list-group-item" style="float: left;">                   
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" style="color:#007bff;font-size: 12px;" type="button" data-toggle="dropdown">Classroom List
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li class="list-group-item"><a href="{{route('view.addAssignment', ['classroom_id' =>$classroom_id])}}">Add assignment</a></li>
+                                <li class="list-group-item"><a href="{{route('show.studentAssignment', ['classroom_id' =>$classroom_id])}}">Grade assignment</a></li>
+                                <li class="list-group-item"><a href="{{route('show.teacherAssignment', ['classroom_id' =>$classroom_id])}}">View assignments</a></li>
+                                <li class="list-group-item"><a href="{{route('showAllMemebers', ['class_id'=>$classroom_id])}}">Members</a><hr></li>
+                                {{-- <li class="list-group-item">View All<hr></li> --}}
+                                <li class="list-group-item"><a href="{{route('add.result', ['classroom_id' =>$classroom_id])}}">Grade exams</li></a>
+                            </ul>
+                        </div>                       
+                    </li>
+                </ul>
+            </div>
             
             <div class="col-md-8" style="margin:-4px 0 0 -3px;">
                 <div class="d-flex flex-column comment-section" id="myGroup">
@@ -399,8 +464,8 @@
                                 
                                 <div class="mt-2 text-right">
                                     <input type="file" class="form-control-file" style="margin: 20px 0px -27px 5px;" name="file" id="exampleInputFile" >
-                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px;width: 110px;font-size: small;">Post</button>
-                                    <button class="btn btn-danger btn-sm shadow-none" type="reset"  style="height: 29px;width: 110px;font-size: small;">Cancel</button>
+                                    <button class="btn btn-primary btn-sm shadow-none" type="submit"  style="height: 29px; width: 18%;font-size: small;">Post</button>
+                                    <button class="btn btn-danger btn-sm shadow-none" type="reset"  style="height: 29px;   width: 18%;font-size: small;">Cancel</button>
                                 </div>
 
                             </div>
