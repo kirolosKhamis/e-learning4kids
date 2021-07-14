@@ -24,7 +24,25 @@
       background-color: #2073d9;
       color: white;
       
-    }</style>
+    }
+    
+    #bigFive td, #bigFive th {
+    border: 0% solid #ddd;
+    padding: 2%;
+    font-size: 60%;
+}
+
+#bigFive th {
+    padding-top: 4%;
+    padding-bottom: 5%;
+    text-align: left;
+    background-color: #3071a9;
+    color: white;
+    font-size: 60%;
+}
+    
+    
+    </style>
 </head>
 
 <body>
@@ -46,11 +64,11 @@
                     <p><strong>Dued Assignments</strong></p>
                     <!-- tabele -->
                     <table id="bigFive">
-                        <tr>
-                          <th>Assignment Title</th>
-                          <th>Due</th>
-                          <th>Description</th>
-                          <th>Points</th>
+                        <tr >
+                          <th class="col-md-3">Assignment Title</th>
+                          <th class="col-md-3">Due</th>
+                          <th class="col-md-3">Description</th>
+                          <th class="col-md-3">Points</th>
                         </tr>
                        
                         @foreach ($teacherassignments as $teacherassignment )
