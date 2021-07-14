@@ -156,10 +156,10 @@ var json = {
           text: "44. Is sophisticated in art, music, or literature"
         }]
       }, {
-          "type": "expression",
-          "name": "total",
-          "title": "Total Quality:",
-          "expression": "sumInObject({Quality})",
+          // "type": "expression",
+          // "name": "total",
+          // "title": "Total Quality:",
+          // "expression": "sumInObject({Quality})",
           "displayStyle": "decimal",
           "startWithNewLine": true
       }
@@ -183,19 +183,19 @@ var json = {
     alert("Are You Sure You Want To Submit");
   }
   
-  function sumInObject(params) {
+//   function sumInObject(params) {
     
-    if (params.length != 1) 
-        return 0;
+//     if (params.length != 1) 
+//         return 0;
   
-    if(!params[0]) 
-        return 0;
+//     if(!params[0]) 
+//         return 0;
 
-    const object = params[0];
-    const array = Object.keys(object).map(key => object[key]).map(value => parseInt(value));
+//     const object = params[0];
+//     const array = Object.keys(object).map(key => object[key]).map(value => parseInt(value));
 
-  return array.reduce((left,right) => left+ right );
-}
+//   return array.reduce((left,right) => left+ right );
+// }
 Survey.FunctionFactory.Instance.register("sumInObject", sumInObject);  
 
 
