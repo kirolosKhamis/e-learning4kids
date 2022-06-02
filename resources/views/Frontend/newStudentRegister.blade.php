@@ -127,12 +127,12 @@
 
                                 </div>  
                                 <div class="form-group">
-                                    <input type="file" class="form-control-file form-control form-control-user @error('file') is-invalid @enderror" name="file" id="exampleInputFile"  value="{{ old('file') }}" placeholder="upload file" autofocus>
-                                    @error('file')
+                                    <input type="file" required class="form-control-file form-control form-control-user @error('file') is-invalid @enderror" name="file" id="exampleInputFile"  value="{{ old('file') }}" placeholder="upload file" autofocus>
+                                    {{-- @error('file')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
                                 </div>                        
                                 
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
